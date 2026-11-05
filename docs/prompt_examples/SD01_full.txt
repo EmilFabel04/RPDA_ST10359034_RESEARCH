@@ -1,0 +1,100 @@
+You are helping the on-call analytics engineer of an online shop. The shop's data warehouse is built with dbt (dbt-core 1.12, DuckDB adapter). Ingestion jobs load data from the web shop, the payment provider and the CRM into the `raw` schema every hour; dbt then builds staging views and mart tables on top, runs the data tests and checks source freshness.
+
+The scheduled run on 2026-10-13 reported the following.
+
+## Failure report
+Command: dbt build  (exit code 1)
+Result: 12 passed, 0 failed, 1 errors, 0 warnings, 19 skipped
+- ERROR: model stg_payments (models/staging/stg_payments.sql)
+    Runtime Error in model stg_payments (models/staging/stg_payments.sql)
+      Binder Error: Column "amount" referenced that exists in the SELECT clause - but this column cannot be referenced before it is defined
+- SKIPPED because an upstream node failed: model dim_customers, model fct_orders, 15 tests
+
+Command: dbt source freshness  (exit code 0)
+- PASS: source raw.raw_customers: max(loaded_at) = 2026-10-13 14:56 UTC, 4.1 h before the check (warn after 24 hours, error after 48 hours)
+- PASS: source raw.raw_orders: max(loaded_at) = 2026-10-13 18:05 UTC, 0.9 h before the check (warn after 6 hours, error after 12 hours)
+- PASS: source raw.raw_payments: max(loaded_at) = 2026-10-13 18:05 UTC, 0.9 h before the check (warn after 6 hours, error after 12 hours)
+
+## Model and source metadata
+### Model stg_payments
+File: models/staging/stg_payments.sql · materialized as view
+Description: Cleaned payments, one row per payment. Amount converted from cents to currency units.
+Columns (name · type in warehouse · description · tests):
+- payment_id · INTEGER · Primary key of the payment. · tests: unique, not_null
+- order_id · INTEGER · Order the payment belongs to (foreign key to stg_orders). · tests: not_null, relationships(to=stg_orders, field=order_id)
+- payment_method · VARCHAR · Payment method used. · tests: accepted_values(values=['credit_card', 'bank_transfer', 'voucher', 'gift_card'])
+- amount · DOUBLE · Payment amount in currency units (raw cents / 100). · tests: not_null
+- loaded_at · TIMESTAMP · UTC timestamp when the row was loaded into the warehouse.
+SQL (models/staging/stg_payments.sql):
+```sql
+with source as (
+
+    select * from {{ source('raw', 'raw_payments') }}
+
+),
+
+renamed as (
+
+    select
+        payment_id,
+        order_id,
+        payment_method,
+        -- source stores integer cents; convert to currency units
+        cast(amount as decimal(18, 2)) / 100 as amount,
+        loaded_at
+    from source
+
+)
+
+select * from renamed
+```
+
+## Lineage
+DAG edges (upstream → downstream; tests omitted):
+- source raw.raw_payments → model stg_payments
+- model dim_customers → exposure finance_revenue_dashboard
+- model dim_customers → exposure marketing_customer_dashboard
+- model fct_orders → exposure finance_revenue_dashboard
+- model stg_payments → model dim_customers
+- model stg_payments → model fct_orders
+Upstream nodes and their current warehouse columns:
+- source raw.raw_payments (source table): payment_id INTEGER, order_id INTEGER, payment_method VARCHAR, amount_cents INTEGER, loaded_at TIMESTAMP
+Downstream nodes (affected if the failing node is wrong or skipped):
+- model dim_customers (table): One row per customer with order history and lifetime value. Used by marketing and finance dashboards.
+- model fct_orders (table): One row per order with payment amounts pivoted by method. Grain must match stg_orders (one row per order).
+- exposure finance_revenue_dashboard (dashboard, owner: Finance analytics): Daily revenue by payment method and order status. Refreshed at 07:00 UTC and used in the daily finance stand-up.
+- exposure marketing_customer_dashboard (dashboard, owner: Marketing analytics): Customer counts, lifetime value and repeat-purchase rate by country.
+Column-level lineage (as designed):
+- stg_payments.{payment_id, order_id, payment_method, loaded_at} ← raw_payments (same names)
+- stg_payments.amount ← raw_payments.amount (integer cents / 100)
+- dim_customers.{customer_id, first_name, last_name, email, country_code, created_at} ← stg_customers (same names)
+- dim_customers.{first_order_date, most_recent_order_date, number_of_orders} ← stg_orders.order_date / order_id, per customer_id
+- dim_customers.lifetime_value ← stg_payments.amount joined via stg_orders.order_id, non-cancelled orders, per customer_id
+- fct_orders.{order_id, customer_id, order_date, status} ← stg_orders (same names)
+- fct_orders.{credit_card_amount, bank_transfer_amount, voucher_amount, gift_card_amount} ← stg_payments.amount by payment_method, per order_id
+- fct_orders.amount ← stg_payments.amount, total per order_id
+
+## Recent history
+Recent changes (newest first):
+- 2026-10-12 · vendor · Payment provider notice: settlement export v2 is live from 2026-10-12. Field names now follow the provider's API v2 naming.
+- 2026-10-07 · deploy · CI image upgraded dbt-duckdb 1.10 → 1.11; full build passed afterwards
+- 2026-10-04 · commit 544b92f · docs: add column descriptions to models/marts/schema.yml (no SQL change)
+Previous incidents:
+- INC-0388 (2026-09-02): stg_payments build warnings after the provider added a `currency` column. Resolution: no change needed; staging ignores the new column.
+Recent run history:
+- stg_payments model status, last 7 daily runs: success ×6, error today (2026-10-13).
+
+## Task
+Diagnose the failure and recommend a remediation. Base your answer on the information above. Where you need something that is not given, state it as an assumption rather than as a fact.
+
+Use exactly these four headings:
+### Root cause
+What went wrong and why, in a few sentences.
+### Fix
+The specific change to make. Name the exact models, sources, columns, files or settings involved, and include the SQL or YAML change where one is needed. If the change belongs outside the dbt project, say what should change and where.
+### Verification
+How to confirm the fix worked: the dbt command(s) or SQL query to run, and the expected result.
+### Assumptions
+Anything you assumed that the information above does not state.
+
+Keep the answer under 500 words, not counting code.

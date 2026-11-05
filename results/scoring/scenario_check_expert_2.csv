@@ -1,0 +1,16 @@
+rater_id,scenario_id,position,realistic,fix_correct,comments,checked_at
+expert_2,SD01,1,Yes,Partly,"The general idea of the verification ""select min(amount), max(amount) from stg_payments should be roughly 5 to 250 (currency units)"" makes sense to me but I do not have enough context to know why specifically that range. There might be a need for this range to be widened.",2026-10-29T21:02:48Z
+expert_2,SD02,2,Yes,Partly,The only extra thing I would add is a verification step to compare the source dates to the transformed dates to ensure the conversion provided the expected result.,2026-10-29T21:12:42Z
+expert_2,SD03,3,Yes,Yes,,2026-10-30T06:29:40Z
+expert_2,NR01,4,Yes,Yes,,2026-10-30T06:40:34Z
+expert_2,NR02,5,Yes,Yes,,2026-10-30T06:45:41Z
+expert_2,NR03,6,Yes,Yes,,2026-10-30T06:52:18Z
+expert_2,RC01,7,Yes,Partly,"I would also want to add some sort of monitoring/test to notify that the ingestion layer creates duplicates, to ensure the fix stays effective and that future duplicate ingestion isn't hidden by the staging deduplication.",2026-10-31T07:52:27Z
+expert_2,RC02,8,Yes,Partly,"I would also add an verification comparing key values between raw_orders and stg_orders, such as the total/distinct order_id counts and the minimum/maximum order_date. This would help confirm that the restored order history is not only present in the raw layer, but is also represented correctly in staging.",2026-10-31T08:15:00Z
+expert_2,RC03,9,Yes,Yes,,2026-10-31T08:37:36Z
+expert_2,RI01,10,Yes,Partly,"I agree with resolving the CRM rate-limit issue and allowing a grace period for genuinely late-arriving customer data. I would reconsider changing the freshness error threshold to 24 hours, as the scenario shows that customer freshness can normally reach up to 30 hours. A threshold around 30 hours may avoid unnecessary failures while still detecting a stalled feed. Sometimes too many false positives can lead to overlooking a real positive.",2026-10-31T08:42:11Z
+expert_2,RI02,11,Yes,Yes,,2026-10-31T08:44:35Z
+expert_2,RI03,12,Yes,No,"The proposed exclusion resolves the relationship test, but I am concerned that excluding these payments from stg_payments could make the downstream financial data incomplete. These appear to be genuine payments that occurred, so removing them from the transformed data could mean historical payment totals no longer reflect what actually happened. I would want to confirm how these transactions should be retained or anonymised without losing the financial record, and verify the impact on downstream totals.",2026-10-31T08:51:28Z
+expert_2,FV01,13,Yes,Yes,,2026-10-31T09:03:29Z
+expert_2,FV02,14,Yes,Yes,,2026-10-31T09:05:26Z
+expert_2,FV03,15,Yes,Yes,,2026-10-31T09:12:29Z

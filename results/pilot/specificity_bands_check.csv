@@ -1,0 +1,10 @@
+pilot_answer,calibration_item,own_similarity,own_band,off_target_median,off_target_max,closest_study_gold,calibration_scores
+P1,,0.8797,high,0.5494,0.7482,RI01,
+P2,PL01-03C,0.8804,high,0.5491,0.712,RI01,
+P3,PL01-03B,0.8104,high,0.4741,0.6562,SD03,
+P4,,0.7746,high,0.5325,0.6995,RI01,
+P5,PL01-02C,0.7962,high,0.5394,0.6949,RI01,
+P6,,0.7341,moderate,0.4143,0.6155,SD03,
+P7,,0.8663,high,0.5205,0.7143,RI01,
+P8,PL01-01C,0.8162,high,0.5337,0.6838,RC01,
+P9,PL01-01A,0.7913,high,0.473,0.6634,SD03,

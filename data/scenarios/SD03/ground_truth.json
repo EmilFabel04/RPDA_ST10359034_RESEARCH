@@ -1,0 +1,267 @@
+{
+  "scenario_id": "SD03",
+  "category": "schema_drift",
+  "title": "CRM migration changed customer_id to prefixed string keys",
+  "root_cause_type": "data",
+  "root_cause": "After a CRM migration raw_customers.customer_id is a string key like 'CUST-00042' while orders still use the integer id; the type mismatch fails the join in dim_customers.",
+  "fault": {
+    "kind": "data",
+    "diff": null,
+    "data_change": {
+      "raw_customers": {
+        "rows_before": 200,
+        "rows_after": 200,
+        "columns_added": [],
+        "columns_removed": [],
+        "rows_only_before": 200,
+        "rows_only_after": 200
+      }
+    },
+    "facts": {
+      "as_of": "2026-10-13 19:00 UTC",
+      "n_customers": 200,
+      "n_orders": 600,
+      "n_payments": 636,
+      "hist_orders": "584, 587, 590, 594, 594, 597",
+      "hist_customers": "194, 194, 195, 195, 196, 198",
+      "example_key": "CUST-00042",
+      "age_raw_customers": "4",
+      "age_raw_orders": "1",
+      "age_raw_payments": "1"
+    }
+  },
+  "expected_failures": [
+    "model.dim_customers"
+  ],
+  "observed_failures": [
+    "model.dim_customers"
+  ],
+  "validation": {
+    "matches_expected": true,
+    "missing": [],
+    "unexpected": []
+  },
+  "fix_targets": {
+    "files": [
+      "models/staging/stg_customers.sql",
+      "models/staging/sources.yml"
+    ],
+    "models": [
+      "stg_customers"
+    ],
+    "columns": [
+      "raw_customers.customer_id",
+      "stg_customers.customer_id"
+    ]
+  },
+  "key_entities": [
+    "stg_customers",
+    "raw_customers",
+    "customer_id",
+    "dim_customers"
+  ],
+  "valid_entities": {
+    "models": [
+      "dim_customers",
+      "fct_orders",
+      "stg_customers",
+      "stg_orders",
+      "stg_payments"
+    ],
+    "sources": [
+      "raw.raw_customers",
+      "raw.raw_orders",
+      "raw.raw_payments"
+    ],
+    "exposures": [
+      "finance_revenue_dashboard",
+      "marketing_customer_dashboard"
+    ],
+    "tests": [
+      "accepted_values_stg_orders_status__placed__shipped__completed__cancelled",
+      "accepted_values_stg_payments_payment_method__credit_card__bank_transfer__voucher__gift_card",
+      "equal_row_count_fct_orders_ref_stg_orders_",
+      "not_null_dim_customers_customer_id",
+      "not_null_dim_customers_lifetime_value",
+      "not_null_fct_orders_amount",
+      "not_null_fct_orders_customer_id",
+      "not_null_fct_orders_order_id",
+      "not_null_stg_customers_country_code",
+      "not_null_stg_customers_customer_id",
+      "not_null_stg_orders_customer_id",
+      "not_null_stg_orders_order_date",
+      "not_null_stg_orders_order_id",
+      "not_null_stg_payments_amount",
+      "not_null_stg_payments_order_id",
+      "not_null_stg_payments_payment_id",
+      "null_rate_below_stg_customers_email__0_05",
+      "relationships_fct_orders_customer_id__customer_id__ref_dim_customers_",
+      "relationships_stg_payments_order_id__order_id__ref_stg_orders_",
+      "row_count_between_stg_orders_1000__500",
+      "unique_dim_customers_customer_id",
+      "unique_fct_orders_order_id",
+      "unique_stg_customers_customer_id",
+      "unique_stg_orders_order_id",
+      "unique_stg_payments_payment_id"
+    ],
+    "columns": {
+      "main.dim_customers": [
+        "customer_id",
+        "first_name",
+        "last_name",
+        "email",
+        "country_code",
+        "created_at",
+        "first_order_date",
+        "most_recent_order_date",
+        "number_of_orders",
+        "lifetime_value"
+      ],
+      "main.fct_orders": [
+        "order_id",
+        "customer_id",
+        "order_date",
+        "status",
+        "credit_card_amount",
+        "bank_transfer_amount",
+        "voucher_amount",
+        "gift_card_amount",
+        "amount"
+      ],
+      "main.stg_customers": [
+        "customer_id",
+        "first_name",
+        "last_name",
+        "email",
+        "country_code",
+        "created_at",
+        "loaded_at"
+      ],
+      "main.stg_orders": [
+        "order_id",
+        "customer_id",
+        "order_date",
+        "status",
+        "loaded_at"
+      ],
+      "main.stg_payments": [
+        "payment_id",
+        "order_id",
+        "payment_method",
+        "amount",
+        "loaded_at"
+      ],
+      "raw.raw_customers": [
+        "customer_id",
+        "first_name",
+        "last_name",
+        "email",
+        "country",
+        "created_at",
+        "loaded_at"
+      ],
+      "raw.raw_orders": [
+        "order_id",
+        "customer_id",
+        "order_date",
+        "status",
+        "loaded_at"
+      ],
+      "raw.raw_payments": [
+        "payment_id",
+        "order_id",
+        "payment_method",
+        "amount",
+        "loaded_at"
+      ]
+    },
+    "documented_columns": {
+      "stg_customers": [
+        "country_code",
+        "created_at",
+        "customer_id",
+        "email",
+        "first_name",
+        "last_name",
+        "loaded_at"
+      ],
+      "stg_payments": [
+        "amount",
+        "loaded_at",
+        "order_id",
+        "payment_id",
+        "payment_method"
+      ],
+      "stg_orders": [
+        "customer_id",
+        "loaded_at",
+        "order_date",
+        "order_id",
+        "status"
+      ],
+      "dim_customers": [
+        "country_code",
+        "created_at",
+        "customer_id",
+        "email",
+        "first_name",
+        "first_order_date",
+        "last_name",
+        "lifetime_value",
+        "most_recent_order_date",
+        "number_of_orders"
+      ],
+      "fct_orders": [
+        "amount",
+        "bank_transfer_amount",
+        "credit_card_amount",
+        "customer_id",
+        "gift_card_amount",
+        "order_date",
+        "order_id",
+        "status",
+        "voucher_amount"
+      ],
+      "raw_customers": [
+        "country",
+        "created_at",
+        "customer_id",
+        "email",
+        "first_name",
+        "last_name",
+        "loaded_at"
+      ],
+      "raw_orders": [
+        "customer_id",
+        "loaded_at",
+        "order_date",
+        "order_id",
+        "status"
+      ],
+      "raw_payments": [
+        "amount",
+        "loaded_at",
+        "order_id",
+        "payment_id",
+        "payment_method"
+      ]
+    },
+    "files": [
+      "dbt_project.yml",
+      "macros/generate_schema_name.sql",
+      "models/marts/dim_customers.sql",
+      "models/marts/exposures.yml",
+      "models/marts/fct_orders.sql",
+      "models/marts/schema.yml",
+      "models/staging/schema.yml",
+      "models/staging/sources.yml",
+      "models/staging/stg_customers.sql",
+      "models/staging/stg_orders.sql",
+      "models/staging/stg_payments.sql",
+      "profiles.yml",
+      "tests/generic/equal_row_count.sql",
+      "tests/generic/null_rate_below.sql",
+      "tests/generic/row_count_between.sql"
+    ]
+  }
+}

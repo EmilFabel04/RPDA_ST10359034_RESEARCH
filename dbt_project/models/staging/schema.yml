@@ -1,0 +1,88 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Cleaned customers, one row per customer. Email lower-cased, country code upper-cased.
+    columns:
+      - name: customer_id
+        description: Primary key of the customer.
+        data_tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: Customer first name.
+      - name: last_name
+        description: Customer last name.
+      - name: email
+        description: Lower-cased email address. A small share of missing emails is tolerated (max 5%).
+        data_tests:
+          - null_rate_below:
+              arguments:
+                max_rate: 0.05
+      - name: country_code
+        description: Upper-cased ISO 3166-1 alpha-2 country code (from raw_customers.country).
+        data_tests:
+          - not_null
+      - name: created_at
+        description: UTC timestamp when the account was created.
+      - name: loaded_at
+        description: UTC timestamp when the row was loaded into the warehouse.
+
+  - name: stg_orders
+    description: Cleaned orders, one row per order. Expected volume is 500-1,000 orders over the 180-day window.
+    data_tests:
+      - row_count_between:
+          arguments:
+            min_rows: 500
+            max_rows: 1000
+    columns:
+      - name: order_id
+        description: Primary key of the order.
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: Customer who placed the order (foreign key to stg_customers).
+        data_tests:
+          - not_null
+      - name: order_date
+        description: Date the order was placed.
+        data_tests:
+          - not_null
+      - name: status
+        description: Order lifecycle status.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['placed', 'shipped', 'completed', 'cancelled']
+      - name: loaded_at
+        description: UTC timestamp when the row was loaded into the warehouse.
+
+  - name: stg_payments
+    description: Cleaned payments, one row per payment. Amount converted from cents to currency units.
+    columns:
+      - name: payment_id
+        description: Primary key of the payment.
+        data_tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: Order the payment belongs to (foreign key to stg_orders).
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_orders')
+                field: order_id
+      - name: payment_method
+        description: Payment method used.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['credit_card', 'bank_transfer', 'voucher', 'gift_card']
+      - name: amount
+        description: Payment amount in currency units (raw cents / 100).
+        data_tests:
+          - not_null
+      - name: loaded_at
+        description: UTC timestamp when the row was loaded into the warehouse.

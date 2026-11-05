@@ -1,0 +1,24 @@
+{
+  "created_at_utc": "2026-10-26T17:04:39+00:00",
+  "answers": 405,
+  "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+  "embedding_revision": "e8c3b32edf5434bc2275fc9bab85f82640a19130",
+  "max_tokens_per_chunk": 382,
+  "bands": {
+    "high": 0.75,
+    "moderate": 0.69
+  },
+  "similarity_text": "answer without its Assumptions section vs gold root_cause + fix + verification",
+  "versions": {
+    "sentence-transformers": "6.1.0",
+    "torch": "2.14.1",
+    "transformers": "5.19.0",
+    "sqlglot": "30.22.0"
+  },
+  "review_verdicts": {
+    "H": "hallucination: stated as an existing entity, but it does not exist",
+    "C": "conditional: a hedged guess or example ('if the column is called ...', 'e.g.', 'likely')",
+    "N": "new: something the answer proposes to create",
+    "F": "false positive: a placeholder, not an entity reference, or the answer says it does not exist"
+  }
+}

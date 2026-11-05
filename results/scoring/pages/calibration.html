@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RPDA8411 calibration — 5 sample outputs</title>
+<style>
+:root {
+  --bg: #f6f6f3; --panel: #ffffff; --ink: #1d1d1b; --muted: #6b6b66; --line: #deded8;
+  --accent: #2f5d8a; --accent-ink: #ffffff; --done: #3d7a4f; --part: #b7791f; --warn-bg: #fff4d6;
+  --code-bg: #f0f0eb; --mock: #a32020;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161615; --panel: #20201e; --ink: #ecece6; --muted: #a3a39b; --line: #3a3a36;
+    --accent: #7fb0e0; --accent-ink: #10202f; --done: #6fbf86; --part: #e0a84a; --warn-bg: #3a3220;
+    --code-bg: #2a2a27; --mock: #ff8a8a;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #161615; --panel: #20201e; --ink: #ecece6; --muted: #a3a39b; --line: #3a3a36;
+  --accent: #7fb0e0; --accent-ink: #10202f; --done: #6fbf86; --part: #e0a84a; --warn-bg: #3a3220;
+  --code-bg: #2a2a27; --mock: #ff8a8a;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+header { position: sticky; top: 0; z-index: 5; background: var(--panel); border-bottom: 1px solid var(--line);
+  padding: 10px 16px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
+header h1 { font-size: 16px; margin: 0; font-weight: 600; }
+.progress { color: var(--muted); font-size: 14px; }
+.spacer { flex: 1; }
+button, .button { font: inherit; font-size: 14px; border: 1px solid var(--line); background: var(--panel);
+  color: var(--ink); border-radius: 6px; padding: 6px 12px; cursor: pointer; }
+button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+button:disabled { opacity: .45; cursor: default; }
+.banner { margin: 12px 16px 0; padding: 10px 14px; border-radius: 8px; background: var(--warn-bg); font-size: 14px; }
+.banner.mock { color: var(--mock); font-weight: 600; }
+main { display: grid; grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); gap: 16px; padding: 16px; }
+@media (max-width: 1000px) { main { grid-template-columns: minmax(0, 1fr); } }
+section.col { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px;
+  min-width: 0; }
+@media (min-width: 1001px) { section.col { max-height: calc(100vh - 140px); overflow-y: auto; } }
+.itemhead { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; margin-bottom: 8px; }
+.itemhead h2 { font-size: 18px; margin: 0; }
+.code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; color: var(--muted); }
+details { border-top: 1px solid var(--line); padding: 6px 0; }
+details > summary { cursor: pointer; font-weight: 600; padding: 4px 0; }
+.plain { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; }
+pre { background: var(--code-bg); padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-size: 13px;
+  line-height: 1.45; white-space: pre; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px;
+  background: var(--code-bg); padding: 1px 4px; border-radius: 4px; }
+pre code { background: none; padding: 0; }
+.suggestion { overflow-wrap: anywhere; }
+.suggestion h3, .suggestion h4, .suggestion h5 { margin: 14px 0 6px; font-size: 15px; }
+.repeat { margin: 0 0 10px; padding: 8px 12px; border-radius: 8px; background: var(--warn-bg); font-size: 14px; }
+form.score { border-top: 2px solid var(--line); margin-top: 18px; padding-top: 12px; }
+fieldset { border: 0; padding: 0; margin: 0 0 12px; }
+legend { font-weight: 600; padding: 0; margin-bottom: 4px; }
+.hint { color: var(--muted); font-size: 13px; margin: 0 0 6px; }
+.choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.choices label { border: 1px solid var(--line); border-radius: 6px; padding: 5px 14px; cursor: pointer;
+  user-select: none; }
+.choices input { margin-right: 6px; }
+.choices label:has(input:checked) { border-color: var(--accent); outline: 1px solid var(--accent); }
+textarea { width: 100%; min-height: 70px; font: inherit; font-size: 14px; padding: 8px; border-radius: 6px;
+  border: 1px solid var(--line); background: var(--panel); color: var(--ink); }
+.nav { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
+.msg { color: var(--part); font-size: 14px; }
+.grid { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 0; }
+.grid button { width: 38px; padding: 3px 0; font-size: 12px; }
+.grid button.complete { background: var(--done); color: #fff; border-color: var(--done); }
+.grid button.partial { border-color: var(--part); color: var(--part); }
+.grid button.current { outline: 2px solid var(--accent); }
+dialog { max-width: 760px; width: calc(100% - 32px); border: 1px solid var(--line); border-radius: 10px;
+  background: var(--panel); color: var(--ink); padding: 18px 22px; }
+dialog::backdrop { background: rgba(0, 0, 0, .35); }
+dialog h3 { margin-top: 18px; font-size: 15px; }
+.rater-pick { display: flex; gap: 8px; align-items: center; font-size: 14px; }
+select { font: inherit; font-size: 14px; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line);
+  background: var(--panel); color: var(--ink); }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title"></h1>
+  <span class="rater-pick" id="raterPick" hidden>Scoring as
+    <select id="raterSelect"></select></span>
+  <span class="progress" id="progress"></span>
+  <span class="spacer"></span>
+  <button type="button" id="rubricBtn">Rubric</button>
+  <button type="button" id="gridBtn">All items</button>
+  <label class="button" for="loadFile">Load CSV</label>
+  <input type="file" id="loadFile" accept=".csv,text/csv" hidden>
+  <button type="button" class="primary" id="exportBtn">Export CSV</button>
+</header>
+<div class="banner" id="banner"></div>
+<div id="gridWrap" hidden style="padding: 0 16px"><div class="grid" id="grid"></div></div>
+<main>
+  <section class="col" aria-label="Scenario">
+    <div class="itemhead"><h2 id="scenarioTitle"></h2></div>
+    <div id="scenario"></div>
+  </section>
+  <section class="col" aria-label="Suggestion and scores">
+    <div class="itemhead"><h2 id="itemTitle"></h2><span class="code" id="itemCode"></span></div>
+    <p class="repeat" id="repeatNote" hidden>Consistency check: you have scored this suggestion before. Score it
+      again from scratch; your earlier scores are not shown.</p>
+    <div class="suggestion" id="suggestion"></div>
+    <form class="score" id="form" autocomplete="off">
+      <div id="fields"></div>
+      <fieldset>
+        <legend>Notes <span class="hint">(optional: anything unusual, invented models or columns, doubts)</span></legend>
+        <textarea id="notes"></textarea>
+      </fieldset>
+      <div class="nav">
+        <button type="button" id="prevBtn">Previous</button>
+        <button type="button" class="primary" id="nextBtn">Save and next</button>
+        <button type="button" id="unscoredBtn">Next unscored</button>
+        <span class="msg" id="msg"></span>
+      </div>
+    </form>
+  </section>
+</main>
+<dialog id="rubric"><div id="rubricBody"></div><p><button type="button" id="rubricClose">Close</button></p></dialog>
+
+<script id="data" type="application/json">{"page": {"id": "calibration-ceb3988989", "kind": "calibration", "rater_id": null, "status": "CALIBRATION", "file_prefix": "calibration_", "raters": [["expert_1", "Evaluator 1"], ["expert_2", "Evaluator 2"], ["researcher_provisional", "Researcher (PROVISIONAL)"]], "title": "RPDA8411 calibration — 5 sample outputs", "banner": "Calibration samples from a pilot scenario. They are <b>not part of the results<\/b>. Choose who is scoring at the top, score all 5 on your own, then compare and discuss."}, "rubric": {"general": ["Score what the suggestion actually says, as if you were the on-call engineer receiving it. Use the reference fix as a guide, not a strict answer key."], "dimensions": [{"key": "technical_accuracy", "name": "Technical accuracy", "scale": "0 / 0.5 / 1", "question": "Would the suggested fix technically work for this failure? “Partly right” (0.5) means on the right track but incomplete, or it fixes the failing test but causes a new problem."}, {"key": "root_cause_correctness", "name": "Root cause correctness", "scale": "0 / 1", "question": "Does the suggestion correctly identify the underlying cause of the failure?"}, {"key": "actionability", "name": "Actionability", "scale": "1 / 2 / 3", "question": "Can a competent engineer implement this without needing further research?"}], "anchor_failure": "Example failure (not one of the study scenarios): the accepted_values test on the status column of stg_orders failed because the source started sending a new order status, ‘returned’, that is not in the accepted list.", "anchors": [{"score": "1", "example": "“Check the upstream source data for unexpected values and consider adding more data quality tests.”", "why": "Generic advice with no specific model, column or code reference."}, {"score": "2", "example": "“The status column in stg_orders is receiving a new value that isn’t in the accepted list. Update the test or the model to handle it and rerun the tests.”", "why": "Points to the right column and model, but gives no code, no downstream impact and no way to verify the fix."}, {"score": "3", "example": "“Root cause: raw_orders now contains status = 'returned', which stg_orders passes through unchanged, so accepted_values on stg_orders.status fails. Fix: if returns are a valid business state, add 'returned' to the accepted values for status in models/staging/schema.yml (values: ['placed', 'shipped', 'completed', 'cancelled', 'returned']) and check that fct_orders handles returned orders correctly in revenue totals. Verify: dbt build --select stg_orders+”", "why": "Identifies the root cause, gives the exact fix location with code, names the affected downstream models and gives a verification step."}], "rules": ["Between two anchors: a 3 needs all four elements — the root cause, the exact fix location with code, the affected downstream models, and a verification step. A suggestion that names the right model or column but is missing any of these scores 2. One that names no specific model, column or code scores 1.", "Use the notes field for anything unusual. If a suggestion mentions a model or column that doesn’t exist in the scenario, note it. If the fix depends on it, score technical accuracy as the fix would actually behave: a change to a model that doesn’t exist can’t work as written.", "Each model was also asked to list the assumptions it made. Don’t score that list separately; use it only to understand the rest of the suggestion.", "If you’re unsure between two scores, pick one and add a note. Unclear cases are discussed afterwards. If you still disagree after discussion, both scores are kept and the disagreement is reported."]}, "items": [{"position": 1, "item_id": "PL01-01A", "is_repeat": 0, "scenario_id": "PL01", "label": "A", "group_pos": 1, "group_size": 5, "text": "### Root cause\n\nThe failure is due to the presence of duplicate `customer_id` values in the `stg_customers` view, which is expected to have a unique `customer_id` for each customer. The test `unique_stg_customers_customer_id` is configured to fail if there are any duplicate `customer_id` values, and in this case, it has detected 3 results.\n\n### Fix\n\nTo fix this issue, we need to ensure that the `stg_customers` view does not contain duplicate `customer_id` values. One possible solution is to add a unique constraint to the `customer_id` column in the `stg_customers` view. This can be done by modifying the `models/staging/stg_customers.sql` file to include a `UNIQUE` constraint on the `customer_id` column.\n\nHere is the modified SQL:\n```sql\nwith source as (\n\n    select * from {{ source('raw', 'raw_customers') }}\n\n),\n\nrenamed as (\n\n    select\n        customer_id,\n        first_name,\n        last_name,\n        lower(email) as email,\n        upper(country) as country_code,\n        cast(created_at as timestamp) as created_at,\n        loaded_at\n    from source\n\n)\n\nselect\n    *,\n    ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY loaded_at DESC) as row_num\nfrom renamed\nwhere row_num = 1\n```\nThis modified SQL uses a `ROW_NUMBER()` function to assign a unique row number to each row within each group of duplicate `customer_id` values. The `where` clause then filters out all rows except the most recently loaded one (i.e., the one with `row_num = 1`).\n\n### Verification\n\nTo verify that the fix has worked, we can run the following dbt command:\n```\ndbt test stg_customers\n```\nThis command will re-run the `unique_stg_customers_customer_id` test, which should now pass because there are no duplicate `customer_id` values in the `stg_customers` view.\n\n### Assumptions\n\n* I assumed that the `stg_customers` view is not intentionally designed to allow duplicate `customer_id` values, and that the unique constraint is necessary to ensure data integrity.\n* I also assumed that the `ROW_NUMBER()` function is supported by the DuckDB adapter."}, {"position": 2, "item_id": "PL01-01C", "is_repeat": 0, "scenario_id": "PL01", "label": "C", "group_pos": 2, "group_size": 5, "text": "### Root cause\nThe run failed because the dbt `unique` test on `stg_customers.customer_id` found 3 duplicated `customer_id` values. `stg_customers` is a view over `source('raw', 'raw_customers')` and does not deduplicate records, even though its description says it should contain one row per customer.\n\nSource freshness passed, so this is not a stale-source problem. The issue is that `raw.raw_customers` likely contains multiple rows for the same `customer_id`, and those duplicates flow directly into `stg_customers`, breaking the primary-key expectation and causing downstream `dim_customers` and its tests to be skipped.\n\n### Fix\nUpdate `models/staging/stg_customers.sql` to enforce one row per `customer_id`. A common remediation is to keep the latest loaded record per customer using `loaded_at`, with a deterministic tie-breaker if available.\n\nChange `models/staging/stg_customers.sql` to:\n\n```sql\nwith source as (\n\n    select * from {{ source('raw', 'raw_customers') }}\n\n),\n\nrenamed as (\n\n    select\n        customer_id,\n        first_name,\n        last_name,\n        lower(email) as email,\n        upper(country) as country_code,\n        cast(created_at as timestamp) as created_at,\n        loaded_at\n    from source\n\n),\n\ndeduplicated as (\n\n    select *\n    from renamed\n    qualify row_number() over (\n        partition by customer_id\n        order by loaded_at desc\n    ) = 1\n\n)\n\nselect * from deduplicated\n```\n\nAlso investigate the ingestion job that writes to `raw.raw_customers`. If `raw.raw_customers` is intended to be a current-state table, fix the loader/upsert logic so it does not insert multiple current rows for the same `customer_id`. If it is intended to be an append-only snapshot/history table, the dbt deduplication above is the correct staging-layer behavior, and the source/model documentation should make that explicit.\n\nOptionally add a dbt source test on `raw.raw_customers.customer_id` only if the raw table is contractually expected to be unique:\n\n```yaml\nsources:\n  - name: raw\n    tables:\n      - name: raw_customers\n        columns:\n          - name: customer_id\n            tests:\n              - not_null\n              - unique\n```\n\nDo not add the raw `unique` test if `raw.raw_customers` is append-only and duplicates are expected.\n\n### Verification\nFirst inspect the duplicate IDs in the raw source:\n\n```sql\nselect\n    customer_id,\n    count(*) as n_records,\n    min(loaded_at) as first_loaded_at,\n    max(loaded_at) as last_loaded_at\nfrom raw.raw_customers\nwhere customer_id is not null\ngroup by customer_id\nhaving count(*) > 1\norder by n_records desc, customer_id;\n```\n\nExpected result before the fix: the duplicated customer IDs explain the 3 failing uniqueness results in `stg_customers`.\n\nAfter changing `models/staging/stg_customers.sql`, run:\n\n```bash\ndbt build --select stg_customers+ \n```\n\nExpected result: the `unique_stg_customers_customer_id` test passes, `dim_customers` is no longer skipped, and its downstream tests run.\n\nYou can also confirm directly:\n\n```sql\nselect\n    customer_id,\n    count(*) as n_records\nfrom \"ecommerce\".\"main\".\"stg_customers\"\nwhere customer_id is not null\ngroup by customer_id\nhaving count(*) > 1;\n```\n\nExpected result: 0 rows.\n\nFinally run the normal scheduled commands:\n\n```bash\ndbt build\ndbt source freshness\n```\n\nExpected result: `dbt build` exits 0, all previously skipped downstream nodes run, and source freshness still passes.\n\n### Assumptions\nThe duplicate rows in `stg_customers` originate from `raw.raw_customers`, because `stg_customers` is a direct view over that source.\n\n`loaded_at` is the best available column for choosing the most recent customer record.\n\nIf two rows for the same `customer_id` have identical `loaded_at`, the desired tie-breaker is not specified. A deterministic additional ordering column should be added if the raw source has one, such as an ingestion sequence, source updated timestamp, or file row number.\n\nDuckDB in this environment supports `qualify`; if not, the same logic should be implemented with a subquery and `row_number`."}, {"position": 3, "item_id": "PL01-02C", "is_repeat": 0, "scenario_id": "PL01", "label": "C", "group_pos": 3, "group_size": 5, "text": "### Root cause\nThe dbt run failed because the `unique` test on `stg_customers.customer_id` found 3 duplicated `customer_id` values in `\"ecommerce\".\"main\".\"stg_customers\"`. Freshness passed for all sources, including `raw.raw_customers`, so this is not an ingestion-lateness issue. The most likely cause is that `raw.raw_customers` contains multiple rows per `customer_id` and `stg_customers` is passing them through without deduplication, while downstream `dim_customers` expects one row per customer.\n\n### Fix\nFix `models/staging/stg_customers.sql` so it returns exactly one row per `customer_id`. Deduplicate from `source('raw', 'raw_customers')`, keeping the latest customer record per `customer_id`.\n\nExample:\n\n```sql\nwith source as (\n\n    select *\n    from {{ source('raw', 'raw_customers') }}\n\n),\n\ndeduped as (\n\n    select *\n    from source\n    where customer_id is not null\n    qualify row_number() over (\n        partition by customer_id\n        order by loaded_at desc\n    ) = 1\n\n)\n\nselect\n    customer_id,\n    -- keep existing selected/renamed columns here\n    first_name,\n    last_name,\n    email,\n    created_at,\n    updated_at,\n    loaded_at\nfrom deduped\n```\n\nIf `raw.raw_customers` has a better business timestamp than `loaded_at`, such as `updated_at`, use it first and use `loaded_at` as a tie-breaker:\n\n```sql\nqualify row_number() over (\n    partition by customer_id\n    order by updated_at desc nulls last, loaded_at desc\n) = 1\n```\n\nIf the webshop/CRM ingestion is intended to be one current row per customer, also fix the upstream ingestion job that writes to `raw.raw_customers` so it performs an upsert/merge by `customer_id` instead of appending duplicate current records. The dbt staging deduplication should still remain as a defensive transformation.\n\nKeep the existing test in the staging schema YAML, for example in `models/staging/schema.yml`:\n\n```yaml\nmodels:\n  - name: stg_customers\n    columns:\n      - name: customer_id\n        tests:\n          - not_null\n          - unique\n```\n\n### Verification\nFirst, identify the duplicates to confirm the issue:\n\n```sql\nselect\n    customer_id,\n    count(*) as n_records\nfrom \"ecommerce\".\"main\".\"stg_customers\"\nwhere customer_id is not null\ngroup by customer_id\nhaving count(*) > 1;\n```\n\nBefore the fix, this should return 3 rows. After the fix, it should return 0 rows.\n\nRun the affected model and downstream dependencies:\n\n```bash\ndbt build --select stg_customers+\n```\n\nExpected result: `test unique_stg_customers_customer_id` passes, `dim_customers` is no longer skipped, and its 4 downstream tests run and pass.\n\nOptionally run the full scheduled workflow:\n\n```bash\ndbt build\ndbt source freshness\n```\n\nExpected result: exit code 0 for both commands, no failed tests, no skipped nodes caused by `stg_customers`.\n\n### Assumptions\n- `stg_customers` is built directly or indirectly from `source('raw', 'raw_customers')`.\n- `raw.raw_customers` includes `customer_id` and `loaded_at`, and may include `updated_at`.\n- The desired grain of `stg_customers` and `dim_customers` is one row per `customer_id`.\n- For duplicate customer records, the latest row by `updated_at`/`loaded_at` is the correct record to keep.\n- The duplicate count in the failure means 3 duplicated `customer_id` groups, not necessarily only 3 extra physical rows."}, {"position": 4, "item_id": "PL01-03B", "is_repeat": 0, "scenario_id": "PL01", "label": "B", "group_pos": 4, "group_size": 5, "text": "### Root cause\n\nThe failure is due to the presence of duplicate customer records in the `stg_customers` model. The test `unique` on the `customer_id` column in the `stg_customers` model is failing, indicating that there are records with the same `customer_id` value. This is likely caused by the recent CRM re-sync job (INC-0341 on 2026-08-11) that merged duplicate sign-ups into one account, resulting in duplicate customers in the `raw_customers` source table.\n\n### Fix\n\nTo fix this issue, we need to clean up the duplicate customer records in the `raw_customers` source table. We can do this by running a SQL script that identifies and removes duplicate records. Specifically, we can add a new dbt model, `clean_raw_customers`, that runs a SQL script to remove duplicate records from the `raw_customers` table. This script should be added to the `models/clean_raw_customers.sql` file:\n\n```sql\nwith duplicates as (\n  select customer_id, count(*) as count\n  from \"ecommerce\".\"main\".\"raw_customers\"\n  group by customer_id\n  having count > 1\n)\n\ndelete from \"ecommerce\".\"main\".\"raw_customers\"\nusing duplicates\nwhere \"ecommerce\".\"main\".\"raw_customers\".customer_id = duplicates.customer_id;\n```\n\nThis script uses a CTE to identify duplicate records and then deletes them.\n\n### Verification\n\nTo verify the fix, we can run the following dbt command:\n\n```bash\ndbt run --select models/clean_raw_customers\n```\n\nThis command will run the `clean_raw_customers` model and report any errors or warnings. If the fix is successful, we should see no errors or warnings.\n\nWe can also verify the fix by running the `unique` test on the `stg_customers` model again:\n\n```bash\ndbt test --select models/staging/stg_customers\n```\n\nIf the test passes, it indicates that the duplicate customer records have been cleaned up and the `stg_customers` model is now free of duplicates.\n\n### Assumptions\n\nWe assume that the `raw_customers` source table is the primary source of customer data and that the CRM re-sync job has not introduced any new data quality issues. We also assume that the `stg_customers` model is the primary staging view for customer data and that it is used by downstream models and dashboards."}, {"position": 5, "item_id": "PL01-03C", "is_repeat": 0, "scenario_id": "PL01", "label": "C", "group_pos": 5, "group_size": 5, "text": "### Root cause\n`dbt build` failed because `stg_customers.customer_id` is no longer unique: the uniqueness test found 3 duplicated `customer_id` values in `\"ecommerce\".\"main\".\"stg_customers\"`. Since `stg_customers` is a direct view over `raw.raw_customers` with no deduplication, the duplicates are coming from `raw.raw_customers`.\n\nThe most likely trigger is the CRM nightly account-merge job enabled on 2026-10-24. It likely started producing multiple raw rows for the same `customer_id`, for example old and merged records or multiple versions loaded at different `loaded_at` timestamps. This blocks `dim_customers`, which is skipped, and affects the finance and marketing dashboards that depend on it.\n\n### Fix\nFirst, fix the upstream ingestion/CRM process so `raw.raw_customers` does not contain multiple active rows per `customer_id`. Specifically, the CRM/account-merge export or ingestion job loading `raw.raw_customers` should either:\n- emit only the current canonical record per `customer_id`, or\n- include a versioning/deletion/active flag so dbt can select the current record deterministically.\n\nAs a defensive dbt fix, update `models/staging/stg_customers.sql` to deduplicate `raw.raw_customers` to one row per `customer_id`, choosing the latest loaded row. If two rows have the same `loaded_at`, use a deterministic tie-breaker.\n\n```sql\nwith source as (\n\n    select * from {{ source('raw', 'raw_customers') }}\n\n),\n\ndeduplicated as (\n\n    select *\n    from source\n    qualify row_number() over (\n        partition by customer_id\n        order by loaded_at desc, created_at desc, email desc\n    ) = 1\n\n),\n\nrenamed as (\n\n    select\n        customer_id,\n        first_name,\n        last_name,\n        lower(email) as email,\n        upper(country) as country_code,\n        cast(created_at as timestamp) as created_at,\n        loaded_at\n    from deduplicated\n\n)\n\nselect * from renamed\n```\n\nKeep the existing `unique` and `not_null` tests on `stg_customers.customer_id`; they are correctly catching this issue.\n\nIf the intended business behavior of the CRM merge is that several old customer IDs should map to one canonical customer ID, then do not silently deduplicate by `loaded_at`. Instead, add a CRM merge mapping source, for example `raw.customer_account_merges`, and explicitly resolve `raw_customers.customer_id` to a canonical ID in staging or an intermediate model. That mapping is not present in the provided metadata, so the immediate safe remediation is latest-row deduplication plus an upstream ingestion fix.\n\n### Verification\nIdentify the duplicate raw records before and after the upstream fix:\n\n```sql\nselect\n    customer_id,\n    count(*) as n_records,\n    min(loaded_at) as first_loaded_at,\n    max(loaded_at) as last_loaded_at\nfrom raw.raw_customers\nwhere customer_id is not null\ngroup by customer_id\nhaving count(*) > 1\norder by n_records desc, customer_id;\n```\n\nExpected after the upstream fix: zero rows, or only historical/versioned rows if that is the intended raw design.\n\nAfter changing `models/staging/stg_customers.sql`, run:\n\n```bash\ndbt build --select stg_customers+ source:raw.raw_customers\n```\n\nExpected result:\n- `stg_customers` builds successfully.\n- `unique_stg_customers_customer_id` passes with 0 duplicate `customer_id` values.\n- `dim_customers` is no longer skipped and builds successfully.\n- Its downstream tests pass.\n\nOptionally confirm directly:\n\n```sql\nselect\n    customer_id,\n    count(*) as n_records\nfrom ecommerce.main.stg_customers\nwhere customer_id is not null\ngroup by customer_id\nhaving count(*) > 1;\n```\n\nExpected result: zero rows.\n\nThen run freshness again:\n\n```bash\ndbt source freshness --select source:raw.raw_customers\n```\n\nExpected result: pass, with `raw.raw_customers` still within the configured freshness threshold.\n\n### Assumptions\n- `raw.raw_customers.loaded_at` can be used to identify the most recently ingested version of a customer record.\n- For duplicate `customer_id` records, keeping the latest loaded row is acceptable until the CRM/integration team fixes the upstream export.\n- DuckDB in this project supports `qualify` with `row_number()`. If not, the same logic should be implemented with a subquery filtering on `row_number = 1`.\n- The 3 failing uniqueness results mean 3 duplicated `customer_id` groups, not exactly 3 duplicate rows.\n- The CRM account-merge deployment is the likely cause because it is the only recent relevant change, but this should be confirmed by inspecting the duplicate raw rows."}], "scenarios": {"PL01": {"sections": [["Failure report", "Command: dbt build  (exit code 1)\nResult: 24 passed, 1 failed, 0 errors, 0 warnings, 7 skipped\n- FAIL: test unique_stg_customers_customer_id [unique] on stg_customers.customer_id\n  Message: Got 3 results, configured to fail if != 0\n  Compiled test SQL:\n    select\n        customer_id as unique_field,\n        count(*) as n_records\n    from \"ecommerce\".\"main\".\"stg_customers\"\n    where customer_id is not null\n    group by customer_id\n    having count(*) > 1\n- SKIPPED because an upstream node failed: model dim_customers, 4 tests\n\nCommand: dbt source freshness  (exit code 0)\n- PASS: source raw.raw_customers: max(loaded_at) = 2026-10-25 14:50 UTC, 3.9 h before the check (warn after 24 hours, error after 48 hours)\n- PASS: source raw.raw_orders: max(loaded_at) = 2026-10-25 17:05 UTC, 1.7 h before the check (warn after 6 hours, error after 12 hours)\n- PASS: source raw.raw_payments: max(loaded_at) = 2026-10-25 17:05 UTC, 1.7 h before the check (warn after 6 hours, error after 12 hours)", true], ["Model and source metadata", "### Model stg_customers\nFile: models/staging/stg_customers.sql · materialized as view\nDescription: Cleaned customers, one row per customer. Email lower-cased, country code upper-cased.\nColumns (name · type in warehouse · description · tests):\n- customer_id · INTEGER · Primary key of the customer. · tests: unique, not_null\n- first_name · VARCHAR · Customer first name.\n- last_name · VARCHAR · Customer last name.\n- email · VARCHAR · Lower-cased email address. A small share of missing emails is tolerated (max 5%). · tests: null_rate_below(max_rate=0.05)\n- country_code · VARCHAR · Upper-cased ISO 3166-1 alpha-2 country code (from raw_customers.country). · tests: not_null\n- created_at · TIMESTAMP · UTC timestamp when the account was created.\n- loaded_at · TIMESTAMP · UTC timestamp when the row was loaded into the warehouse.\nSQL (models/staging/stg_customers.sql):\n```sql\nwith source as (\n\n    select * from {{ source('raw', 'raw_customers') }}\n\n),\n\nrenamed as (\n\n    select\n        customer_id,\n        first_name,\n        last_name,\n        lower(email) as email,\n        upper(country) as country_code,\n        cast(created_at as timestamp) as created_at,\n        loaded_at\n    from source\n\n)\n\nselect * from renamed\n```", false], ["Lineage", "DAG edges (upstream → downstream; tests omitted):\n- source raw.raw_customers → model stg_customers\n- model dim_customers → exposure finance_revenue_dashboard\n- model dim_customers → exposure marketing_customer_dashboard\n- model stg_customers → model dim_customers\nUpstream nodes and their current warehouse columns:\n- source raw.raw_customers (source table): customer_id INTEGER, first_name VARCHAR, last_name VARCHAR, email VARCHAR, country VARCHAR, created_at TIMESTAMP, loaded_at TIMESTAMP\nDownstream nodes (affected if the failing node is wrong or skipped):\n- model dim_customers (table): One row per customer with order history and lifetime value. Used by marketing and finance dashboards.\n- exposure finance_revenue_dashboard (dashboard, owner: Finance analytics): Daily revenue by payment method and order status. Refreshed at 07:00 UTC and used in the daily finance stand-up.\n- exposure marketing_customer_dashboard (dashboard, owner: Marketing analytics): Customer counts, lifetime value and repeat-purchase rate by country.\nColumn-level lineage (as designed):\n- stg_customers.customer_id ← raw_customers.customer_id\n- stg_customers.{first_name, last_name, created_at, loaded_at} ← raw_customers (same names)\n- stg_customers.email ← raw_customers.email (lower-cased)\n- stg_customers.country_code ← raw_customers.country (upper-cased)\n- dim_customers.{customer_id, first_name, last_name, email, country_code, created_at} ← stg_customers (same names)\n- dim_customers.{first_order_date, most_recent_order_date, number_of_orders} ← stg_orders.order_date / order_id, per customer_id\n- dim_customers.lifetime_value ← stg_payments.amount joined via stg_orders.order_id, non-cancelled orders, per customer_id", false], ["Recent history", "Recent changes (newest first):\n- 2026-10-24 · deploy · CRM: nightly account-merge job enabled (merges duplicate sign-ups into one account).\n- 2026-10-17 · deploy · Warehouse database file moved to faster storage; no schema changes\n- 2026-10-16 · commit 82abc43 · docs: add column descriptions to models/marts/schema.yml (no SQL change)\nPrevious incidents:\n- INC-0341 (2026-08-11): duplicate customers after a CRM re-sync. Resolution: duplicate rows deleted from raw_customers by hand.\nRecent run history:\n- stg_customers row count, last 7 daily runs: 194, 194, 195, 195, 196, 198, 203 today (2026-10-25).", false]], "reference": "Root cause: raw.raw_customers has 3 customer_ids that appear twice (17, 58, 121): the original row and a second row with a different email, loaded at 2026-10-25 14:50 UTC. The CRM account-merge job enabled yesterday writes the merged account as a new row with the same customer_id instead of updating the existing one. stg_customers passes both rows through, so unique fails on stg_customers.customer_id and dim_customers and its tests are skipped.\n\nFix: Ask the CRM team to make the merge job update the existing account (upsert on customer_id) and remove the extra rows. Until then, keep one row per customer in models/staging/stg_customers.sql: add `qualify row_number() over (partition by customer_id order by loaded_at desc) = 1`, so the most recently loaded (merged) version wins.\n\nVerification: `select customer_id, count(*) from stg_customers group by 1 having count(*) > 1` returns no rows, and `dbt build --select stg_customers+` passes with dim_customers back to 200 rows."}}}</script>
+<script>
+"use strict";
+const DATA = JSON.parse(document.getElementById("data").textContent);
+const PAGE = DATA.page, ITEMS = DATA.items, RUBRIC = DATA.rubric;
+const COLUMNS = ["rater_id", "status", "item_id", "position", "is_repeat", "technical_accuracy",
+                 "root_cause_correctness", "actionability", "notes", "scored_at"];
+const DIMS = RUBRIC.dimensions;
+const CHOICES = {technical_accuracy: ["0", "0.5", "1"], root_cause_correctness: ["0", "1"], actionability: ["1", "2", "3"]};
+const $ = (id) => document.getElementById(id);
+
+// ------------------------------------------------------------ storage (this browser only)
+let rater = PAGE.rater_id || "";
+let scores = {};        // position -> {technical_accuracy, root_cause_correctness, actionability, notes, scored_at}
+let current = 0;
+let dirtySinceExport = false;
+const storeKey = () => `rpda8411:${PAGE.id}:${rater}`;
+function save() {
+  try { localStorage.setItem(storeKey(), JSON.stringify({scores, current, dirtySinceExport})); } catch (e) {}
+}
+function restore() {
+  scores = {}; current = 0; dirtySinceExport = false;
+  try {
+    const raw = localStorage.getItem(storeKey());
+    if (raw) { const s = JSON.parse(raw); scores = s.scores || {}; current = s.current || 0;
+               dirtySinceExport = !!s.dirtySinceExport; }
+  } catch (e) {}
+  if (current >= ITEMS.length) current = 0;
+}
+const isComplete = (s) => s && DIMS.every((d) => s[d.key] !== undefined && s[d.key] !== "");
+
+// ------------------------------------------------------------ text rendering (all input escaped)
+function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+function inline(s) {   // s is already escaped
+  return s.replace(/`([^`]+)`/g, "<code>$1</code>").replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+}
+function fenced(src, renderText) {   // split ``` code blocks from the text around them
+  const out = []; const parts = String(src).split(/^\s*```[^\n]*$/m);
+  parts.forEach((part, i) => {
+    if (i % 2 === 1) out.push("<pre><code>" + esc(part.replace(/^\n/, "").replace(/\n$/, "")) + "</code></pre>");
+    else if (part.trim()) out.push(renderText(part));
+  });
+  return out.join("");
+}
+function plain(src) {   // scenario text: keep line breaks and indentation
+  return fenced(src, (t) => `<div class="plain">${inline(esc(t.replace(/^\n+|\n+$/g, "")))}</div>`);
+}
+function markdown(src) {   // model suggestions: headings, lists, paragraphs, code
+  return fenced(src, (text) => {
+    let html = "", list = null, para = [];
+    const flush = () => { if (para.length) { html += "<p>" + inline(esc(para.join(" "))) + "</p>"; para = []; } };
+    const close = () => { if (list) { html += `</${list}>`; list = null; } };
+    for (const line of text.split("\n")) {
+      const h = line.match(/^\s*(#{1,6})\s+(.*)$/);
+      const ul = line.match(/^\s*[-*•]\s+(.*)$/);
+      const ol = line.match(/^\s*\d+[.)]\s+(.*)$/);
+      if (h) { flush(); close(); const n = Math.min(5, h[1].length + 2); html += `<h${n}>${inline(esc(h[2]))}</h${n}>`; }
+      else if (ul || ol) { flush(); const t = ul ? "ul" : "ol"; if (list !== t) { close(); html += `<${t}>`; list = t; }
+                           html += "<li>" + inline(esc((ul || ol)[1])) + "</li>"; }
+      else if (!line.trim()) { flush(); close(); }
+      else { close(); para.push(line.trim()); }
+    }
+    flush(); close(); return html;
+  });
+}
+
+// ------------------------------------------------------------ rendering
+function renderFields() {
+  $("fields").innerHTML = DIMS.map((d) => `
+    <fieldset>
+      <legend>${esc(d.name)} <span class="hint">(${esc(d.scale)})</span></legend>
+      <p class="hint">${esc(d.question)}</p>
+      <div class="choices">${CHOICES[d.key].map((v) =>
+        `<label><input type="radio" name="${d.key}" value="${v}">${v}</label>`).join("")}</div>
+    </fieldset>`).join("");
+}
+function renderProgress() {
+  const done = ITEMS.filter((it) => isComplete(scores[it.position])).length;
+  $("progress").textContent = `${done} of ${ITEMS.length} scored` + (dirtySinceExport ? " · not exported since last change" : "");
+}
+function renderGrid() {
+  $("grid").innerHTML = ITEMS.map((it, i) => {
+    const s = scores[it.position];
+    const cls = [isComplete(s) ? "complete" : (s ? "partial" : ""), i === current ? "current" : ""].join(" ");
+    return `<button type="button" class="${cls}" data-i="${i}" title="Item ${it.position}">${it.position}</button>`;
+  }).join("");
+}
+let shownScenario = null;   // the scenario panel is kept (open sections, scroll) while its answers are scored
+function render() {
+  const it = ITEMS[current], sc = DATA.scenarios[it.scenario_id];
+  $("scenarioTitle").textContent = `Scenario ${it.scenario_id}` +
+    (it.group_size > 1 ? ` · answer ${it.group_pos} of ${it.group_size}` : "");
+  const newScenario = shownScenario !== it.scenario_id;
+  if (newScenario) {
+    $("scenario").innerHTML = sc.sections.map(([title, text, open]) =>
+      `<details${open ? " open" : ""}><summary>${esc(title)}</summary>${plain(text)}</details>`).join("") +
+      `<details open><summary>Reference fix (researcher)</summary>${plain(sc.reference)}</details>`;
+    shownScenario = it.scenario_id;
+  }
+  $("itemTitle").textContent = `Item ${it.position} of ${ITEMS.length} · Model ${it.label}`;
+  $("itemCode").textContent = it.item_id;
+  $("repeatNote").hidden = !it.is_repeat;
+  $("suggestion").innerHTML = markdown(it.text);
+  const s = scores[it.position] || {};
+  for (const d of DIMS) for (const input of document.getElementsByName(d.key)) input.checked = s[d.key] === input.value;
+  $("notes").value = s.notes || "";
+  $("prevBtn").disabled = current === 0;
+  $("nextBtn").textContent = current === ITEMS.length - 1 ? "Save" : "Save and next";
+  $("msg").textContent = "";
+  renderProgress(); renderGrid();
+  document.querySelectorAll("section.col").forEach((el, i) => { if (i === 1 || newScenario) el.scrollTop = 0; });
+}
+function go(i) { current = Math.max(0, Math.min(ITEMS.length - 1, i)); save(); render(); window.scrollTo(0, 0); }
+
+// ------------------------------------------------------------ editing (saved on every change)
+function update() {
+  if (!rater) { $("msg").textContent = "Choose who is scoring (top of the page) first."; return; }
+  const it = ITEMS[current], s = Object.assign({}, scores[it.position] || {});
+  for (const d of DIMS) { const c = document.querySelector(`input[name="${d.key}"]:checked`); if (c) s[d.key] = c.value; }
+  s.notes = $("notes").value;
+  if (isComplete(s)) s.scored_at = new Date().toISOString().slice(0, 19) + "Z";
+  scores[it.position] = s; dirtySinceExport = true; save(); renderProgress(); renderGrid();
+}
+$("form").addEventListener("change", update);
+$("notes").addEventListener("input", update);
+$("prevBtn").onclick = () => go(current - 1);
+$("nextBtn").onclick = () => {
+  if (!isComplete(scores[ITEMS[current].position])) { $("msg").textContent = "Please score all three dimensions first."; return; }
+  if (current < ITEMS.length - 1) go(current + 1); else { $("msg").textContent = "Saved. Remember to export the CSV."; }
+};
+$("unscoredBtn").onclick = () => {
+  for (let k = 1; k <= ITEMS.length; k++) { const i = (current + k) % ITEMS.length;
+    if (!isComplete(scores[ITEMS[i].position])) return go(i); }
+  $("msg").textContent = "Every item is scored. Export the CSV and send it to the researcher.";
+};
+$("grid").onclick = (e) => { const b = e.target.closest("button[data-i]"); if (b) go(+b.dataset.i); };
+$("gridBtn").onclick = () => { $("gridWrap").hidden = !$("gridWrap").hidden; };
+
+// ------------------------------------------------------------ CSV export / import
+function csvCell(v) { v = String(v ?? ""); return /[",\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
+function exportCsv() {
+  if (!rater) { alert("Choose who is scoring first."); return; }
+  const rows = ITEMS.filter((it) => isComplete(scores[it.position])).map((it) => {
+    const s = scores[it.position];
+    return {rater_id: rater, status: PAGE.status, item_id: it.item_id, position: it.position,
+            is_repeat: it.is_repeat ? 1 : 0, technical_accuracy: s.technical_accuracy,
+            root_cause_correctness: s.root_cause_correctness, actionability: s.actionability,
+            notes: (s.notes || "").trim(), scored_at: s.scored_at || ""};
+  });
+  const text = [COLUMNS.join(","), ...rows.map((r) => COLUMNS.map((c) => csvCell(r[c])).join(","))].join("\n") + "\n";
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([text], {type: "text/csv"}));
+  a.download = `${PAGE.file_prefix}${rater}.csv`;
+  document.body.appendChild(a); a.click(); a.remove();
+  dirtySinceExport = false; save(); renderProgress();
+}
+function parseCsv(text) {
+  const rows = []; let row = [], cell = "", q = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (q) { if (ch === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += ch; }
+    else if (ch === '"') q = true;
+    else if (ch === ",") { row.push(cell); cell = ""; }
+    else if (ch === "\n" || ch === "\r") { if (ch === "\r" && text[i + 1] === "\n") i++; row.push(cell); rows.push(row); row = []; cell = ""; }
+    else cell += ch;
+  }
+  if (cell || row.length) { row.push(cell); rows.push(row); }
+  const head = rows.shift() || [];
+  return rows.filter((r) => r.length > 1).map((r) => Object.fromEntries(head.map((h, i) => [h, r[i] ?? ""])));
+}
+$("exportBtn").onclick = exportCsv;
+$("loadFile").onchange = async (e) => {
+  const file = e.target.files[0]; e.target.value = "";
+  if (!file) return;
+  const rows = parseCsv(await file.text());
+  const byPos = Object.fromEntries(ITEMS.map((it) => [String(it.position), it]));
+  const ok = rows.filter((r) => byPos[r.position] && byPos[r.position].item_id === r.item_id);
+  if (!ok.length) { alert("This CSV does not match this scoring page."); return; }
+  if (PAGE.rater_id && ok.some((r) => r.rater_id !== PAGE.rater_id)) { alert("This CSV belongs to a different rater."); return; }
+  if (!confirm(`Load ${ok.length} scores from ${file.name}? Scores for those items in this browser are replaced.`)) return;
+  if (!PAGE.rater_id && ok[0].rater_id) { rater = ok[0].rater_id; $("raterSelect").value = rater; restore(); }
+  for (const r of ok) scores[r.position] = {technical_accuracy: r.technical_accuracy,
+    root_cause_correctness: r.root_cause_correctness, actionability: r.actionability, notes: r.notes, scored_at: r.scored_at};
+  save(); render();
+};
+
+// ------------------------------------------------------------ rubric
+$("rubricBody").innerHTML = `<h2 style="margin-top:0">Rubric</h2>` +
+  RUBRIC.general.map((t) => `<p>${esc(t)}</p>`).join("") +
+  DIMS.map((d) => `<h3>${esc(d.name)} (${esc(d.scale)})</h3><p>${esc(d.question)}</p>`).join("") +
+  `<h3>Actionability anchors</h3><p>${esc(RUBRIC.anchor_failure)}</p>` +
+  RUBRIC.anchors.map((a) => `<p><strong>${esc(a.score)}</strong> — ${esc(a.example)}<br><span class="hint">${esc(a.why)}</span></p>`).join("") +
+  `<h3>Rules</h3><ul>${RUBRIC.rules.map((r) => `<li>${esc(r)}</li>`).join("")}</ul>`;
+$("rubricBtn").onclick = () => $("rubric").showModal();
+$("rubricClose").onclick = () => $("rubric").close();
+
+// ------------------------------------------------------------ start
+document.title = PAGE.title;
+$("title").textContent = PAGE.title;
+$("banner").innerHTML = PAGE.banner;
+if (PAGE.banner_class) $("banner").classList.add(PAGE.banner_class);
+if (!PAGE.rater_id) {
+  $("raterPick").hidden = false;
+  $("raterSelect").innerHTML = `<option value="">choose…</option>` +
+    PAGE.raters.map(([id, label]) => `<option value="${esc(id)}">${esc(label)}</option>`).join("");
+  $("raterSelect").onchange = (e) => { rater = e.target.value; restore(); render(); };
+}
+renderFields(); restore(); render();
+</script>
+</body>
+</html>

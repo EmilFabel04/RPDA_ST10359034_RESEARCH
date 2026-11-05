@@ -1,0 +1,4 @@
+comparison,dimension,n,mean_a,mean_b,difference,a_higher,b_higher,wilcoxon_p,data_label
+expert_1 vs expert_2 (45 shared items),technical_accuracy,45,0.4444,0.6222,-0.1778,5,18,0.0047,Expert scores
+expert_1 vs expert_2 (45 shared items),root_cause_correctness,45,0.4889,0.2889,0.2,10,1,0.0067,Expert scores
+expert_1 vs expert_2 (45 shared items),actionability,45,1.8,2.3778,-0.5778,6,27,0.0002,Expert scores

@@ -1,0 +1,118 @@
+{
+  "metadata": {
+    "dbt_schema_version": "https://schemas.getdbt.com/dbt/sources/v3.json",
+    "dbt_version": "1.12.5",
+    "generated_at": "2026-10-25T18:44:54.655046Z",
+    "invocation_id": "b5a0d68f-982d-4c80-932f-1897eb0ac6b3",
+    "invocation_started_at": "2026-10-25T18:44:53.924589Z",
+    "env": {}
+  },
+  "results": [
+    {
+      "unique_id": "source.ecommerce.raw.raw_customers",
+      "max_loaded_at": "2026-10-25T14:50:00+00:00",
+      "snapshotted_at": "2026-10-25T18:44:54.638193+00:00",
+      "max_loaded_at_time_ago_in_s": 14094.638193,
+      "status": "pass",
+      "criteria": {
+        "warn_after": {
+          "count": 24,
+          "period": "hour"
+        },
+        "error_after": {
+          "count": 48,
+          "period": "hour"
+        },
+        "filter": null
+      },
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-25T18:44:54.631452Z",
+          "completed_at": "2026-10-25T18:44:54.631458Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-25T18:44:54.631750Z",
+          "completed_at": "2026-10-25T18:44:54.640601Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.010027885437011719
+    },
+    {
+      "unique_id": "source.ecommerce.raw.raw_orders",
+      "max_loaded_at": "2026-10-25T17:05:00+00:00",
+      "snapshotted_at": "2026-10-25T18:44:54.644783+00:00",
+      "max_loaded_at_time_ago_in_s": 5994.644783,
+      "status": "pass",
+      "criteria": {
+        "warn_after": {
+          "count": 6,
+          "period": "hour"
+        },
+        "error_after": {
+          "count": 12,
+          "period": "hour"
+        },
+        "filter": null
+      },
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-25T18:44:54.642396Z",
+          "completed_at": "2026-10-25T18:44:54.642398Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-25T18:44:54.642535Z",
+          "completed_at": "2026-10-25T18:44:54.646146Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.004210948944091797
+    },
+    {
+      "unique_id": "source.ecommerce.raw.raw_payments",
+      "max_loaded_at": "2026-10-25T17:05:00+00:00",
+      "snapshotted_at": "2026-10-25T18:44:54.650268+00:00",
+      "max_loaded_at_time_ago_in_s": 5994.650268,
+      "status": "pass",
+      "criteria": {
+        "warn_after": {
+          "count": 6,
+          "period": "hour"
+        },
+        "error_after": {
+          "count": 12,
+          "period": "hour"
+        },
+        "filter": null
+      },
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-25T18:44:54.647275Z",
+          "completed_at": "2026-10-25T18:44:54.647276Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-25T18:44:54.647418Z",
+          "completed_at": "2026-10-25T18:44:54.651199Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.004291057586669922
+    }
+  ],
+  "elapsed_time": 0.08697199821472168
+}

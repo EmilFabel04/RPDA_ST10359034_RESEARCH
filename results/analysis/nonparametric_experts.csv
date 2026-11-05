@@ -1,0 +1,37 @@
+unit,model_key,dv,n,test,factor,statistic,p,effect_size,effect_measure,note,data_label
+experts,gpt,technical_accuracy,45,Kruskal-Wallis,level,13.244,0.0013,0.301,epsilon2,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,Kruskal-Wallis,category,4.2954,0.3675,0.0976,epsilon2,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,Friedman (blocks: scenario),level,10.36,0.0056,0.3453,Kendall W,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,Kruskal-Wallis,level,16.5267,0.0003,0.3756,epsilon2,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,Kruskal-Wallis,category,2.3349,0.6744,0.0531,epsilon2,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,Friedman (blocks: scenario),level,12.0426,0.0024,0.4014,Kendall W,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,Kruskal-Wallis,level,15.2972,0.0005,0.3477,epsilon2,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,Kruskal-Wallis,category,2.8153,0.5892,0.064,epsilon2,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,Friedman (blocks: scenario),level,14.6038,0.0007,0.4868,Kendall W,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,specificity,45,Kruskal-Wallis,level,19.033,0.0001,0.4326,epsilon2,,Automated metric
+experts,gpt,specificity,45,Kruskal-Wallis,category,6.5997,0.1586,0.15,epsilon2,,Automated metric
+experts,gpt,specificity,45,Friedman (blocks: scenario),level,19.7333,0.0001,0.6578,Kendall W,,Automated metric
+experts,claude,technical_accuracy,45,Kruskal-Wallis,level,8.0758,0.0176,0.1835,epsilon2,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,Kruskal-Wallis,category,2.3606,0.6698,0.0536,epsilon2,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,Friedman (blocks: scenario),level,5.4419,0.0658,0.1814,Kendall W,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,Kruskal-Wallis,level,11.7841,0.0028,0.2678,epsilon2,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,Kruskal-Wallis,category,6.0932,0.1923,0.1385,epsilon2,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,Friedman (blocks: scenario),level,10.4324,0.0054,0.3477,Kendall W,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,Kruskal-Wallis,level,11.7857,0.0028,0.2679,epsilon2,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,Kruskal-Wallis,category,4.6788,0.3219,0.1063,epsilon2,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,Friedman (blocks: scenario),level,9.5217,0.0086,0.3174,Kendall W,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,specificity,45,Kruskal-Wallis,level,9.6031,0.0082,0.2183,epsilon2,,Automated metric
+experts,claude,specificity,45,Kruskal-Wallis,category,6.8694,0.143,0.1561,epsilon2,,Automated metric
+experts,claude,specificity,45,Friedman (blocks: scenario),level,6.9333,0.0312,0.2311,Kendall W,,Automated metric
+experts,llama,technical_accuracy,45,Kruskal-Wallis,level,0.8484,0.6543,0.0193,epsilon2,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,Kruskal-Wallis,category,8.8585,0.0647,0.2013,epsilon2,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,Friedman (blocks: scenario),level,1.0,0.6065,0.0333,Kendall W,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,Kruskal-Wallis,level,3.1982,0.2021,0.0727,epsilon2,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,Kruskal-Wallis,category,1.6948,0.7917,0.0385,epsilon2,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,Friedman (blocks: scenario),level,3.0,0.2231,0.1,Kendall W,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,Kruskal-Wallis,level,1.5044,0.4713,0.0342,epsilon2,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,Kruskal-Wallis,category,3.3971,0.4937,0.0772,epsilon2,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,Friedman (blocks: scenario),level,1.24,0.5379,0.0413,Kendall W,,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,specificity,45,Kruskal-Wallis,level,2.1805,0.3361,0.0496,epsilon2,,Automated metric
+experts,llama,specificity,45,Kruskal-Wallis,category,11.2296,0.0241,0.2552,epsilon2,,Automated metric
+experts,llama,specificity,45,Friedman (blocks: scenario),level,5.2,0.0743,0.1733,Kendall W,,Automated metric

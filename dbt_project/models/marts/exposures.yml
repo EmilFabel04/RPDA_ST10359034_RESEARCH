@@ -1,0 +1,25 @@
+version: 2
+
+exposures:
+  - name: finance_revenue_dashboard
+    label: Finance revenue dashboard
+    type: dashboard
+    maturity: high
+    description: Daily revenue by payment method and order status. Refreshed at 07:00 UTC and used in the daily finance stand-up.
+    depends_on:
+      - ref('fct_orders')
+      - ref('dim_customers')
+    owner:
+      name: Finance analytics
+      email: finance-analytics@example.com
+
+  - name: marketing_customer_dashboard
+    label: Marketing customer dashboard
+    type: dashboard
+    maturity: medium
+    description: Customer counts, lifetime value and repeat-purchase rate by country.
+    depends_on:
+      - ref('dim_customers')
+    owner:
+      name: Marketing analytics
+      email: marketing-analytics@example.com

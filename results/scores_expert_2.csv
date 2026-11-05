@@ -1,0 +1,299 @@
+rater_id,status,item_id,position,is_repeat,technical_accuracy,root_cause_correctness,actionability,notes,scored_at
+expert_2,EXPERT,RC02-07A,1,0,0,0,2,"Technical accuracy: The proposed fix doesn't work even on its own interpretation: changing the minimum to 200 doesn't help if there are supposedly only 1 row, and the supplied SQL doesn't actually modify the test threshold.
+
+Root cause correctness: it identifies the failed row-count test and vaguely suspects ingestion, but doesn't explain why the data loss occurred.
+
+Actionability: It names the affected model and gives a proposed change and verification command, so it's more than generic advice. However, you would still need to investigate the actual problem, and the proposed remediation isn't workable.",2026-11-01T17:30:02Z
+expert_2,EXPERT,RC02-03A,2,0,0.5,0,2,"Technical accuracy: Parts of the solution are technically valid, particularly its alternative recommendation to repair ingestion if raw orders are missing. But its primary solution doesn't restore the missing orders and can make the relationship test pass by dropping real payments.
+
+Root cause correctness: It doesn't explain the actual reason the orders disappeared: the ingestion lookback was changed from 180 to 60 days.
+
+Actionability: Lots of concrete implementation detail and verification, but the engineer must first investigate which of its possible diagnoses is actually true, and following the main fix blindly could produce the wrong result.",2026-11-01T17:34:19Z
+expert_2,EXPERT,RC02-03B,3,0,0,0,2,"Technical accuracy: Changing the expected range to 0–1 hides the row-count problem, doesn't restore missing data, and doesn't address the orphan payments.
+
+Root cause correctness: It only restates the failed test and vaguely mentions a possible ingestion change; it doesn't explain why the failure occurred.
+
+Actionability: It gives a specific model change and verification command, but it's the wrong fix and omits the relationship failure entirely.",2026-11-01T17:39:08Z
+expert_2,EXPERT,RC02-07C,4,0,1,1,3,,2026-11-01T17:39:34Z
+expert_2,EXPERT,RC02-04A,5,0,0.5,0,2,"Technical accuracy: Its primary remediation is based on a wrong assumption and wouldn't solve the actual failure. However, it also provides a valid remediation path for the possibility that raw_orders is incomplete: repair ingestion and backfill the missing orders.
+
+Root cause correctness: It incorrectly says legitimate table growth is the most plausible cause and doesn't identify the 60-day ingestion lookback change.
+
+Actionability: Specific models, configuration suggestions, SQL diagnostics, downstream impact and verification are provided, but the engineer still has to determine which of several possible causes actually applies.",2026-11-01T17:40:51Z
+expert_2,EXPERT,RC02-04C,6,0,0.5,0,2,"Technical accuracy: It contains a potentially correct remediation branch (repair ingestion if raw orders are missing), but much of its primary fix targets unsupported staging problems and includes unsupported columns such as order_created_at and payment_created_at.
+
+Root cause correctness: It doesn't identify why the data disappeared: the ingestion lookback was changed from 180 to 60 days.
+
+Actionability: Specific diagnostics, code and verification are provided, but the engineer still has to determine which of several proposed causes is real.",2026-11-01T17:45:55Z
+expert_2,EXPERT,NR03-01B,7,0,1,0,3,"Root cause correctness: It correctly traces the nulls to raw, but that's essentially the where. It doesn't identify the underlying CRM privacy-mode change explaining why emails became null.",2026-11-01T17:47:54Z
+expert_2,EXPERT,NR03-09C,8,0,1,0,2,"Root cause correctness: It describes the data-quality failure but doesn't explain why it happened or identify the privacy-mode change.
+
+Actionability: Lots of useful implementation and verification detail, but further investigation is still necessary to identify which upstream issue actually needs fixing.",2026-11-01T17:49:47Z
+expert_2,EXPERT,NR03-02B,9,0,1,1,3,,2026-11-01T17:50:08Z
+expert_2,EXPERT,NR03-09B,10,0,0,0,2,"Technical accuracy: The proposed dbt test logic is reversed, causing good data to fail and bad data to pass.
+
+Root cause correctness: It identifies excessive null emails but doesn't explain why they appeared or connect them to the CRM privacy-mode change.
+
+Actionability: It names the affected column and gives concrete SQL and verification instructions, so it's not generic, but those instructions contain a serious error and further investigation is required.",2026-11-01T17:52:07Z
+expert_2,EXPERT,NR03-01C,11,0,0,0,2,"Technical accuracy: Changing the threshold to 10% doesn't resolve a 17.5% null rate, and it doesn't fix the underlying data problem.
+
+Root cause correctness: It only explains what test failed, not why the emails suddenly became null.
+
+Actionability: It provides a specific model/column, concrete change and verification steps, but lacks the actual root cause and correct remediation.",2026-11-01T17:52:59Z
+expert_2,EXPERT,NR03-02A,12,0,1,1,3,,2026-11-01T17:53:22Z
+expert_2,EXPERT,NR01-07A,13,0,1,1,3,,2026-11-01T17:53:44Z
+expert_2,EXPERT,NR01-07C,14,0,0.5,0,2,"Technical accuracy: It makes the test pass, but converting unknown payment amounts to zero can corrupt financial data.
+
+Root cause correctness: It identifies the nulls but doesn't explain why they appeared.
+
+Actionability: Specific code and verification are provided, but the actual upstream cause/fix isn't.",2026-11-01T17:55:14Z
+expert_2,EXPERT,NR01-09A,15,0,1,0,2,"Root cause correctness: It traces the problem to raw/upstream ingestion but doesn't explain why it happened or identify the gift-card settlement re-sync.
+
+Actionability: Concrete remediation and verification are provided, but further investigation is needed to determine the actual upstream cause.",2026-11-01T17:56:10Z
+expert_2,EXPERT,NR01-05B,16,0,0.5,0,2,"Technical accuracy: Contains the correct upstream-fix/backfill path, but also proposes unsupported fixes using a nonexistent status column and doesn't determine which fix actually applies.
+
+Root cause correctness: Identifies several possibilities but misses the specific gift-card settlement re-sync that explains why the nulls appeared.
+
+Actionability: Detailed diagnostics and verification, but further investigation is required and some suggested code doesn't match the supplied schema.",2026-11-01T17:57:21Z
+expert_2,EXPERT,NR01-05A,17,0,0.5,0,2,"Technical accuracy: It mentions fixing the raw data as an alternative, which is directionally correct, but its chosen implementation of allowing 11 nulls is unjustified and the proposed max_nulls=11 test syntax isn't supported by the scenario's standard not_null test.
+
+Root cause correctness: Doesn't identify why the null amounts appeared.
+
+Actionability: Specific model/column and an implementation are given, but the implementation isn't reliable and there's no actual root-cause remediation.",2026-11-01T18:00:22Z
+expert_2,EXPERT,NR01-09B,18,0,1,0,2,"Root cause correctness: Correctly traces the nulls upstream but doesn't identify the gift-card settlement re-sync as why they appeared.
+
+Actionability: Very detailed and useful, but the engineer still needs to investigate the actual cause before implementing the appropriate branch.",2026-11-01T18:01:33Z
+expert_2,EXPERT,SD01-07A,19,0,0,0,2,"Technical accuracy: Moving amount earlier in the SELECT does not solve the missing source column.
+
+Root cause correctness: Mistakes the Binder Error for a SELECT-order problem and misses the provider's amount → amount_cents rename.
+
+Actionability: Names the model/column and provides concrete changes and verification, but they're based on an incorrect diagnosis.",2026-11-01T18:02:56Z
+expert_2,EXPERT,SD01-07C,20,0,0.5,0,2,"Technical accuracy: It happens to use the correct amount_cents source field in its example, but treats it as a placeholder, misdiagnoses why the error occurs, and includes a nonexistent status column.
+
+Root cause correctness: Explicitly assumes a model SQL/alias bug rather than the actual provider v2 schema change.
+
+Actionability: Detailed fix and verification, but further investigation is required and the supplied SQL isn't valid as written.",2026-11-01T18:03:39Z
+expert_2,EXPERT,SD01-04A,21,0,1,1,3,,2026-11-01T18:03:55Z
+expert_2,EXPERT,SD01-04B,22,0,1,1,3,,2026-11-01T18:04:13Z
+expert_2,EXPERT,SD01-06A,23,0,0,0,3,"Technical accuracy: The replacement SQL still references the nonexistent raw amount column, so the failure remains.
+
+Root cause correctness: Treats this as an ordering problem rather than the provider's amount - amount_cents schema change.",2026-11-01T18:05:39Z
+expert_2,EXPERT,SD01-06C,24,0,0.5,0,2,"Technical accuracy: Targets the correct expression but its recommended source.amount still references a nonexistent column.
+
+Root cause correctness: Attributes the failure to alias ambiguity rather than the provider v2 schema rename.
+
+Actionability: Detailed and specific, but further investigation/correction is required before the fix can actually be implemented.",2026-11-01T18:06:28Z
+expert_2,EXPERT,FV03-03B,25,0,0.5,0,2,"Technical accuracy: Contains the correct alternative of changing the freshness threshold, but incorrectly treats ingestion as the primary problem and suggests forcing fresh loaded_at values.
+
+Root cause correctness: Misses DATA-140 making the threshold inappropriate for a sparse customer source.
+
+Actionability: Very concrete, but further investigation is needed to choose between its branches because it hasn't identified the real cause.",2026-11-01T18:08:59Z
+expert_2,EXPERT,FV03-04B,26,0,1,1,3,,2026-11-01T18:10:00Z
+expert_2,EXPERT,FV03-03A,27,0,0.5,0,2,"Technical accuracy: Correctly targets freshness configuration, but proposes an ineffective 2-hour threshold and appears to put the configuration in the wrong place.
+
+Root cause correctness: Incorrectly blames delayed ingestion instead of DATA-140 applying an unsuitable threshold to sparse customer data.",2026-11-01T18:11:02Z
+expert_2,EXPERT,FV03-04A,28,0,1,1,3,,2026-11-01T18:12:17Z
+expert_2,EXPERT,FV03-02A,29,0,0.5,0,2,"Technical accuracy: Right general idea, but 2.1h still fails against a 4.1h age and profiles.yml is the wrong configuration location.
+
+Root cause correctness: Only restates the freshness failure; doesn't identify DATA-140 and the sparse-source behavior that caused the false alarm.
+
+Actionability: Specific instructions are provided, but they won't work as written.",2026-11-01T18:14:02Z
+expert_2,EXPERT,FV03-02B,30,0,0,0,2,"Technical accuracy: Leaves the incorrect 1h/2h threshold in place and recommends repairing a loader that isn't shown to be broken; gating builds on this threshold could create additional problems.
+
+Root cause correctness: Incorrectly diagnoses CRM ingestion failure instead of DATA-140's inappropriate freshness threshold for sparse customer data.
+
+Actionability: Highly specific and implementable instructions, but they're aimed at the wrong problem.",2026-11-01T18:15:07Z
+expert_2,EXPERT,FV01-08A,31,0,0.5,0,2,"Technical accuracy: Correctly sends the engineer to ingestion rather than changing dbt, but doesn't identify or implement the actual credential fix.
+
+Root cause correctness: Says ingestion isn't updating but misses the WHY: SEC-58 rotated the shop replica credentials and the connector is still using the old ones.
+
+Actionability: Concrete investigation and verification steps, but further research is required to discover the actual fix.",2026-11-01T18:15:50Z
+expert_2,EXPERT,FV01-05A,32,0,1,1,3,,2026-11-01T18:16:19Z
+expert_2,EXPERT,FV01-08C,33,0,0.5,0,2,"Technical accuracy: Correctly keeps the fix upstream and recommends restoring/backfilling ingestion, but doesn't provide the actual credential remediation.
+
+Root cause correctness: Doesn't identify SEC-58's credential rotation as the reason the connector stopped loading data.
+
+Actionability: Specific investigation and verification, but further research is required to determine the actual fix.",2026-11-01T18:17:51Z
+expert_2,EXPERT,FV01-01A,34,0,0.5,0,2,"Technical accuracy: Correct upstream remediation strategy, but incomplete because it doesn't provide the credential fix.
+
+Root cause correctness: Identifies the ingestion layer but not the actual WHY: SEC-58 credential rotation.
+
+Actionability: Concrete enough to guide investigation and recovery, but not enough to implement the actual fix without further research.",2026-11-01T18:18:34Z
+expert_2,EXPERT,FV01-01B,35,0,0.5,0,2,"Technical accuracy: Correct recovery/backfill approach, but missing the actual credential update required to restore ingestion.
+
+Root cause correctness: Identifies stalled ingestion but not the underlying SEC-58 credential rotation.
+
+Actionability: Very detailed investigation and verification, but further research is needed before the actual fix can be implemented.",2026-11-01T18:19:31Z
+expert_2,EXPERT,FV01-05B,36,0,0.5,0,2,"Technical accuracy: Backfilling/rerunning ingestion is directionally correct, but it doesn't fix the underlying credential problem; tightening freshness thresholds is unrelated to remediation.
+
+Root cause correctness: ""the data is 24 hours old"" describes the symptom, not why ingestion stopped.
+
+Actionability: Identifies sources and gives recovery/verification steps, but further investigation is required to find and fix the actual cause.",2026-11-01T18:20:47Z
+expert_2,EXPERT,SD02-05B,37,0,0.5,0,2,"Technical accuracy: Correct parsing strategy, but uses %m/%d/%Y instead of the actual en-ZA %d/%m/%Y, which could silently swap days/months.
+
+Root cause correctness: Identifies the format problem but doesn't explain WHY it changed: SHOP-219 switched the shop locale to en-ZA.
+
+Actionability: Highly specific with code, downstream impact and verification, but the engineer must first correct/confirm the format.",2026-11-01T18:25:16Z
+expert_2,EXPERT,SD02-03C,38,0,1,0,2,"Root cause correctness: Correctly explains the failure mechanism but doesn't identify SHOP-219/en-ZA as why the format changed.
+
+Actionability: Extremely detailed implementation and verification, but missing the known causal change prevents a 3 under this rubric.",2026-11-01T18:26:01Z
+expert_2,EXPERT,SD02-08A,39,0,1,1,3,,2026-11-01T18:26:26Z
+expert_2,EXPERT,SD02-05A,40,0,0.5,0,2,"Technical accuracy: Right area, but to_char() doesn't correctly parse the incoming DD/MM/YYYY string.
+
+Root cause correctness: Identifies the format mismatch but misses SHOP-219/en-ZA as the reason it changed.
+
+Actionability: Specific model/column/code, but the code itself needs correction and downstream impact isn't covered.",2026-11-01T18:27:32Z
+expert_2,EXPERT,SD02-08B,41,0,1,0,2,"Root cause correctness: Recognizes the format change but doesn't identify SHOP-219/en-ZA as why it happened.
+
+Actionability: Concrete enough to implement the dbt change, but missing the causal change and complete downstream impact.",2026-11-01T18:28:46Z
+expert_2,EXPERT,SD02-03A,42,0,1,1,3,,2026-11-01T18:29:03Z
+expert_2,EXPERT,RC03-06B,43,0,1,1,3,,2026-11-01T18:29:25Z
+expert_2,EXPERT,RC03-08B,44,0,1,0,2,"Root cause correctness: Identifies the fanout mechanism but not the actual causal change, commit 82ffbf3.
+
+Actionability: Highly implementable SQL and verification, but doesn't satisfy the full root-cause/downstream requirements for 3.",2026-11-01T18:30:07Z
+expert_2,EXPERT,RC03-01B,45,0,0,0,2,"Technical accuracy: Misunderstands the row-count failure and leaves the one-to-many payment join intact.
+
+Root cause correctness: Misses both the fanout mechanism and commit 82ffbf3 that introduced it.
+
+Actionability: Concrete SQL and verification, but the proposed implementation is incorrect.",2026-11-01T18:30:51Z
+expert_2,EXPERT,RC03-08A,46,0,1,1,3,,2026-11-01T18:50:23Z
+expert_2,EXPERT,RC03-01A,47,0,1,1,3,,2026-11-01T18:51:02Z
+expert_2,EXPERT,RC03-06A,48,0,0,1,2,"Technical accuracy: The WHERE EXISTS doesn't remove fan-out duplicates, and the proposed SQL also references an undefined payments relation.
+
+Actionability: Concrete model/code/verification, but the implementation is incorrect and downstream impact isn't covered.",2026-11-01T18:51:56Z
+expert_2,EXPERT,NR02-08B,49,0,1,1,3,,2026-11-01T18:53:43Z
+expert_2,EXPERT,NR02-02B,50,0,1,0,2,"Root cause correctness: Explains how the left join creates nulls but misses commit 75ab2ba removing the existing coalesce.
+
+Actionability: Concrete and implementable fix, but missing the confirmed causal change and full downstream impact.",2026-11-01T18:55:01Z
+expert_2,EXPERT,NR02-07C,51,0,0,0,1,"Technical accuracy: Proposed SQL doesn't reflect how fct_orders.amount is actually derived and appears to use nonexistent macros.
+
+Root cause correctness: Merely restates that 46 nulls exist and doesn't identify commit 75ab2ba removing the coalesce.
+
+Actionability: Substantial further investigation and rewriting would be required before an engineer could implement anything.",2026-11-01T18:56:21Z
+expert_2,EXPERT,NR02-08C,52,0,0,0,2,"Technical accuracy: Changing the aggregation doesn't solve nulls caused by orders having no matching order_payments row.
+
+Root cause correctness: Misses commit 75ab2ba removing the coalesce.
+
+Actionability: Concrete model/code/verification, but the proposed implementation won't fix the failure.",2026-11-01T18:57:04Z
+expert_2,EXPERT,NR02-07B,53,0,0.5,0,2,"Technical accuracy: Correctly proposes coalescing unpaid orders to zero, but implements it using a direct payment join that could create duplicate order rows and presents inappropriate alternatives.
+
+Root cause correctness: Misses commit 75ab2ba removing the existing coalesce.
+
+Actionability: Concrete code and verification, but further investigation is required to determine and implement the correct branch.",2026-11-01T18:57:46Z
+expert_2,EXPERT,NR02-02A,54,0,1,0,2,"Root cause correctness: Explains how nulls arise but misses commit 75ab2ba removing the previous coalesce.
+
+Actionability: Concrete and implementable, but missing the specific cause and complete downstream impact.",2026-11-01T18:58:19Z
+expert_2,EXPERT,RC01-07A,55,0,1,1,3,,2026-11-01T18:58:40Z
+expert_2,EXPERT,RC01-04C,56,0,0,0,1,"Technical accuracy: Misreads the dbt test and doesn't address the actual duplication.
+
+Root cause correctness: Misses the loader v2.4 append/upsert regression entirely.
+
+Actionability: Essentially tells the engineer to investigate rather than providing an implementable remediation.",2026-11-01T19:00:15Z
+expert_2,EXPERT,RC01-07C,57,0,1,1,3,,2026-11-01T19:00:38Z
+expert_2,EXPERT,RC01-03C,58,0,1,0,2,"Root cause correctness: Identifies raw duplication but doesn't identify the loader v2.4 write-behaviour regression that caused it.
+
+Actionability: Excellent SQL and verification, but further investigation is needed to find and correct the actual upstream configuration.",2026-11-01T19:01:33Z
+expert_2,EXPERT,RC01-04B,59,0,1,0,3,"Root cause correctness:  Correctly identifies append behaviour, but misses the specific loader v2.4 change that caused it.",2026-11-01T19:02:30Z
+expert_2,EXPERT,RC01-03B,60,0,0.5,0,2,"Technical accuracy: Staging deduplication can make the tests pass, but it masks the ongoing ingestion regression rather than fixing it.
+
+Root cause correctness: Interprets duplicates as possible order history and misses the loader v2.4 append/upsert regression.
+
+Actionability: Provides implementable dbt SQL and verification, but doesn't provide the actual upstream remediation.",2026-11-01T19:03:44Z
+expert_2,EXPERT,RI01-01B,61,0,0.5,0,2,"Technical accuracy: Correctly recommends restoring missing orders as one option, but filtering orphan payments could hide valid data and doesn't fix the underlying problem.
+
+Root cause correctness: Identifies missing parent orders but not why they're missing.
+
+Actionability: Useful diagnostic SQL and specific models, but further investigation is required before choosing and implementing the actual remediation.",2026-11-01T19:04:21Z
+expert_2,EXPERT,RI01-03A,62,0,0.5,0,3,"Technical accuracy: Restoring/backfilling CRM ingestion is correct, but tightening freshness to 6h/12h conflicts with the source's normal sparse 3–30h pattern.
+
+Root cause correctness: Correctly identifies stale CRM ingestion but misses the actual WHY: HTTP 429 rate-limit errors with exhausted retries.",2026-11-01T19:05:25Z
+expert_2,EXPERT,RI01-01C,63,0,0.5,0,2,"Technical accuracy: Correct recovery strategy, but incomplete because it doesn't address the actual rate-limit failure preventing ingestion.
+
+Root cause correctness: Identifies stale CRM ingestion but not the HTTP 429/retry-exhaustion cause.
+
+Actionability: Good diagnosis and recovery/verification steps, but further investigation is required to implement the actual connector fix.",2026-11-01T19:06:01Z
+expert_2,EXPERT,RI01-05B,64,0,0,0,2,"Technical accuracy: Changing dim_customers can't recover customers that never arrived because ingestion stopped; the supplied SQL also has structural issues.
+
+Root cause correctness: Incorrectly blames customer-ID quality rather than the HTTP 429 rate-limit failure.
+
+Actionability: Specific SQL and verification are provided, but they're aimed at the wrong fix and substantial further investigation is required.",2026-11-01T19:06:45Z
+expert_2,EXPERT,RI01-05A,65,0,1,1,3,,2026-11-01T19:07:08Z
+expert_2,EXPERT,RI01-03B,66,0,1,1,3,,2026-11-01T19:07:15Z
+expert_2,EXPERT,SD03-06A,67,0,0.5,0,2,"Technical accuracy: Converting to text would avoid the cast error, but it assumes non-numeric customer IDs are valid and could introduce downstream type/join issues.
+
+Root cause correctness: Identifies the conversion mechanism, not why non-numeric IDs appeared.
+
+Actionability: Concrete code and verification, but further investigation is required before changing the model's ID type.",2026-11-01T19:07:59Z
+expert_2,EXPERT,SD03-01B,68,0,1,1,3,,2026-11-01T19:08:23Z
+expert_2,EXPERT,SD03-06B,69,0,0.5,0,2,"Technical accuracy: Casting both sides to text removes the conversion error but doesn't make ""1"" equal ""CUST-00001"".
+
+Root cause correctness: Identifies incompatible IDs but misses CRM-77 as why the customer identifiers changed.
+
+Actionability: Concrete code and verification, but further work is required to establish a shared key/mapping.",2026-11-01T19:08:58Z
+expert_2,EXPERT,SD03-01A,70,0,0.5,0,2,"Technical accuracy: Converting both sides to text avoids the conversion error but doesn't reconcile the two different identifier systems.
+
+Root cause correctness: Misses CRM-77 changing the customer export to external reference keys.
+
+Actionability: Concrete implementation details, but further investigation/mapping is required to restore correct joins.",2026-11-01T19:09:29Z
+expert_2,EXPERT,SD03-03B,71,0,0.5,0,3,"Technical accuracy: Casting both sides to VARCHAR prevents the database error but doesn't guarantee that numeric order IDs match CUST-xxxxx CRM IDs.
+
+Root cause correctness: Identifies a format/type change but misses CRM-77 as the specific reason it happened.",2026-11-01T19:10:30Z
+expert_2,EXPERT,SD03-03A,72,0,1,0,3,Root cause correctness: Recognizes identifier-format drift but doesn't identify CRM-77 as the specific cause.,2026-11-01T19:11:14Z
+expert_2,EXPERT,FV02-07A,73,0,0.5,0,2,"Technical accuracy: Correctly focuses on ingestion/loaded_at and avoids weakening freshness, but misdiagnoses this as likely stopped ingestion rather than a stuck v2.3 watermark.
+
+Root cause correctness: Misses the loader v2.3 change causing loaded_at to use a stuck extraction watermark.
+
+Actionability: Detailed investigation and verification, but further research is needed to find the actual loader fix.",2026-11-01T19:12:26Z
+expert_2,EXPERT,FV02-07B,74,0,1,1,3,,2026-11-01T19:12:50Z
+expert_2,EXPERT,FV02-02A,75,0,0.5,0,2,"Technical accuracy: Correct remediation direction, but incomplete because it doesn't identify or directly fix the v2.3 watermark regression.
+
+Root cause correctness: Recognizes incorrect loaded_at values but not why they're wrong.
+
+Actionability: Useful diagnostics and recovery steps, but further investigation is required for the actual loader fix.",2026-11-01T19:13:44Z
+expert_2,EXPERT,FV02-09C,76,0,1,1,3,,2026-11-01T19:14:01Z
+expert_2,EXPERT,FV02-02B,77,0,0.5,0,2,"Technical accuracy: Correctly focuses on fixing loaded_at upstream rather than loosening freshness, but doesn't identify the exact loader behaviour to change.
+
+Root cause correctness: Recognizes stale/incorrect loaded_at, but misses loader v2.3's stuck extraction watermark as the WHY.
+
+Actionability: Useful diagnostics and verification, but the actual implementation still requires investigation.",2026-11-01T19:14:42Z
+expert_2,EXPERT,FV02-09A,78,0,0.5,0,2,"Technical accuracy: Correctly looks upstream, but treats this as missing/stalled ingestion rather than incorrect freshness timestamps.
+
+Root cause correctness: Misses loader v2.3's stuck extraction watermark.
+
+Actionability: Specific recovery and verification steps, but further investigation is required to find and fix the actual timestamp problem.",2026-11-01T19:15:25Z
+expert_2,EXPERT,RI02-09B,79,0,1,1,3,,2026-11-01T19:15:46Z
+expert_2,EXPERT,RI02-04C,80,0,0,0,2,"Technical accuracy: Weakening the relationship test doesn't restore the missing customers, and a threshold of 10 wouldn't even accommodate the current 145 failures.
+
+Root cause correctness: Merely describes unmatched IDs and completely misses the misplaced Marketing country filter.
+
+Actionability: Concrete instructions are provided, but they implement the wrong solution.",2026-11-01T19:16:26Z
+expert_2,EXPERT,RI02-01C,81,0,1,1,3,,2026-11-01T19:16:42Z
+expert_2,EXPERT,RI02-01A,82,0,1,1,3,,2026-11-01T19:17:03Z
+expert_2,EXPERT,RI02-04B,83,0,0.5,0,2,"Technical accuracy: Changing ingestion order or excluding recent orders doesn't restore customers removed by the country filter.
+
+Root cause correctness: Incorrectly attributes the 145 orphan orders to a small source-freshness lag and misses the MKT-12 filter in dim_customers.
+
+Actionability: Detailed and implementable instructions, but they're directed at the wrong cause.",2026-11-01T19:17:43Z
+expert_2,EXPERT,RI02-09C,84,0,0.5,0,2,"Technical accuracy: Filtering fct_orders to existing dimension customers would make the relationship test pass but incorrectly remove legitimate orders.
+
+Root cause correctness: Misses the Marketing country filter that removed customers from the shared dimension.
+
+Actionability: Concrete implementation and verification, but the implementation solves the test rather than the underlying data problem.",2026-11-01T19:18:20Z
+expert_2,EXPERT,RI03-03C,85,0,1,1,3,,2026-11-01T19:18:42Z
+expert_2,EXPERT,RI03-03B,86,0,0.5,0,2,"Technical accuracy: Restoring appropriate order records could work, but filtering/removing payments may incorrectly discard legitimate financial data.
+
+Root cause correctness: identifies missing parent orders but doesn't connect them specifically to DPR-1093's erasure process.
+
+Actionability: Useful diagnostics and concrete options, but further investigation/policy clarification is required.",2026-11-01T19:19:20Z
+expert_2,EXPERT,RI03-07C,87,0,0,0,2,"Technical accuracy: Weakening the relationship test doesn't repair referential integrity, and its threshold wouldn't even accommodate the current 6 failures.
+
+Root cause correctness: Identifies orphan payments but completely misses DPR-1093 as why their parent orders disappeared.
+
+Actionability: Concrete instructions, but they're aimed at masking rather than fixing the incident.",2026-11-01T19:19:57Z
+expert_2,EXPERT,RI03-04A,88,0,1,0,3,Root cause correctness: Recognizes deletion as a possibility but doesn't specifically identify DPR-1093 as the causal event.,2026-11-01T19:20:34Z
+expert_2,EXPERT,RI03-04B,89,0,1,0,3,Root cause correctness: Recognizes deletion as a possibility but doesn't specifically identify DPR-1093 as why these six orders disappeared.,2026-11-01T19:21:14Z
+expert_2,EXPERT,RI03-07A,90,0,0.5,0,2,"Technical accuracy: Technically sensible investigation and conditional fixes, but they don't address the evidence-supported privacy-erasure problem.
+
+Root cause correctness: Correctly identifies the orphan-payment symptom but doesn't connect it to DPR-1093.
+
+Actionability: Very concrete investigation, code and verification, but further investigation is still required to discover the actual cause.",2026-11-01T19:21:51Z

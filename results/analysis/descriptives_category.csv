@@ -1,0 +1,16 @@
+model_key,dv,category,n,mean,sd,median,q1,q3,data_label
+gpt,specificity,schema_drift,9,0.8071,0.0388,0.8175,0.7777,0.8353,Automated metric
+gpt,specificity,null_rate_anomaly,9,0.7892,0.0597,0.8062,0.7489,0.8316,Automated metric
+gpt,specificity,row_count_anomaly,9,0.7956,0.0337,0.8003,0.7666,0.8134,Automated metric
+gpt,specificity,referential_integrity,9,0.8065,0.0732,0.8257,0.8035,0.8499,Automated metric
+gpt,specificity,freshness_violation,9,0.7625,0.054,0.7673,0.7141,0.8059,Automated metric
+claude,specificity,schema_drift,9,0.8224,0.0321,0.8204,0.8029,0.8407,Automated metric
+claude,specificity,null_rate_anomaly,9,0.8031,0.0443,0.8092,0.7742,0.8376,Automated metric
+claude,specificity,row_count_anomaly,9,0.8063,0.0463,0.8022,0.7904,0.8359,Automated metric
+claude,specificity,referential_integrity,9,0.8161,0.0998,0.8587,0.8015,0.8674,Automated metric
+claude,specificity,freshness_violation,9,0.7612,0.0581,0.7624,0.7058,0.787,Automated metric
+llama,specificity,schema_drift,9,0.7517,0.0289,0.7511,0.7324,0.7775,Automated metric
+llama,specificity,null_rate_anomaly,9,0.7279,0.0647,0.717,0.7008,0.7646,Automated metric
+llama,specificity,row_count_anomaly,9,0.7056,0.0417,0.7092,0.6767,0.7446,Automated metric
+llama,specificity,referential_integrity,9,0.6812,0.0519,0.67,0.6588,0.7366,Automated metric
+llama,specificity,freshness_violation,9,0.7367,0.0365,0.7315,0.7153,0.7611,Automated metric

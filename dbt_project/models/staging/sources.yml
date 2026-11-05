@@ -1,0 +1,65 @@
+version: 2
+
+sources:
+  - name: raw
+    description: >
+      Raw e-commerce data as landed by the ingestion jobs (simulated with dbt
+      seeds in the `raw` schema). Loaders run hourly at :05 past the hour and
+      stamp every row with `loaded_at` (UTC).
+    schema: raw
+    config:
+      loaded_at_field: loaded_at
+      freshness:
+        warn_after: {count: 6, period: hour}
+        error_after: {count: 12, period: hour}
+
+    tables:
+      - name: raw_customers
+        description: One row per customer account, extracted from the CRM.
+        config:
+          freshness:
+            warn_after: {count: 24, period: hour}
+            error_after: {count: 48, period: hour}
+        columns:
+          - name: customer_id
+            description: CRM primary key of the customer (integer).
+          - name: first_name
+            description: Customer first name.
+          - name: last_name
+            description: Customer last name.
+          - name: email
+            description: Customer email address as entered in the CRM.
+          - name: country
+            description: ISO 3166-1 alpha-2 country code of the customer's billing address.
+          - name: created_at
+            description: UTC timestamp when the account was created in the CRM.
+          - name: loaded_at
+            description: UTC timestamp when the ingestion job wrote the row.
+
+      - name: raw_orders
+        description: One row per order placed in the web shop.
+        columns:
+          - name: order_id
+            description: Shop primary key of the order (integer).
+          - name: customer_id
+            description: CRM customer_id of the customer who placed the order.
+          - name: order_date
+            description: Date the order was placed (ISO format YYYY-MM-DD).
+          - name: status
+            description: "Order lifecycle status: placed, shipped, completed or cancelled."
+          - name: loaded_at
+            description: UTC timestamp when the ingestion job wrote the row.
+
+      - name: raw_payments
+        description: One row per payment taken by the payment provider. Split payments produce several rows per order.
+        columns:
+          - name: payment_id
+            description: Payment provider primary key (integer).
+          - name: order_id
+            description: Shop order_id the payment belongs to.
+          - name: payment_method
+            description: "Payment method: credit_card, bank_transfer, voucher or gift_card."
+          - name: amount
+            description: Payment amount in integer cents.
+          - name: loaded_at
+            description: UTC timestamp when the ingestion job wrote the row.

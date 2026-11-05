@@ -1,0 +1,28 @@
+item_id,suggested_missed,reason
+RC03-05B,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+NR02-04B,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+SD01-05A,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+RC01-07C,--source-freshness,`dbt build ... --source-freshness`: dbt build has no such flag (checked with dbt 1.12.5 --help)
+FV01-09A,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+FV01-01B,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+SD01-03C,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+FV01-04B,minutes,Jinja filter `| minutes` in the YAML does not exist in dbt. Borderline: leave it out if you count only named project objects
+NR02-01B,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+NR02-03A,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+FV03-01B,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+SD02-02A,main.raw_orders,"Verification queries ""ecommerce"".""main"".""raw_orders""; raw_orders is in the raw schema"
+NR01-08B,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+RC03-02B,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+NR02-03C,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+SD03-01B,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+RC02-07B,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+RC02-07A,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+SD03-09C,raw_customers.country_code,"stg_customers fix selects `country_code` from source raw_customers, which has `country`"
+RI01-03C,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+NR03-09A,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+RI01-06A,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+RI03-05B,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+SD03-04B,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+RI02-07A,expected_results,YAML `config: expected_results: 145`: no such dbt test config
+RI01-09A,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"
+FV01-02C,,"Nothing missed: every name stated as existing is real, flagged, hedged, proposed or listed under Assumptions"

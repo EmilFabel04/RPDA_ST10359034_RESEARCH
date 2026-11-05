@@ -1,0 +1,11 @@
+--- a/models/marts/dim_customers.sql
++++ b/models/marts/dim_customers.sql
+@@ -56,6 +56,8 @@
+     from customers
+     left join customer_orders on customers.customer_id = customer_orders.customer_id
+     left join customer_payments on customers.customer_id = customer_payments.customer_id
++    -- marketing dashboard only covers launch markets (MKT-12)
++    where customers.country_code in ('ZA', 'GB', 'US')
+ 
+ )
+ 

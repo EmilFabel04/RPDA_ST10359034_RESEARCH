@@ -1,0 +1,988 @@
+{
+  "metadata": {
+    "dbt_schema_version": "https://schemas.getdbt.com/dbt/run-results/v6.json",
+    "dbt_version": "1.12.5",
+    "generated_at": "2026-10-13T19:02:58.189778Z",
+    "invocation_id": "044b1c52-e27b-41a6-9fa9-aaeaa6241432",
+    "invocation_started_at": "2026-10-13T19:02:57.586860Z",
+    "env": {}
+  },
+  "results": [
+    {
+      "status": "success",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:57.949349Z",
+          "completed_at": "2026-10-13T19:02:57.951720Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:57.951851Z",
+          "completed_at": "2026-10-13T19:02:57.975974Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.027083635330200195,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": "OK",
+      "failures": null,
+      "unique_id": "model.ecommerce.stg_customers",
+      "compiled": true,
+      "compiled_code": "with source as (\n\n    select * from \"ecommerce\".\"raw\".\"raw_customers\"\n\n),\n\nrenamed as (\n\n    select\n        customer_id,\n        first_name,\n        last_name,\n        lower(email) as email,\n        upper(country) as country_code,\n        cast(created_at as timestamp) as created_at,\n        loaded_at\n    from source\n\n)\n\nselect * from renamed",
+      "relation_name": "\"ecommerce\".\"main\".\"stg_customers\"",
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "success",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:57.977749Z",
+          "completed_at": "2026-10-13T19:02:57.978510Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:57.978642Z",
+          "completed_at": "2026-10-13T19:02:57.984197Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.006924867630004883,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": "OK",
+      "failures": null,
+      "unique_id": "model.ecommerce.stg_orders",
+      "compiled": true,
+      "compiled_code": "with source as (\n\n    select * from \"ecommerce\".\"raw\".\"raw_orders\"\n\n),\n\nrenamed as (\n\n    select\n        order_id,\n        customer_id,\n        cast(order_date as date) as order_date,\n        status,\n        loaded_at\n    from source\n\n)\n\nselect * from renamed",
+      "relation_name": "\"ecommerce\".\"main\".\"stg_orders\"",
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "success",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:57.985413Z",
+          "completed_at": "2026-10-13T19:02:57.986155Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:57.986298Z",
+          "completed_at": "2026-10-13T19:02:57.991884Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.006943225860595703,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": "OK",
+      "failures": null,
+      "unique_id": "model.ecommerce.stg_payments",
+      "compiled": true,
+      "compiled_code": "with source as (\n\n    select * from \"ecommerce\".\"raw\".\"raw_payments\"\n\n),\n\nrenamed as (\n\n    select\n        payment_id,\n        order_id,\n        payment_method,\n        -- source stores integer cents; convert to currency units\n        cast(amount as decimal(18, 2)) / 100 as amount,\n        loaded_at\n    from source\n\n)\n\nselect * from renamed",
+      "relation_name": "\"ecommerce\".\"main\".\"stg_payments\"",
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:57.993046Z",
+          "completed_at": "2026-10-13T19:02:57.997649Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:57.997776Z",
+          "completed_at": "2026-10-13T19:02:58.006003Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.013580083847045898,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.not_null_stg_customers_country_code.3249b83c15",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\n\n\nselect country_code\nfrom \"ecommerce\".\"main\".\"stg_customers\"\nwhere country_code is null\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.007234Z",
+          "completed_at": "2026-10-13T19:02:58.009976Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.010102Z",
+          "completed_at": "2026-10-13T19:02:58.012042Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.005381107330322266,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.not_null_stg_customers_customer_id.e2cfb1f9aa",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\n\n\nselect customer_id\nfrom \"ecommerce\".\"main\".\"stg_customers\"\nwhere customer_id is null\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.013265Z",
+          "completed_at": "2026-10-13T19:02:58.015615Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.015744Z",
+          "completed_at": "2026-10-13T19:02:58.017937Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.005265951156616211,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.null_rate_below_stg_customers_email__0_05.73e95c9c72",
+      "compiled": true,
+      "compiled_code": "\n\nwith stats as (\n    select\n        count(*) as total_rows,\n        sum(case when email is null then 1 else 0 end) as null_rows\n    from \"ecommerce\".\"main\".\"stg_customers\"\n)\n\nselect\n    total_rows,\n    null_rows,\n    null_rows * 1.0 / nullif(total_rows, 0) as null_rate\nfrom stats\nwhere null_rows * 1.0 / nullif(total_rows, 0) > 0.05\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.019079Z",
+          "completed_at": "2026-10-13T19:02:58.021893Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.022014Z",
+          "completed_at": "2026-10-13T19:02:58.024097Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.005579948425292969,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.unique_stg_customers_customer_id.c7614daada",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\nselect\n    customer_id as unique_field,\n    count(*) as n_records\n\nfrom \"ecommerce\".\"main\".\"stg_customers\"\nwhere customer_id is not null\ngroup by customer_id\nhaving count(*) > 1\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.025245Z",
+          "completed_at": "2026-10-13T19:02:58.033068Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.033203Z",
+          "completed_at": "2026-10-13T19:02:58.035340Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.010679960250854492,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.accepted_values_stg_orders_status__placed__shipped__completed__cancelled.c09db2e79b",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\nwith all_values as (\n\n    select\n        status as value_field,\n        count(*) as n_records\n\n    from \"ecommerce\".\"main\".\"stg_orders\"\n    group by status\n\n)\n\nselect *\nfrom all_values\nwhere value_field not in (\n    'placed','shipped','completed','cancelled'\n)\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.036539Z",
+          "completed_at": "2026-10-13T19:02:58.038691Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.038815Z",
+          "completed_at": "2026-10-13T19:02:58.040690Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.004717111587524414,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.not_null_stg_orders_customer_id.af79d5e4b5",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\n\n\nselect customer_id\nfrom \"ecommerce\".\"main\".\"stg_orders\"\nwhere customer_id is null\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.041837Z",
+          "completed_at": "2026-10-13T19:02:58.043960Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.044079Z",
+          "completed_at": "2026-10-13T19:02:58.045931Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.004638195037841797,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.not_null_stg_orders_order_date.2177a3e8bb",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\n\n\nselect order_date\nfrom \"ecommerce\".\"main\".\"stg_orders\"\nwhere order_date is null\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.047068Z",
+          "completed_at": "2026-10-13T19:02:58.049099Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.049220Z",
+          "completed_at": "2026-10-13T19:02:58.051091Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.004586935043334961,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.not_null_stg_orders_order_id.81cfe2fe64",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\n\n\nselect order_id\nfrom \"ecommerce\".\"main\".\"stg_orders\"\nwhere order_id is null\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.052265Z",
+          "completed_at": "2026-10-13T19:02:58.054622Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.054748Z",
+          "completed_at": "2026-10-13T19:02:58.056764Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.0051250457763671875,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.row_count_between_stg_orders_1000__500.df57ba21b7",
+      "compiled": true,
+      "compiled_code": "\n\nwith row_count as (\n    select count(*) as n_rows from \"ecommerce\".\"main\".\"stg_orders\"\n)\n\nselect n_rows\nfrom row_count\nwhere n_rows < 500 or n_rows > 1000\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.057963Z",
+          "completed_at": "2026-10-13T19:02:58.060211Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.060353Z",
+          "completed_at": "2026-10-13T19:02:58.062472Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.005090236663818359,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.unique_stg_orders_order_id.e3b841c71a",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\nselect\n    order_id as unique_field,\n    count(*) as n_records\n\nfrom \"ecommerce\".\"main\".\"stg_orders\"\nwhere order_id is not null\ngroup by order_id\nhaving count(*) > 1\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.063668Z",
+          "completed_at": "2026-10-13T19:02:58.070505Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.070644Z",
+          "completed_at": "2026-10-13T19:02:58.072772Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.009697675704956055,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.accepted_values_stg_payments_payment_method__credit_card__bank_transfer__voucher__gift_card.09c03f073b",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\nwith all_values as (\n\n    select\n        payment_method as value_field,\n        count(*) as n_records\n\n    from \"ecommerce\".\"main\".\"stg_payments\"\n    group by payment_method\n\n)\n\nselect *\nfrom all_values\nwhere value_field not in (\n    'credit_card','bank_transfer','voucher','gift_card'\n)\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.073998Z",
+          "completed_at": "2026-10-13T19:02:58.076102Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.076228Z",
+          "completed_at": "2026-10-13T19:02:58.078147Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.004721164703369141,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.not_null_stg_payments_amount.4739fb3aea",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\n\n\nselect amount\nfrom \"ecommerce\".\"main\".\"stg_payments\"\nwhere amount is null\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.079307Z",
+          "completed_at": "2026-10-13T19:02:58.081396Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.081516Z",
+          "completed_at": "2026-10-13T19:02:58.083400Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.004659175872802734,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.not_null_stg_payments_order_id.601cf57649",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\n\n\nselect order_id\nfrom \"ecommerce\".\"main\".\"stg_payments\"\nwhere order_id is null\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.084548Z",
+          "completed_at": "2026-10-13T19:02:58.086516Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.086641Z",
+          "completed_at": "2026-10-13T19:02:58.088478Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.0045130252838134766,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.not_null_stg_payments_payment_id.c19cc50075",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\n\n\nselect payment_id\nfrom \"ecommerce\".\"main\".\"stg_payments\"\nwhere payment_id is null\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.089649Z",
+          "completed_at": "2026-10-13T19:02:58.094931Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.095054Z",
+          "completed_at": "2026-10-13T19:02:58.097322Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.008231878280639648,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.relationships_stg_payments_order_id__order_id__ref_stg_orders_.8426a3f3d3",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\nwith child as (\n    select order_id as from_field\n    from \"ecommerce\".\"main\".\"stg_payments\"\n    where order_id is not null\n),\n\nparent as (\n    select order_id as to_field\n    from \"ecommerce\".\"main\".\"stg_orders\"\n)\n\nselect\n    from_field\n\nfrom child\nleft join parent\n    on child.from_field = parent.to_field\n\nwhere parent.to_field is null\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.098460Z",
+          "completed_at": "2026-10-13T19:02:58.100491Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.100609Z",
+          "completed_at": "2026-10-13T19:02:58.102518Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.00464320182800293,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.unique_stg_payments_payment_id.3744510712",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\nselect\n    payment_id as unique_field,\n    count(*) as n_records\n\nfrom \"ecommerce\".\"main\".\"stg_payments\"\nwhere payment_id is not null\ngroup by payment_id\nhaving count(*) > 1\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "success",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.103914Z",
+          "completed_at": "2026-10-13T19:02:58.104757Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.104877Z",
+          "completed_at": "2026-10-13T19:02:58.126540Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.02303290367126465,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": "OK",
+      "failures": null,
+      "unique_id": "model.ecommerce.dim_customers",
+      "compiled": true,
+      "compiled_code": "with customers as (\n\n    select * from \"ecommerce\".\"main\".\"stg_customers\"\n\n),\n\norders as (\n\n    select * from \"ecommerce\".\"main\".\"stg_orders\"\n\n),\n\npayments as (\n\n    select * from \"ecommerce\".\"main\".\"stg_payments\"\n\n),\n\ncustomer_orders as (\n\n    select\n        customer_id,\n        min(order_date) as first_order_date,\n        max(order_date) as most_recent_order_date,\n        count(order_id) as number_of_orders\n    from orders\n    group by customer_id\n\n),\n\ncustomer_payments as (\n\n    select\n        orders.customer_id,\n        sum(payments.amount) as lifetime_value\n    from payments\n    inner join orders on payments.order_id = orders.order_id\n    where orders.status != 'cancelled'\n    group by orders.customer_id\n\n),\n\nfinal as (\n\n    select\n        customers.customer_id,\n        customers.first_name,\n        customers.last_name,\n        customers.email,\n        customers.country_code,\n        customers.created_at,\n        customer_orders.first_order_date,\n        customer_orders.most_recent_order_date,\n        coalesce(customer_orders.number_of_orders, 0) as number_of_orders,\n        coalesce(customer_payments.lifetime_value, 0) as lifetime_value\n    from customers\n    left join customer_orders on customers.customer_id = customer_orders.customer_id\n    left join customer_payments on customers.customer_id = customer_payments.customer_id\n\n)\n\nselect * from final",
+      "relation_name": "\"ecommerce\".\"main\".\"dim_customers\"",
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "success",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.127709Z",
+          "completed_at": "2026-10-13T19:02:58.128434Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.128544Z",
+          "completed_at": "2026-10-13T19:02:58.135556Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.008270978927612305,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": "OK",
+      "failures": null,
+      "unique_id": "model.ecommerce.fct_orders",
+      "compiled": true,
+      "compiled_code": "with orders as (\n\n    select * from \"ecommerce\".\"main\".\"stg_orders\"\n\n),\n\npayments as (\n\n    select * from \"ecommerce\".\"main\".\"stg_payments\"\n\n),\n\norder_payments as (\n\n    select\n        order_id,\n        sum(case when payment_method = 'credit_card' then amount else 0 end) as credit_card_amount,\n        sum(case when payment_method = 'bank_transfer' then amount else 0 end) as bank_transfer_amount,\n        sum(case when payment_method = 'voucher' then amount else 0 end) as voucher_amount,\n        sum(case when payment_method = 'gift_card' then amount else 0 end) as gift_card_amount,\n        sum(amount) as total_amount\n    from payments\n    group by order_id\n\n),\n\nfinal as (\n\n    select\n        orders.order_id,\n        orders.customer_id,\n        orders.order_date,\n        orders.status,\n        coalesce(order_payments.credit_card_amount, 0) as credit_card_amount,\n        coalesce(order_payments.bank_transfer_amount, 0) as bank_transfer_amount,\n        coalesce(order_payments.voucher_amount, 0) as voucher_amount,\n        coalesce(order_payments.gift_card_amount, 0) as gift_card_amount,\n        coalesce(order_payments.total_amount, 0) as amount\n    from orders\n    left join order_payments on orders.order_id = order_payments.order_id\n\n)\n\nselect * from final",
+      "relation_name": "\"ecommerce\".\"main\".\"fct_orders\"",
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "no-op",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.136526Z",
+          "completed_at": "2026-10-13T19:02:58.136527Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.136642Z",
+          "completed_at": "2026-10-13T19:02:58.136645Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.00047516822814941406,
+      "adapter_response": {},
+      "message": "NO-OP",
+      "failures": 0,
+      "unique_id": "exposure.ecommerce.marketing_customer_dashboard",
+      "compiled": null,
+      "compiled_code": null,
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.137506Z",
+          "completed_at": "2026-10-13T19:02:58.139594Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.139709Z",
+          "completed_at": "2026-10-13T19:02:58.141536Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.004586935043334961,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.not_null_dim_customers_customer_id.dd91cd1c8d",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\n\n\nselect customer_id\nfrom \"ecommerce\".\"main\".\"dim_customers\"\nwhere customer_id is null\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.142672Z",
+          "completed_at": "2026-10-13T19:02:58.144878Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.144995Z",
+          "completed_at": "2026-10-13T19:02:58.146796Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.0047228336334228516,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.not_null_dim_customers_lifetime_value.8655024888",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\n\n\nselect lifetime_value\nfrom \"ecommerce\".\"main\".\"dim_customers\"\nwhere lifetime_value is null\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.147947Z",
+          "completed_at": "2026-10-13T19:02:58.149967Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.150085Z",
+          "completed_at": "2026-10-13T19:02:58.151868Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.00448298454284668,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.unique_dim_customers_customer_id.15c9f1e2fd",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\nselect\n    customer_id as unique_field,\n    count(*) as n_records\n\nfrom \"ecommerce\".\"main\".\"dim_customers\"\nwhere customer_id is not null\ngroup by customer_id\nhaving count(*) > 1\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "no-op",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.152829Z",
+          "completed_at": "2026-10-13T19:02:58.152830Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.152929Z",
+          "completed_at": "2026-10-13T19:02:58.152932Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.0003731250762939453,
+      "adapter_response": {},
+      "message": "NO-OP",
+      "failures": 0,
+      "unique_id": "exposure.ecommerce.finance_revenue_dashboard",
+      "compiled": null,
+      "compiled_code": null,
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.153751Z",
+          "completed_at": "2026-10-13T19:02:58.157264Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.157381Z",
+          "completed_at": "2026-10-13T19:02:58.159339Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.006134033203125,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.equal_row_count_fct_orders_ref_stg_orders_.8bea18b445",
+      "compiled": true,
+      "compiled_code": "\n\nwith model_rows as (\n    select count(*) as n_rows from \"ecommerce\".\"main\".\"fct_orders\"\n),\n\ncompare_rows as (\n    select count(*) as n_rows from \"ecommerce\".\"main\".\"stg_orders\"\n)\n\nselect\n    model_rows.n_rows as model_rows,\n    compare_rows.n_rows as compare_model_rows\nfrom model_rows\ncross join compare_rows\nwhere model_rows.n_rows != compare_rows.n_rows\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.160461Z",
+          "completed_at": "2026-10-13T19:02:58.162437Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.162550Z",
+          "completed_at": "2026-10-13T19:02:58.164272Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.004422187805175781,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.not_null_fct_orders_amount.66810a8d08",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\n\n\nselect amount\nfrom \"ecommerce\".\"main\".\"fct_orders\"\nwhere amount is null\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.165434Z",
+          "completed_at": "2026-10-13T19:02:58.167387Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.167506Z",
+          "completed_at": "2026-10-13T19:02:58.169225Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.004350423812866211,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.not_null_fct_orders_customer_id.16fe324f7b",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\n\n\nselect customer_id\nfrom \"ecommerce\".\"main\".\"fct_orders\"\nwhere customer_id is null\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.170343Z",
+          "completed_at": "2026-10-13T19:02:58.172546Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.172674Z",
+          "completed_at": "2026-10-13T19:02:58.174425Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.004642009735107422,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.not_null_fct_orders_order_id.4e687af8d0",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\n\n\nselect order_id\nfrom \"ecommerce\".\"main\".\"fct_orders\"\nwhere order_id is null\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.175537Z",
+          "completed_at": "2026-10-13T19:02:58.180002Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.180131Z",
+          "completed_at": "2026-10-13T19:02:58.182246Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.007279157638549805,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.relationships_fct_orders_customer_id__customer_id__ref_dim_customers_.d5636051d4",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\nwith child as (\n    select customer_id as from_field\n    from \"ecommerce\".\"main\".\"fct_orders\"\n    where customer_id is not null\n),\n\nparent as (\n    select customer_id as to_field\n    from \"ecommerce\".\"main\".\"dim_customers\"\n)\n\nselect\n    from_field\n\nfrom child\nleft join parent\n    on child.from_field = parent.to_field\n\nwhere parent.to_field is null\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    },
+    {
+      "status": "pass",
+      "timing": [
+        {
+          "name": "compile",
+          "started_at": "2026-10-13T19:02:58.183412Z",
+          "completed_at": "2026-10-13T19:02:58.185404Z"
+        },
+        {
+          "name": "execute",
+          "started_at": "2026-10-13T19:02:58.185516Z",
+          "completed_at": "2026-10-13T19:02:58.187389Z"
+        }
+      ],
+      "thread_id": "Thread-1 (worker)",
+      "execution_time": 0.004560232162475586,
+      "adapter_response": {
+        "_message": "OK"
+      },
+      "message": null,
+      "failures": 0,
+      "unique_id": "test.ecommerce.unique_fct_orders_order_id.523ddb6ce5",
+      "compiled": true,
+      "compiled_code": "\n    \n    \n\nselect\n    order_id as unique_field,\n    count(*) as n_records\n\nfrom \"ecommerce\".\"main\".\"fct_orders\"\nwhere order_id is not null\ngroup by order_id\nhaving count(*) > 1\n\n\n",
+      "relation_name": null,
+      "batch_results": null,
+      "overload_results": null
+    }
+  ],
+  "elapsed_time": 0.2834620475769043,
+  "args": {
+    "require_sql_header_in_test_configs": false,
+    "require_explicit_package_overrides_for_builtin_materializations": true,
+    "skip_nodes_if_on_run_start_fails": true,
+    "state_modified_compare_more_unrendered_values": true,
+    "write_json": true,
+    "profiles_dir": "dbt_project",
+    "require_all_warnings_handled_by_warn_error": true,
+    "invocation_command": "dbt build --exclude resource_type:seed --project-dir dbt_project --profiles-dir dbt_project",
+    "show": false,
+    "exclude": [
+      "resource_type:seed"
+    ],
+    "select": [],
+    "require_valid_schema_from_generate_schema_name": false,
+    "partial_parse": true,
+    "warn_error_options": {
+      "error": [],
+      "warn": [],
+      "silence": []
+    },
+    "use_v2_parser": false,
+    "log_file_max_bytes": 10485760,
+    "print": true,
+    "exclude_resource_types": [],
+    "require_generic_test_arguments_property": true,
+    "log_level": "info",
+    "which": "build",
+    "quiet": false,
+    "use_colors": true,
+    "snowflake_projects_otel": false,
+    "allow_jinja_file_extensions": false,
+    "require_resource_names_without_spaces": true,
+    "upload_to_artifacts_ingest_api": false,
+    "partial_parse_file_diff": true,
+    "printer_width": 80,
+    "require_yaml_configuration_for_mf_time_spines": true,
+    "macro_debugging": false,
+    "maximum_seed_size_mib": 1,
+    "vars": {},
+    "empty": false,
+    "log_path": "logs",
+    "send_anonymous_usage_stats": false,
+    "require_source_and_semantic_model_names_without_spaces": false,
+    "latest_version_pointer_enabled_by_default": false,
+    "log_format_file": "debug",
+    "log_format": "default",
+    "version_check": true,
+    "populate_cache": true,
+    "show_all_deprecations": false,
+    "source_freshness_run_project_hooks": true,
+    "strict_mode": false,
+    "introspect": true,
+    "sqlparse": {
+      "MAX_GROUPING_DEPTH": null,
+      "MAX_GROUPING_TOKENS": null
+    },
+    "support_custom_ref_kwargs": false,
+    "validate_macro_args": true,
+    "hints_enabled": true,
+    "require_batched_execution_for_custom_microbatch_strategy": true,
+    "v2_parser": "dbt-core-experimental-parser parse",
+    "cache_selected_only": false,
+    "include_saved_query": false,
+    "defer": false,
+    "favor_state": false,
+    "static_parser": true,
+    "state_modified_compare_vars": false,
+    "require_ref_searches_node_package_before_root": false,
+    "require_corrected_analysis_fqns": false,
+    "use_colors_file": true,
+    "enable_grouped_warn_error_parser_logs": false,
+    "export_saved_queries": false,
+    "require_unique_project_resource_names": false,
+    "use_fast_test_edges": false,
+    "require_nested_cumulative_type_params": true,
+    "resource_types": [],
+    "project_dir": "dbt_project",
+    "log_level_file": "debug",
+    "indirect_selection": "eager",
+    "show_resource_report": false,
+    "use_catalogs_v2": false
+  }
+}

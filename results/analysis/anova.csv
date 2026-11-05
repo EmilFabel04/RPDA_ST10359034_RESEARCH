@@ -1,0 +1,10 @@
+unit,model_key,dv,n,effect,df,df_resid,sum_sq,F,p,partial_eta2,note,p_holm,data_label
+median3,gpt,specificity,45,level,2,30,0.0478,11.7742,0.0002,0.4398,,0.0002,Automated metric
+median3,gpt,specificity,45,category,4,30,0.012,1.4737,0.2349,0.1642,,0.2349,Automated metric
+median3,gpt,specificity,45,level x category,8,30,0.0072,0.4437,0.8849,0.1058,,0.8849,Automated metric
+median3,claude,specificity,45,level,2,30,0.039,6.2637,0.0053,0.2946,,0.0053,Automated metric
+median3,claude,specificity,45,category,4,30,0.0207,1.659,0.1855,0.1811,,0.1855,Automated metric
+median3,claude,specificity,45,level x category,8,30,0.0154,0.6181,0.7557,0.1415,,0.7557,Automated metric
+median3,llama,specificity,45,level,2,30,0.0195,4.6351,0.0176,0.2361,,0.0176,Automated metric
+median3,llama,specificity,45,category,4,30,0.0276,3.2787,0.0241,0.3042,,0.0241,Automated metric
+median3,llama,specificity,45,level x category,8,30,0.0037,0.2206,0.9844,0.0556,,0.9844,Automated metric

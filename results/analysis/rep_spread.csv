@@ -1,0 +1,4 @@
+model_key,dv,cells,mean_range,max_range,all_three_equal,data_label
+gpt,specificity,45,0.0345,0.0829,,Automated metric
+claude,specificity,45,0.0419,0.0924,,Automated metric
+llama,specificity,45,0.0567,0.1545,,Automated metric

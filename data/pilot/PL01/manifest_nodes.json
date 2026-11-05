@@ -1,0 +1,957 @@
+{
+  "nodes": {
+    "model.ecommerce.stg_customers": {
+      "unique_id": "model.ecommerce.stg_customers",
+      "resource_type": "model",
+      "name": "stg_customers",
+      "original_file_path": "models/staging/stg_customers.sql",
+      "description": "Cleaned customers, one row per customer. Email lower-cased, country code upper-cased.",
+      "raw_code": "with source as (\n\n    select * from {{ source('raw', 'raw_customers') }}\n\n),\n\nrenamed as (\n\n    select\n        customer_id,\n        first_name,\n        last_name,\n        lower(email) as email,\n        upper(country) as country_code,\n        cast(created_at as timestamp) as created_at,\n        loaded_at\n    from source\n\n)\n\nselect * from renamed",
+      "compiled_code": "with source as (\n\n    select * from \"ecommerce\".\"raw\".\"raw_customers\"\n\n),\n\nrenamed as (\n\n    select\n        customer_id,\n        first_name,\n        last_name,\n        lower(email) as email,\n        upper(country) as country_code,\n        cast(created_at as timestamp) as created_at,\n        loaded_at\n    from source\n\n)\n\nselect * from renamed",
+      "materialized": "view",
+      "depends_on": [
+        "source.ecommerce.raw.raw_customers"
+      ],
+      "columns": {
+        "customer_id": "Primary key of the customer.",
+        "first_name": "Customer first name.",
+        "last_name": "Customer last name.",
+        "email": "Lower-cased email address. A small share of missing emails is tolerated (max 5%).",
+        "country_code": "Upper-cased ISO 3166-1 alpha-2 country code (from raw_customers.country).",
+        "created_at": "UTC timestamp when the account was created.",
+        "loaded_at": "UTC timestamp when the row was loaded into the warehouse."
+      }
+    },
+    "model.ecommerce.stg_payments": {
+      "unique_id": "model.ecommerce.stg_payments",
+      "resource_type": "model",
+      "name": "stg_payments",
+      "original_file_path": "models/staging/stg_payments.sql",
+      "description": "Cleaned payments, one row per payment. Amount converted from cents to currency units.",
+      "raw_code": "with source as (\n\n    select * from {{ source('raw', 'raw_payments') }}\n\n),\n\nrenamed as (\n\n    select\n        payment_id,\n        order_id,\n        payment_method,\n        -- source stores integer cents; convert to currency units\n        cast(amount as decimal(18, 2)) / 100 as amount,\n        loaded_at\n    from source\n\n)\n\nselect * from renamed",
+      "compiled_code": "with source as (\n\n    select * from \"ecommerce\".\"raw\".\"raw_payments\"\n\n),\n\nrenamed as (\n\n    select\n        payment_id,\n        order_id,\n        payment_method,\n        -- source stores integer cents; convert to currency units\n        cast(amount as decimal(18, 2)) / 100 as amount,\n        loaded_at\n    from source\n\n)\n\nselect * from renamed",
+      "materialized": "view",
+      "depends_on": [
+        "source.ecommerce.raw.raw_payments"
+      ],
+      "columns": {
+        "payment_id": "Primary key of the payment.",
+        "order_id": "Order the payment belongs to (foreign key to stg_orders).",
+        "payment_method": "Payment method used.",
+        "amount": "Payment amount in currency units (raw cents / 100).",
+        "loaded_at": "UTC timestamp when the row was loaded into the warehouse."
+      }
+    },
+    "model.ecommerce.stg_orders": {
+      "unique_id": "model.ecommerce.stg_orders",
+      "resource_type": "model",
+      "name": "stg_orders",
+      "original_file_path": "models/staging/stg_orders.sql",
+      "description": "Cleaned orders, one row per order. Expected volume is 500-1,000 orders over the 180-day window.",
+      "raw_code": "with source as (\n\n    select * from {{ source('raw', 'raw_orders') }}\n\n),\n\nrenamed as (\n\n    select\n        order_id,\n        customer_id,\n        cast(order_date as date) as order_date,\n        status,\n        loaded_at\n    from source\n\n)\n\nselect * from renamed",
+      "compiled_code": "with source as (\n\n    select * from \"ecommerce\".\"raw\".\"raw_orders\"\n\n),\n\nrenamed as (\n\n    select\n        order_id,\n        customer_id,\n        cast(order_date as date) as order_date,\n        status,\n        loaded_at\n    from source\n\n)\n\nselect * from renamed",
+      "materialized": "view",
+      "depends_on": [
+        "source.ecommerce.raw.raw_orders"
+      ],
+      "columns": {
+        "order_id": "Primary key of the order.",
+        "customer_id": "Customer who placed the order (foreign key to stg_customers).",
+        "order_date": "Date the order was placed.",
+        "status": "Order lifecycle status.",
+        "loaded_at": "UTC timestamp when the row was loaded into the warehouse."
+      }
+    },
+    "model.ecommerce.dim_customers": {
+      "unique_id": "model.ecommerce.dim_customers",
+      "resource_type": "model",
+      "name": "dim_customers",
+      "original_file_path": "models/marts/dim_customers.sql",
+      "description": "One row per customer with order history and lifetime value. Used by marketing and finance dashboards.",
+      "raw_code": "with customers as (\n\n    select * from {{ ref('stg_customers') }}\n\n),\n\norders as (\n\n    select * from {{ ref('stg_orders') }}\n\n),\n\npayments as (\n\n    select * from {{ ref('stg_payments') }}\n\n),\n\ncustomer_orders as (\n\n    select\n        customer_id,\n        min(order_date) as first_order_date,\n        max(order_date) as most_recent_order_date,\n        count(order_id) as number_of_orders\n    from orders\n    group by customer_id\n\n),\n\ncustomer_payments as (\n\n    select\n        orders.customer_id,\n        sum(payments.amount) as lifetime_value\n    from payments\n    inner join orders on payments.order_id = orders.order_id\n    where orders.status != 'cancelled'\n    group by orders.customer_id\n\n),\n\nfinal as (\n\n    select\n        customers.customer_id,\n        customers.first_name,\n        customers.last_name,\n        customers.email,\n        customers.country_code,\n        customers.created_at,\n        customer_orders.first_order_date,\n        customer_orders.most_recent_order_date,\n        coalesce(customer_orders.number_of_orders, 0) as number_of_orders,\n        coalesce(customer_payments.lifetime_value, 0) as lifetime_value\n    from customers\n    left join customer_orders on customers.customer_id = customer_orders.customer_id\n    left join customer_payments on customers.customer_id = customer_payments.customer_id\n\n)\n\nselect * from final",
+      "materialized": "table",
+      "depends_on": [
+        "model.ecommerce.stg_customers",
+        "model.ecommerce.stg_orders",
+        "model.ecommerce.stg_payments"
+      ],
+      "columns": {
+        "customer_id": "Primary key of the customer.",
+        "first_name": "Customer first name.",
+        "last_name": "Customer last name.",
+        "email": "Lower-cased email address.",
+        "country_code": "ISO 3166-1 alpha-2 country code.",
+        "created_at": "UTC timestamp when the account was created.",
+        "first_order_date": "Date of the customer's first order (null if no orders).",
+        "most_recent_order_date": "Date of the customer's most recent order (null if no orders).",
+        "number_of_orders": "Count of orders placed, including cancelled ones.",
+        "lifetime_value": "Sum of payments on non-cancelled orders, in currency units."
+      }
+    },
+    "model.ecommerce.fct_orders": {
+      "unique_id": "model.ecommerce.fct_orders",
+      "resource_type": "model",
+      "name": "fct_orders",
+      "original_file_path": "models/marts/fct_orders.sql",
+      "description": "One row per order with payment amounts pivoted by method. Grain must match stg_orders (one row per order).",
+      "raw_code": "with orders as (\n\n    select * from {{ ref('stg_orders') }}\n\n),\n\npayments as (\n\n    select * from {{ ref('stg_payments') }}\n\n),\n\norder_payments as (\n\n    select\n        order_id,\n        sum(case when payment_method = 'credit_card' then amount else 0 end) as credit_card_amount,\n        sum(case when payment_method = 'bank_transfer' then amount else 0 end) as bank_transfer_amount,\n        sum(case when payment_method = 'voucher' then amount else 0 end) as voucher_amount,\n        sum(case when payment_method = 'gift_card' then amount else 0 end) as gift_card_amount,\n        sum(amount) as total_amount\n    from payments\n    group by order_id\n\n),\n\nfinal as (\n\n    select\n        orders.order_id,\n        orders.customer_id,\n        orders.order_date,\n        orders.status,\n        coalesce(order_payments.credit_card_amount, 0) as credit_card_amount,\n        coalesce(order_payments.bank_transfer_amount, 0) as bank_transfer_amount,\n        coalesce(order_payments.voucher_amount, 0) as voucher_amount,\n        coalesce(order_payments.gift_card_amount, 0) as gift_card_amount,\n        coalesce(order_payments.total_amount, 0) as amount\n    from orders\n    left join order_payments on orders.order_id = order_payments.order_id\n\n)\n\nselect * from final",
+      "compiled_code": "with orders as (\n\n    select * from \"ecommerce\".\"main\".\"stg_orders\"\n\n),\n\npayments as (\n\n    select * from \"ecommerce\".\"main\".\"stg_payments\"\n\n),\n\norder_payments as (\n\n    select\n        order_id,\n        sum(case when payment_method = 'credit_card' then amount else 0 end) as credit_card_amount,\n        sum(case when payment_method = 'bank_transfer' then amount else 0 end) as bank_transfer_amount,\n        sum(case when payment_method = 'voucher' then amount else 0 end) as voucher_amount,\n        sum(case when payment_method = 'gift_card' then amount else 0 end) as gift_card_amount,\n        sum(amount) as total_amount\n    from payments\n    group by order_id\n\n),\n\nfinal as (\n\n    select\n        orders.order_id,\n        orders.customer_id,\n        orders.order_date,\n        orders.status,\n        coalesce(order_payments.credit_card_amount, 0) as credit_card_amount,\n        coalesce(order_payments.bank_transfer_amount, 0) as bank_transfer_amount,\n        coalesce(order_payments.voucher_amount, 0) as voucher_amount,\n        coalesce(order_payments.gift_card_amount, 0) as gift_card_amount,\n        coalesce(order_payments.total_amount, 0) as amount\n    from orders\n    left join order_payments on orders.order_id = order_payments.order_id\n\n)\n\nselect * from final",
+      "materialized": "table",
+      "depends_on": [
+        "model.ecommerce.stg_orders",
+        "model.ecommerce.stg_payments"
+      ],
+      "columns": {
+        "order_id": "Primary key of the order.",
+        "customer_id": "Customer who placed the order (foreign key to dim_customers).",
+        "order_date": "Date the order was placed.",
+        "status": "Order lifecycle status.",
+        "credit_card_amount": "Amount paid by credit card.",
+        "bank_transfer_amount": "Amount paid by bank transfer.",
+        "voucher_amount": "Amount paid with vouchers.",
+        "gift_card_amount": "Amount paid with gift cards.",
+        "amount": "Total amount paid for the order (0 if no payments, e.g. cancelled orders)."
+      }
+    },
+    "test.ecommerce.unique_stg_customers_customer_id.c7614daada": {
+      "unique_id": "test.ecommerce.unique_stg_customers_customer_id.c7614daada",
+      "resource_type": "test",
+      "name": "unique_stg_customers_customer_id",
+      "original_file_path": "models/staging/schema.yml",
+      "raw_code": "{{ test_unique(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\nselect\n    customer_id as unique_field,\n    count(*) as n_records\n\nfrom \"ecommerce\".\"main\".\"stg_customers\"\nwhere customer_id is not null\ngroup by customer_id\nhaving count(*) > 1\n\n\n",
+      "attached_node": "model.ecommerce.stg_customers",
+      "column_name": "customer_id",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.stg_customers"
+      ],
+      "test_metadata": {
+        "name": "unique",
+        "kwargs": {
+          "column_name": "customer_id",
+          "model": "{{ get_where_subquery(ref('stg_customers')) }}"
+        }
+      }
+    },
+    "test.ecommerce.not_null_stg_customers_customer_id.e2cfb1f9aa": {
+      "unique_id": "test.ecommerce.not_null_stg_customers_customer_id.e2cfb1f9aa",
+      "resource_type": "test",
+      "name": "not_null_stg_customers_customer_id",
+      "original_file_path": "models/staging/schema.yml",
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\n\n\nselect customer_id\nfrom \"ecommerce\".\"main\".\"stg_customers\"\nwhere customer_id is null\n\n\n",
+      "attached_node": "model.ecommerce.stg_customers",
+      "column_name": "customer_id",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.stg_customers"
+      ],
+      "test_metadata": {
+        "name": "not_null",
+        "kwargs": {
+          "column_name": "customer_id",
+          "model": "{{ get_where_subquery(ref('stg_customers')) }}"
+        }
+      }
+    },
+    "test.ecommerce.null_rate_below_stg_customers_email__0_05.73e95c9c72": {
+      "unique_id": "test.ecommerce.null_rate_below_stg_customers_email__0_05.73e95c9c72",
+      "resource_type": "test",
+      "name": "null_rate_below_stg_customers_email__0_05",
+      "original_file_path": "models/staging/schema.yml",
+      "raw_code": "{{ test_null_rate_below(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n\nwith stats as (\n    select\n        count(*) as total_rows,\n        sum(case when email is null then 1 else 0 end) as null_rows\n    from \"ecommerce\".\"main\".\"stg_customers\"\n)\n\nselect\n    total_rows,\n    null_rows,\n    null_rows * 1.0 / nullif(total_rows, 0) as null_rate\nfrom stats\nwhere null_rows * 1.0 / nullif(total_rows, 0) > 0.05\n\n",
+      "attached_node": "model.ecommerce.stg_customers",
+      "column_name": "email",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.stg_customers"
+      ],
+      "test_metadata": {
+        "name": "null_rate_below",
+        "kwargs": {
+          "column_name": "email",
+          "max_rate": 0.05,
+          "model": "{{ get_where_subquery(ref('stg_customers')) }}"
+        }
+      }
+    },
+    "test.ecommerce.not_null_stg_customers_country_code.3249b83c15": {
+      "unique_id": "test.ecommerce.not_null_stg_customers_country_code.3249b83c15",
+      "resource_type": "test",
+      "name": "not_null_stg_customers_country_code",
+      "original_file_path": "models/staging/schema.yml",
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\n\n\nselect country_code\nfrom \"ecommerce\".\"main\".\"stg_customers\"\nwhere country_code is null\n\n\n",
+      "attached_node": "model.ecommerce.stg_customers",
+      "column_name": "country_code",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.stg_customers"
+      ],
+      "test_metadata": {
+        "name": "not_null",
+        "kwargs": {
+          "column_name": "country_code",
+          "model": "{{ get_where_subquery(ref('stg_customers')) }}"
+        }
+      }
+    },
+    "test.ecommerce.unique_stg_orders_order_id.e3b841c71a": {
+      "unique_id": "test.ecommerce.unique_stg_orders_order_id.e3b841c71a",
+      "resource_type": "test",
+      "name": "unique_stg_orders_order_id",
+      "original_file_path": "models/staging/schema.yml",
+      "raw_code": "{{ test_unique(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\nselect\n    order_id as unique_field,\n    count(*) as n_records\n\nfrom \"ecommerce\".\"main\".\"stg_orders\"\nwhere order_id is not null\ngroup by order_id\nhaving count(*) > 1\n\n\n",
+      "attached_node": "model.ecommerce.stg_orders",
+      "column_name": "order_id",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.stg_orders"
+      ],
+      "test_metadata": {
+        "name": "unique",
+        "kwargs": {
+          "column_name": "order_id",
+          "model": "{{ get_where_subquery(ref('stg_orders')) }}"
+        }
+      }
+    },
+    "test.ecommerce.not_null_stg_orders_order_id.81cfe2fe64": {
+      "unique_id": "test.ecommerce.not_null_stg_orders_order_id.81cfe2fe64",
+      "resource_type": "test",
+      "name": "not_null_stg_orders_order_id",
+      "original_file_path": "models/staging/schema.yml",
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\n\n\nselect order_id\nfrom \"ecommerce\".\"main\".\"stg_orders\"\nwhere order_id is null\n\n\n",
+      "attached_node": "model.ecommerce.stg_orders",
+      "column_name": "order_id",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.stg_orders"
+      ],
+      "test_metadata": {
+        "name": "not_null",
+        "kwargs": {
+          "column_name": "order_id",
+          "model": "{{ get_where_subquery(ref('stg_orders')) }}"
+        }
+      }
+    },
+    "test.ecommerce.not_null_stg_orders_customer_id.af79d5e4b5": {
+      "unique_id": "test.ecommerce.not_null_stg_orders_customer_id.af79d5e4b5",
+      "resource_type": "test",
+      "name": "not_null_stg_orders_customer_id",
+      "original_file_path": "models/staging/schema.yml",
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\n\n\nselect customer_id\nfrom \"ecommerce\".\"main\".\"stg_orders\"\nwhere customer_id is null\n\n\n",
+      "attached_node": "model.ecommerce.stg_orders",
+      "column_name": "customer_id",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.stg_orders"
+      ],
+      "test_metadata": {
+        "name": "not_null",
+        "kwargs": {
+          "column_name": "customer_id",
+          "model": "{{ get_where_subquery(ref('stg_orders')) }}"
+        }
+      }
+    },
+    "test.ecommerce.not_null_stg_orders_order_date.2177a3e8bb": {
+      "unique_id": "test.ecommerce.not_null_stg_orders_order_date.2177a3e8bb",
+      "resource_type": "test",
+      "name": "not_null_stg_orders_order_date",
+      "original_file_path": "models/staging/schema.yml",
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\n\n\nselect order_date\nfrom \"ecommerce\".\"main\".\"stg_orders\"\nwhere order_date is null\n\n\n",
+      "attached_node": "model.ecommerce.stg_orders",
+      "column_name": "order_date",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.stg_orders"
+      ],
+      "test_metadata": {
+        "name": "not_null",
+        "kwargs": {
+          "column_name": "order_date",
+          "model": "{{ get_where_subquery(ref('stg_orders')) }}"
+        }
+      }
+    },
+    "test.ecommerce.accepted_values_stg_orders_status__placed__shipped__completed__cancelled.c09db2e79b": {
+      "unique_id": "test.ecommerce.accepted_values_stg_orders_status__placed__shipped__completed__cancelled.c09db2e79b",
+      "resource_type": "test",
+      "name": "accepted_values_stg_orders_status__placed__shipped__completed__cancelled",
+      "original_file_path": "models/staging/schema.yml",
+      "raw_code": "{{ test_accepted_values(**_dbt_generic_test_kwargs) }}{{ config(alias=\"accepted_values_stg_orders_96615782691da25ee0c8422edca3518a\") }}",
+      "compiled_code": "\n    \n    \n\nwith all_values as (\n\n    select\n        status as value_field,\n        count(*) as n_records\n\n    from \"ecommerce\".\"main\".\"stg_orders\"\n    group by status\n\n)\n\nselect *\nfrom all_values\nwhere value_field not in (\n    'placed','shipped','completed','cancelled'\n)\n\n\n",
+      "attached_node": "model.ecommerce.stg_orders",
+      "column_name": "status",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.stg_orders"
+      ],
+      "test_metadata": {
+        "name": "accepted_values",
+        "kwargs": {
+          "column_name": "status",
+          "values": [
+            "placed",
+            "shipped",
+            "completed",
+            "cancelled"
+          ],
+          "model": "{{ get_where_subquery(ref('stg_orders')) }}"
+        }
+      }
+    },
+    "test.ecommerce.row_count_between_stg_orders_1000__500.df57ba21b7": {
+      "unique_id": "test.ecommerce.row_count_between_stg_orders_1000__500.df57ba21b7",
+      "resource_type": "test",
+      "name": "row_count_between_stg_orders_1000__500",
+      "original_file_path": "models/staging/schema.yml",
+      "raw_code": "{{ test_row_count_between(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n\nwith row_count as (\n    select count(*) as n_rows from \"ecommerce\".\"main\".\"stg_orders\"\n)\n\nselect n_rows\nfrom row_count\nwhere n_rows < 500 or n_rows > 1000\n\n",
+      "attached_node": "model.ecommerce.stg_orders",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.stg_orders"
+      ],
+      "test_metadata": {
+        "name": "row_count_between",
+        "kwargs": {
+          "min_rows": 500,
+          "max_rows": 1000,
+          "model": "{{ get_where_subquery(ref('stg_orders')) }}"
+        }
+      }
+    },
+    "test.ecommerce.unique_stg_payments_payment_id.3744510712": {
+      "unique_id": "test.ecommerce.unique_stg_payments_payment_id.3744510712",
+      "resource_type": "test",
+      "name": "unique_stg_payments_payment_id",
+      "original_file_path": "models/staging/schema.yml",
+      "raw_code": "{{ test_unique(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\nselect\n    payment_id as unique_field,\n    count(*) as n_records\n\nfrom \"ecommerce\".\"main\".\"stg_payments\"\nwhere payment_id is not null\ngroup by payment_id\nhaving count(*) > 1\n\n\n",
+      "attached_node": "model.ecommerce.stg_payments",
+      "column_name": "payment_id",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.stg_payments"
+      ],
+      "test_metadata": {
+        "name": "unique",
+        "kwargs": {
+          "column_name": "payment_id",
+          "model": "{{ get_where_subquery(ref('stg_payments')) }}"
+        }
+      }
+    },
+    "test.ecommerce.not_null_stg_payments_payment_id.c19cc50075": {
+      "unique_id": "test.ecommerce.not_null_stg_payments_payment_id.c19cc50075",
+      "resource_type": "test",
+      "name": "not_null_stg_payments_payment_id",
+      "original_file_path": "models/staging/schema.yml",
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\n\n\nselect payment_id\nfrom \"ecommerce\".\"main\".\"stg_payments\"\nwhere payment_id is null\n\n\n",
+      "attached_node": "model.ecommerce.stg_payments",
+      "column_name": "payment_id",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.stg_payments"
+      ],
+      "test_metadata": {
+        "name": "not_null",
+        "kwargs": {
+          "column_name": "payment_id",
+          "model": "{{ get_where_subquery(ref('stg_payments')) }}"
+        }
+      }
+    },
+    "test.ecommerce.not_null_stg_payments_order_id.601cf57649": {
+      "unique_id": "test.ecommerce.not_null_stg_payments_order_id.601cf57649",
+      "resource_type": "test",
+      "name": "not_null_stg_payments_order_id",
+      "original_file_path": "models/staging/schema.yml",
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\n\n\nselect order_id\nfrom \"ecommerce\".\"main\".\"stg_payments\"\nwhere order_id is null\n\n\n",
+      "attached_node": "model.ecommerce.stg_payments",
+      "column_name": "order_id",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.stg_payments"
+      ],
+      "test_metadata": {
+        "name": "not_null",
+        "kwargs": {
+          "column_name": "order_id",
+          "model": "{{ get_where_subquery(ref('stg_payments')) }}"
+        }
+      }
+    },
+    "test.ecommerce.relationships_stg_payments_order_id__order_id__ref_stg_orders_.8426a3f3d3": {
+      "unique_id": "test.ecommerce.relationships_stg_payments_order_id__order_id__ref_stg_orders_.8426a3f3d3",
+      "resource_type": "test",
+      "name": "relationships_stg_payments_order_id__order_id__ref_stg_orders_",
+      "original_file_path": "models/staging/schema.yml",
+      "raw_code": "{{ test_relationships(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\nwith child as (\n    select order_id as from_field\n    from \"ecommerce\".\"main\".\"stg_payments\"\n    where order_id is not null\n),\n\nparent as (\n    select order_id as to_field\n    from \"ecommerce\".\"main\".\"stg_orders\"\n)\n\nselect\n    from_field\n\nfrom child\nleft join parent\n    on child.from_field = parent.to_field\n\nwhere parent.to_field is null\n\n\n",
+      "attached_node": "model.ecommerce.stg_payments",
+      "column_name": "order_id",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.stg_orders",
+        "model.ecommerce.stg_payments"
+      ],
+      "test_metadata": {
+        "name": "relationships",
+        "kwargs": {
+          "column_name": "order_id",
+          "to": "ref('stg_orders')",
+          "field": "order_id",
+          "model": "{{ get_where_subquery(ref('stg_payments')) }}"
+        }
+      }
+    },
+    "test.ecommerce.accepted_values_stg_payments_payment_method__credit_card__bank_transfer__voucher__gift_card.09c03f073b": {
+      "unique_id": "test.ecommerce.accepted_values_stg_payments_payment_method__credit_card__bank_transfer__voucher__gift_card.09c03f073b",
+      "resource_type": "test",
+      "name": "accepted_values_stg_payments_payment_method__credit_card__bank_transfer__voucher__gift_card",
+      "original_file_path": "models/staging/schema.yml",
+      "raw_code": "{{ test_accepted_values(**_dbt_generic_test_kwargs) }}{{ config(alias=\"accepted_values_stg_payments_177e8ed9baeab281802b802fe399c037\") }}",
+      "compiled_code": "\n    \n    \n\nwith all_values as (\n\n    select\n        payment_method as value_field,\n        count(*) as n_records\n\n    from \"ecommerce\".\"main\".\"stg_payments\"\n    group by payment_method\n\n)\n\nselect *\nfrom all_values\nwhere value_field not in (\n    'credit_card','bank_transfer','voucher','gift_card'\n)\n\n\n",
+      "attached_node": "model.ecommerce.stg_payments",
+      "column_name": "payment_method",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.stg_payments"
+      ],
+      "test_metadata": {
+        "name": "accepted_values",
+        "kwargs": {
+          "column_name": "payment_method",
+          "values": [
+            "credit_card",
+            "bank_transfer",
+            "voucher",
+            "gift_card"
+          ],
+          "model": "{{ get_where_subquery(ref('stg_payments')) }}"
+        }
+      }
+    },
+    "test.ecommerce.not_null_stg_payments_amount.4739fb3aea": {
+      "unique_id": "test.ecommerce.not_null_stg_payments_amount.4739fb3aea",
+      "resource_type": "test",
+      "name": "not_null_stg_payments_amount",
+      "original_file_path": "models/staging/schema.yml",
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\n\n\nselect amount\nfrom \"ecommerce\".\"main\".\"stg_payments\"\nwhere amount is null\n\n\n",
+      "attached_node": "model.ecommerce.stg_payments",
+      "column_name": "amount",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.stg_payments"
+      ],
+      "test_metadata": {
+        "name": "not_null",
+        "kwargs": {
+          "column_name": "amount",
+          "model": "{{ get_where_subquery(ref('stg_payments')) }}"
+        }
+      }
+    },
+    "test.ecommerce.unique_dim_customers_customer_id.15c9f1e2fd": {
+      "unique_id": "test.ecommerce.unique_dim_customers_customer_id.15c9f1e2fd",
+      "resource_type": "test",
+      "name": "unique_dim_customers_customer_id",
+      "original_file_path": "models/marts/schema.yml",
+      "raw_code": "{{ test_unique(**_dbt_generic_test_kwargs) }}",
+      "attached_node": "model.ecommerce.dim_customers",
+      "column_name": "customer_id",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.dim_customers"
+      ],
+      "test_metadata": {
+        "name": "unique",
+        "kwargs": {
+          "column_name": "customer_id",
+          "model": "{{ get_where_subquery(ref('dim_customers')) }}"
+        }
+      }
+    },
+    "test.ecommerce.not_null_dim_customers_customer_id.dd91cd1c8d": {
+      "unique_id": "test.ecommerce.not_null_dim_customers_customer_id.dd91cd1c8d",
+      "resource_type": "test",
+      "name": "not_null_dim_customers_customer_id",
+      "original_file_path": "models/marts/schema.yml",
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "attached_node": "model.ecommerce.dim_customers",
+      "column_name": "customer_id",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.dim_customers"
+      ],
+      "test_metadata": {
+        "name": "not_null",
+        "kwargs": {
+          "column_name": "customer_id",
+          "model": "{{ get_where_subquery(ref('dim_customers')) }}"
+        }
+      }
+    },
+    "test.ecommerce.not_null_dim_customers_lifetime_value.8655024888": {
+      "unique_id": "test.ecommerce.not_null_dim_customers_lifetime_value.8655024888",
+      "resource_type": "test",
+      "name": "not_null_dim_customers_lifetime_value",
+      "original_file_path": "models/marts/schema.yml",
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "attached_node": "model.ecommerce.dim_customers",
+      "column_name": "lifetime_value",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.dim_customers"
+      ],
+      "test_metadata": {
+        "name": "not_null",
+        "kwargs": {
+          "column_name": "lifetime_value",
+          "model": "{{ get_where_subquery(ref('dim_customers')) }}"
+        }
+      }
+    },
+    "test.ecommerce.unique_fct_orders_order_id.523ddb6ce5": {
+      "unique_id": "test.ecommerce.unique_fct_orders_order_id.523ddb6ce5",
+      "resource_type": "test",
+      "name": "unique_fct_orders_order_id",
+      "original_file_path": "models/marts/schema.yml",
+      "raw_code": "{{ test_unique(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\nselect\n    order_id as unique_field,\n    count(*) as n_records\n\nfrom \"ecommerce\".\"main\".\"fct_orders\"\nwhere order_id is not null\ngroup by order_id\nhaving count(*) > 1\n\n\n",
+      "attached_node": "model.ecommerce.fct_orders",
+      "column_name": "order_id",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.fct_orders"
+      ],
+      "test_metadata": {
+        "name": "unique",
+        "kwargs": {
+          "column_name": "order_id",
+          "model": "{{ get_where_subquery(ref('fct_orders')) }}"
+        }
+      }
+    },
+    "test.ecommerce.not_null_fct_orders_order_id.4e687af8d0": {
+      "unique_id": "test.ecommerce.not_null_fct_orders_order_id.4e687af8d0",
+      "resource_type": "test",
+      "name": "not_null_fct_orders_order_id",
+      "original_file_path": "models/marts/schema.yml",
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\n\n\nselect order_id\nfrom \"ecommerce\".\"main\".\"fct_orders\"\nwhere order_id is null\n\n\n",
+      "attached_node": "model.ecommerce.fct_orders",
+      "column_name": "order_id",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.fct_orders"
+      ],
+      "test_metadata": {
+        "name": "not_null",
+        "kwargs": {
+          "column_name": "order_id",
+          "model": "{{ get_where_subquery(ref('fct_orders')) }}"
+        }
+      }
+    },
+    "test.ecommerce.not_null_fct_orders_customer_id.16fe324f7b": {
+      "unique_id": "test.ecommerce.not_null_fct_orders_customer_id.16fe324f7b",
+      "resource_type": "test",
+      "name": "not_null_fct_orders_customer_id",
+      "original_file_path": "models/marts/schema.yml",
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\n\n\nselect customer_id\nfrom \"ecommerce\".\"main\".\"fct_orders\"\nwhere customer_id is null\n\n\n",
+      "attached_node": "model.ecommerce.fct_orders",
+      "column_name": "customer_id",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.fct_orders"
+      ],
+      "test_metadata": {
+        "name": "not_null",
+        "kwargs": {
+          "column_name": "customer_id",
+          "model": "{{ get_where_subquery(ref('fct_orders')) }}"
+        }
+      }
+    },
+    "test.ecommerce.relationships_fct_orders_customer_id__customer_id__ref_dim_customers_.d5636051d4": {
+      "unique_id": "test.ecommerce.relationships_fct_orders_customer_id__customer_id__ref_dim_customers_.d5636051d4",
+      "resource_type": "test",
+      "name": "relationships_fct_orders_customer_id__customer_id__ref_dim_customers_",
+      "original_file_path": "models/marts/schema.yml",
+      "raw_code": "{{ test_relationships(**_dbt_generic_test_kwargs) }}{{ config(alias=\"relationships_fct_orders_0c6c6d9e6f30dfb9b653557ebf38e47c\") }}",
+      "attached_node": "model.ecommerce.fct_orders",
+      "column_name": "customer_id",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.dim_customers",
+        "model.ecommerce.fct_orders"
+      ],
+      "test_metadata": {
+        "name": "relationships",
+        "kwargs": {
+          "column_name": "customer_id",
+          "to": "ref('dim_customers')",
+          "field": "customer_id",
+          "model": "{{ get_where_subquery(ref('fct_orders')) }}"
+        }
+      }
+    },
+    "test.ecommerce.not_null_fct_orders_amount.66810a8d08": {
+      "unique_id": "test.ecommerce.not_null_fct_orders_amount.66810a8d08",
+      "resource_type": "test",
+      "name": "not_null_fct_orders_amount",
+      "original_file_path": "models/marts/schema.yml",
+      "raw_code": "{{ test_not_null(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n    \n    \n\n\n\nselect amount\nfrom \"ecommerce\".\"main\".\"fct_orders\"\nwhere amount is null\n\n\n",
+      "attached_node": "model.ecommerce.fct_orders",
+      "column_name": "amount",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.fct_orders"
+      ],
+      "test_metadata": {
+        "name": "not_null",
+        "kwargs": {
+          "column_name": "amount",
+          "model": "{{ get_where_subquery(ref('fct_orders')) }}"
+        }
+      }
+    },
+    "test.ecommerce.equal_row_count_fct_orders_ref_stg_orders_.8bea18b445": {
+      "unique_id": "test.ecommerce.equal_row_count_fct_orders_ref_stg_orders_.8bea18b445",
+      "resource_type": "test",
+      "name": "equal_row_count_fct_orders_ref_stg_orders_",
+      "original_file_path": "models/marts/schema.yml",
+      "raw_code": "{{ test_equal_row_count(**_dbt_generic_test_kwargs) }}",
+      "compiled_code": "\n\nwith model_rows as (\n    select count(*) as n_rows from \"ecommerce\".\"main\".\"fct_orders\"\n),\n\ncompare_rows as (\n    select count(*) as n_rows from \"ecommerce\".\"main\".\"stg_orders\"\n)\n\nselect\n    model_rows.n_rows as model_rows,\n    compare_rows.n_rows as compare_model_rows\nfrom model_rows\ncross join compare_rows\nwhere model_rows.n_rows != compare_rows.n_rows\n\n",
+      "attached_node": "model.ecommerce.fct_orders",
+      "materialized": "test",
+      "depends_on": [
+        "model.ecommerce.stg_orders",
+        "model.ecommerce.fct_orders"
+      ],
+      "test_metadata": {
+        "name": "equal_row_count",
+        "kwargs": {
+          "compare_model": "ref('stg_orders')",
+          "model": "{{ get_where_subquery(ref('fct_orders')) }}"
+        }
+      }
+    },
+    "source.ecommerce.raw.raw_customers": {
+      "unique_id": "source.ecommerce.raw.raw_customers",
+      "resource_type": "source",
+      "source_name": "raw",
+      "name": "raw_customers",
+      "description": "One row per customer account, extracted from the CRM.",
+      "relation_name": "\"ecommerce\".\"raw\".\"raw_customers\"",
+      "loaded_at_field": "loaded_at",
+      "freshness": {
+        "warn_after": {
+          "count": 24,
+          "period": "hour"
+        },
+        "error_after": {
+          "count": 48,
+          "period": "hour"
+        },
+        "filter": null
+      },
+      "columns": {
+        "customer_id": "CRM primary key of the customer (integer).",
+        "first_name": "Customer first name.",
+        "last_name": "Customer last name.",
+        "email": "Customer email address as entered in the CRM.",
+        "country": "ISO 3166-1 alpha-2 country code of the customer's billing address.",
+        "created_at": "UTC timestamp when the account was created in the CRM.",
+        "loaded_at": "UTC timestamp when the ingestion job wrote the row."
+      }
+    },
+    "source.ecommerce.raw.raw_orders": {
+      "unique_id": "source.ecommerce.raw.raw_orders",
+      "resource_type": "source",
+      "source_name": "raw",
+      "name": "raw_orders",
+      "description": "One row per order placed in the web shop.",
+      "relation_name": "\"ecommerce\".\"raw\".\"raw_orders\"",
+      "loaded_at_field": "loaded_at",
+      "freshness": {
+        "warn_after": {
+          "count": 6,
+          "period": "hour"
+        },
+        "error_after": {
+          "count": 12,
+          "period": "hour"
+        },
+        "filter": null
+      },
+      "columns": {
+        "order_id": "Shop primary key of the order (integer).",
+        "customer_id": "CRM customer_id of the customer who placed the order.",
+        "order_date": "Date the order was placed (ISO format YYYY-MM-DD).",
+        "status": "Order lifecycle status: placed, shipped, completed or cancelled.",
+        "loaded_at": "UTC timestamp when the ingestion job wrote the row."
+      }
+    },
+    "source.ecommerce.raw.raw_payments": {
+      "unique_id": "source.ecommerce.raw.raw_payments",
+      "resource_type": "source",
+      "source_name": "raw",
+      "name": "raw_payments",
+      "description": "One row per payment taken by the payment provider. Split payments produce several rows per order.",
+      "relation_name": "\"ecommerce\".\"raw\".\"raw_payments\"",
+      "loaded_at_field": "loaded_at",
+      "freshness": {
+        "warn_after": {
+          "count": 6,
+          "period": "hour"
+        },
+        "error_after": {
+          "count": 12,
+          "period": "hour"
+        },
+        "filter": null
+      },
+      "columns": {
+        "payment_id": "Payment provider primary key (integer).",
+        "order_id": "Shop order_id the payment belongs to.",
+        "payment_method": "Payment method: credit_card, bank_transfer, voucher or gift_card.",
+        "amount": "Payment amount in integer cents.",
+        "loaded_at": "UTC timestamp when the ingestion job wrote the row."
+      }
+    },
+    "exposure.ecommerce.finance_revenue_dashboard": {
+      "unique_id": "exposure.ecommerce.finance_revenue_dashboard",
+      "resource_type": "exposure",
+      "name": "finance_revenue_dashboard",
+      "label": "Finance revenue dashboard",
+      "type": "dashboard",
+      "description": "Daily revenue by payment method and order status. Refreshed at 07:00 UTC and used in the daily finance stand-up.",
+      "owner": "Finance analytics",
+      "depends_on": [
+        "model.ecommerce.fct_orders",
+        "model.ecommerce.dim_customers"
+      ]
+    },
+    "exposure.ecommerce.marketing_customer_dashboard": {
+      "unique_id": "exposure.ecommerce.marketing_customer_dashboard",
+      "resource_type": "exposure",
+      "name": "marketing_customer_dashboard",
+      "label": "Marketing customer dashboard",
+      "type": "dashboard",
+      "description": "Customer counts, lifetime value and repeat-purchase rate by country.",
+      "owner": "Marketing analytics",
+      "depends_on": [
+        "model.ecommerce.dim_customers"
+      ]
+    }
+  },
+  "parent_map": {
+    "model.ecommerce.stg_customers": [
+      "source.ecommerce.raw.raw_customers"
+    ],
+    "model.ecommerce.stg_payments": [
+      "source.ecommerce.raw.raw_payments"
+    ],
+    "model.ecommerce.stg_orders": [
+      "source.ecommerce.raw.raw_orders"
+    ],
+    "model.ecommerce.dim_customers": [
+      "model.ecommerce.stg_customers",
+      "model.ecommerce.stg_orders",
+      "model.ecommerce.stg_payments"
+    ],
+    "model.ecommerce.fct_orders": [
+      "model.ecommerce.stg_orders",
+      "model.ecommerce.stg_payments"
+    ],
+    "test.ecommerce.unique_stg_customers_customer_id.c7614daada": [
+      "model.ecommerce.stg_customers"
+    ],
+    "test.ecommerce.not_null_stg_customers_customer_id.e2cfb1f9aa": [
+      "model.ecommerce.stg_customers"
+    ],
+    "test.ecommerce.null_rate_below_stg_customers_email__0_05.73e95c9c72": [
+      "model.ecommerce.stg_customers"
+    ],
+    "test.ecommerce.not_null_stg_customers_country_code.3249b83c15": [
+      "model.ecommerce.stg_customers"
+    ],
+    "test.ecommerce.unique_stg_orders_order_id.e3b841c71a": [
+      "model.ecommerce.stg_orders"
+    ],
+    "test.ecommerce.not_null_stg_orders_order_id.81cfe2fe64": [
+      "model.ecommerce.stg_orders"
+    ],
+    "test.ecommerce.not_null_stg_orders_customer_id.af79d5e4b5": [
+      "model.ecommerce.stg_orders"
+    ],
+    "test.ecommerce.not_null_stg_orders_order_date.2177a3e8bb": [
+      "model.ecommerce.stg_orders"
+    ],
+    "test.ecommerce.accepted_values_stg_orders_status__placed__shipped__completed__cancelled.c09db2e79b": [
+      "model.ecommerce.stg_orders"
+    ],
+    "test.ecommerce.row_count_between_stg_orders_1000__500.df57ba21b7": [
+      "model.ecommerce.stg_orders"
+    ],
+    "test.ecommerce.unique_stg_payments_payment_id.3744510712": [
+      "model.ecommerce.stg_payments"
+    ],
+    "test.ecommerce.not_null_stg_payments_payment_id.c19cc50075": [
+      "model.ecommerce.stg_payments"
+    ],
+    "test.ecommerce.not_null_stg_payments_order_id.601cf57649": [
+      "model.ecommerce.stg_payments"
+    ],
+    "test.ecommerce.relationships_stg_payments_order_id__order_id__ref_stg_orders_.8426a3f3d3": [
+      "model.ecommerce.stg_orders",
+      "model.ecommerce.stg_payments"
+    ],
+    "test.ecommerce.accepted_values_stg_payments_payment_method__credit_card__bank_transfer__voucher__gift_card.09c03f073b": [
+      "model.ecommerce.stg_payments"
+    ],
+    "test.ecommerce.not_null_stg_payments_amount.4739fb3aea": [
+      "model.ecommerce.stg_payments"
+    ],
+    "test.ecommerce.unique_dim_customers_customer_id.15c9f1e2fd": [
+      "model.ecommerce.dim_customers"
+    ],
+    "test.ecommerce.not_null_dim_customers_customer_id.dd91cd1c8d": [
+      "model.ecommerce.dim_customers"
+    ],
+    "test.ecommerce.not_null_dim_customers_lifetime_value.8655024888": [
+      "model.ecommerce.dim_customers"
+    ],
+    "test.ecommerce.unique_fct_orders_order_id.523ddb6ce5": [
+      "model.ecommerce.fct_orders"
+    ],
+    "test.ecommerce.not_null_fct_orders_order_id.4e687af8d0": [
+      "model.ecommerce.fct_orders"
+    ],
+    "test.ecommerce.not_null_fct_orders_customer_id.16fe324f7b": [
+      "model.ecommerce.fct_orders"
+    ],
+    "test.ecommerce.relationships_fct_orders_customer_id__customer_id__ref_dim_customers_.d5636051d4": [
+      "model.ecommerce.dim_customers",
+      "model.ecommerce.fct_orders"
+    ],
+    "test.ecommerce.not_null_fct_orders_amount.66810a8d08": [
+      "model.ecommerce.fct_orders"
+    ],
+    "test.ecommerce.equal_row_count_fct_orders_ref_stg_orders_.8bea18b445": [
+      "model.ecommerce.fct_orders",
+      "model.ecommerce.stg_orders"
+    ],
+    "source.ecommerce.raw.raw_customers": [],
+    "source.ecommerce.raw.raw_orders": [],
+    "source.ecommerce.raw.raw_payments": [],
+    "exposure.ecommerce.finance_revenue_dashboard": [
+      "model.ecommerce.dim_customers",
+      "model.ecommerce.fct_orders"
+    ],
+    "exposure.ecommerce.marketing_customer_dashboard": [
+      "model.ecommerce.dim_customers"
+    ]
+  },
+  "child_map": {
+    "model.ecommerce.stg_customers": [
+      "model.ecommerce.dim_customers",
+      "test.ecommerce.not_null_stg_customers_country_code.3249b83c15",
+      "test.ecommerce.not_null_stg_customers_customer_id.e2cfb1f9aa",
+      "test.ecommerce.null_rate_below_stg_customers_email__0_05.73e95c9c72",
+      "test.ecommerce.unique_stg_customers_customer_id.c7614daada"
+    ],
+    "model.ecommerce.stg_payments": [
+      "model.ecommerce.dim_customers",
+      "model.ecommerce.fct_orders",
+      "test.ecommerce.accepted_values_stg_payments_payment_method__credit_card__bank_transfer__voucher__gift_card.09c03f073b",
+      "test.ecommerce.not_null_stg_payments_amount.4739fb3aea",
+      "test.ecommerce.not_null_stg_payments_order_id.601cf57649",
+      "test.ecommerce.not_null_stg_payments_payment_id.c19cc50075",
+      "test.ecommerce.relationships_stg_payments_order_id__order_id__ref_stg_orders_.8426a3f3d3",
+      "test.ecommerce.unique_stg_payments_payment_id.3744510712"
+    ],
+    "model.ecommerce.stg_orders": [
+      "model.ecommerce.dim_customers",
+      "model.ecommerce.fct_orders",
+      "test.ecommerce.accepted_values_stg_orders_status__placed__shipped__completed__cancelled.c09db2e79b",
+      "test.ecommerce.equal_row_count_fct_orders_ref_stg_orders_.8bea18b445",
+      "test.ecommerce.not_null_stg_orders_customer_id.af79d5e4b5",
+      "test.ecommerce.not_null_stg_orders_order_date.2177a3e8bb",
+      "test.ecommerce.not_null_stg_orders_order_id.81cfe2fe64",
+      "test.ecommerce.relationships_stg_payments_order_id__order_id__ref_stg_orders_.8426a3f3d3",
+      "test.ecommerce.row_count_between_stg_orders_1000__500.df57ba21b7",
+      "test.ecommerce.unique_stg_orders_order_id.e3b841c71a"
+    ],
+    "model.ecommerce.dim_customers": [
+      "exposure.ecommerce.finance_revenue_dashboard",
+      "exposure.ecommerce.marketing_customer_dashboard",
+      "test.ecommerce.not_null_dim_customers_customer_id.dd91cd1c8d",
+      "test.ecommerce.not_null_dim_customers_lifetime_value.8655024888",
+      "test.ecommerce.relationships_fct_orders_customer_id__customer_id__ref_dim_customers_.d5636051d4",
+      "test.ecommerce.unique_dim_customers_customer_id.15c9f1e2fd"
+    ],
+    "model.ecommerce.fct_orders": [
+      "exposure.ecommerce.finance_revenue_dashboard",
+      "test.ecommerce.equal_row_count_fct_orders_ref_stg_orders_.8bea18b445",
+      "test.ecommerce.not_null_fct_orders_amount.66810a8d08",
+      "test.ecommerce.not_null_fct_orders_customer_id.16fe324f7b",
+      "test.ecommerce.not_null_fct_orders_order_id.4e687af8d0",
+      "test.ecommerce.relationships_fct_orders_customer_id__customer_id__ref_dim_customers_.d5636051d4",
+      "test.ecommerce.unique_fct_orders_order_id.523ddb6ce5"
+    ],
+    "test.ecommerce.unique_stg_customers_customer_id.c7614daada": [],
+    "test.ecommerce.not_null_stg_customers_customer_id.e2cfb1f9aa": [],
+    "test.ecommerce.null_rate_below_stg_customers_email__0_05.73e95c9c72": [],
+    "test.ecommerce.not_null_stg_customers_country_code.3249b83c15": [],
+    "test.ecommerce.unique_stg_orders_order_id.e3b841c71a": [],
+    "test.ecommerce.not_null_stg_orders_order_id.81cfe2fe64": [],
+    "test.ecommerce.not_null_stg_orders_customer_id.af79d5e4b5": [],
+    "test.ecommerce.not_null_stg_orders_order_date.2177a3e8bb": [],
+    "test.ecommerce.accepted_values_stg_orders_status__placed__shipped__completed__cancelled.c09db2e79b": [],
+    "test.ecommerce.row_count_between_stg_orders_1000__500.df57ba21b7": [],
+    "test.ecommerce.unique_stg_payments_payment_id.3744510712": [],
+    "test.ecommerce.not_null_stg_payments_payment_id.c19cc50075": [],
+    "test.ecommerce.not_null_stg_payments_order_id.601cf57649": [],
+    "test.ecommerce.relationships_stg_payments_order_id__order_id__ref_stg_orders_.8426a3f3d3": [],
+    "test.ecommerce.accepted_values_stg_payments_payment_method__credit_card__bank_transfer__voucher__gift_card.09c03f073b": [],
+    "test.ecommerce.not_null_stg_payments_amount.4739fb3aea": [],
+    "test.ecommerce.unique_dim_customers_customer_id.15c9f1e2fd": [],
+    "test.ecommerce.not_null_dim_customers_customer_id.dd91cd1c8d": [],
+    "test.ecommerce.not_null_dim_customers_lifetime_value.8655024888": [],
+    "test.ecommerce.unique_fct_orders_order_id.523ddb6ce5": [],
+    "test.ecommerce.not_null_fct_orders_order_id.4e687af8d0": [],
+    "test.ecommerce.not_null_fct_orders_customer_id.16fe324f7b": [],
+    "test.ecommerce.relationships_fct_orders_customer_id__customer_id__ref_dim_customers_.d5636051d4": [],
+    "test.ecommerce.not_null_fct_orders_amount.66810a8d08": [],
+    "test.ecommerce.equal_row_count_fct_orders_ref_stg_orders_.8bea18b445": [],
+    "source.ecommerce.raw.raw_customers": [
+      "model.ecommerce.stg_customers"
+    ],
+    "source.ecommerce.raw.raw_orders": [
+      "model.ecommerce.stg_orders"
+    ],
+    "source.ecommerce.raw.raw_payments": [
+      "model.ecommerce.stg_payments"
+    ],
+    "exposure.ecommerce.finance_revenue_dashboard": [],
+    "exposure.ecommerce.marketing_customer_dashboard": []
+  }
+}

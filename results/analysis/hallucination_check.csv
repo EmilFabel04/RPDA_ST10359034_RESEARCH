@@ -1,0 +1,2 @@
+candidates,reviewed,verdict_H,verdict_C,verdict_N,verdict_F,precision,recall_sample,recall_read,recall_found_H,recall_missed,recall,data_label
+62,62,16,22,17,7,0.2581,27,27,4.0,5,0.4444,researcher review (D27)

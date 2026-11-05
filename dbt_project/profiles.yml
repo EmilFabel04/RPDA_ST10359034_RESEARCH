@@ -1,0 +1,8 @@
+ecommerce:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ecommerce.duckdb   # relative to dbt_project/ (git-ignored)
+      schema: main
+      threads: 1               # single thread: deterministic run order and logs

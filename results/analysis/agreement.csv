@@ -1,0 +1,4 @@
+comparison,dimension,n,pct_agree,kappa,kappa_quadratic,interpretation,data_label
+expert_1 vs expert_2 (45 shared items),technical_accuracy,45,0.4889,0.2686,0.4875,fair,Expert scores
+expert_1 vs expert_2 (45 shared items),root_cause_correctness,45,0.7556,0.5065,,moderate,Expert scores
+expert_1 vs expert_2 (45 shared items),actionability,45,0.2667,0.0951,0.2593,slight,Expert scores

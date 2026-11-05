@@ -1,0 +1,16 @@
+scenario_id,category,root_cause_type,title,observed_failures,matches_expected,approx_tokens_parts_1_4
+SD01,schema_drift,data,Payment provider renamed raw_payments.amount to amount_cents,model.stg_payments,True,1209
+SD02,schema_drift,data,Shop export switched recent order_date values to DD/MM/YYYY,test.not_null_stg_orders_order_date,True,1242
+SD03,schema_drift,data,CRM migration changed customer_id to prefixed string keys,model.dim_customers,True,1702
+NR01,null_rate_anomaly,data,Provider re-sync loaded gift-card payments with null amounts,test.not_null_stg_payments_amount,True,1207
+NR02,null_rate_anomaly,code,Refactor removed coalesce on fct_orders.amount,test.not_null_fct_orders_amount,True,1355
+NR03,null_rate_anomaly,data,CRM privacy mode blanks emails for DE and NL customers,test.null_rate_below_stg_customers_email__0_05,True,1192
+RC01,row_count_anomaly,data,Orders loader appended a full extract instead of replacing it,test.row_count_between_stg_orders_1000__500; test.unique_stg_orders_order_id,True,1273
+RC02,row_count_anomaly,data,Orders extract limited to a 60-day lookback on a full-replace load,test.row_count_between_stg_orders_1000__500; test.relationships_stg_payments_order_id__order_id__ref_stg_orders_,True,1757
+RC03,row_count_anomaly,code,fct_orders joins payments without aggregating (fan-out),test.equal_row_count_fct_orders_ref_stg_orders_; test.unique_fct_orders_order_id,True,1903
+RI01,referential_integrity,data,CRM extract stalled; new customers' orders have no customer record,test.relationships_fct_orders_customer_id__customer_id__ref_dim_customers_; source.raw.raw_customers,True,2591
+RI02,referential_integrity,code,"dim_customers filtered to launch markets, orphaning other orders",test.relationships_fct_orders_customer_id__customer_id__ref_dim_customers_,True,2453
+RI03,referential_integrity,data,Customer erasure not propagated to payments,test.relationships_stg_payments_order_id__order_id__ref_stg_orders_,True,1660
+FV01,freshness_violation,data,Shop database connector failing since a credential rotation,source.raw.raw_orders; source.raw.raw_payments,True,1228
+FV02,freshness_violation,data,Orders loader stamps loaded_at with a stuck watermark,source.raw.raw_orders,True,970
+FV03,freshness_violation,config,raw_customers freshness threshold tightened below its load pattern,source.raw.raw_customers,True,907

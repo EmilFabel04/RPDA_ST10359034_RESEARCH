@@ -1,0 +1,65 @@
+You are helping the on-call analytics engineer of an online shop. The shop's data warehouse is built with dbt (dbt-core 1.12, DuckDB adapter). Ingestion jobs load data from the web shop, the payment provider and the CRM into the `raw` schema every hour; dbt then builds staging views and mart tables on top, runs the data tests and checks source freshness.
+
+The scheduled run on 2026-10-13 reported the following.
+
+## Failure report
+Command: dbt build  (exit code 1)
+Result: 12 passed, 0 failed, 1 errors, 0 warnings, 19 skipped
+- ERROR: model stg_payments (models/staging/stg_payments.sql)
+    Runtime Error in model stg_payments (models/staging/stg_payments.sql)
+      Binder Error: Column "amount" referenced that exists in the SELECT clause - but this column cannot be referenced before it is defined
+- SKIPPED because an upstream node failed: model dim_customers, model fct_orders, 15 tests
+
+Command: dbt source freshness  (exit code 0)
+- PASS: source raw.raw_customers: max(loaded_at) = 2026-10-13 14:56 UTC, 4.1 h before the check (warn after 24 hours, error after 48 hours)
+- PASS: source raw.raw_orders: max(loaded_at) = 2026-10-13 18:05 UTC, 0.9 h before the check (warn after 6 hours, error after 12 hours)
+- PASS: source raw.raw_payments: max(loaded_at) = 2026-10-13 18:05 UTC, 0.9 h before the check (warn after 6 hours, error after 12 hours)
+
+## Model and source metadata
+### Model stg_payments
+File: models/staging/stg_payments.sql · materialized as view
+Description: Cleaned payments, one row per payment. Amount converted from cents to currency units.
+Columns (name · type in warehouse · description · tests):
+- payment_id · INTEGER · Primary key of the payment. · tests: unique, not_null
+- order_id · INTEGER · Order the payment belongs to (foreign key to stg_orders). · tests: not_null, relationships(to=stg_orders, field=order_id)
+- payment_method · VARCHAR · Payment method used. · tests: accepted_values(values=['credit_card', 'bank_transfer', 'voucher', 'gift_card'])
+- amount · DOUBLE · Payment amount in currency units (raw cents / 100). · tests: not_null
+- loaded_at · TIMESTAMP · UTC timestamp when the row was loaded into the warehouse.
+SQL (models/staging/stg_payments.sql):
+```sql
+with source as (
+
+    select * from {{ source('raw', 'raw_payments') }}
+
+),
+
+renamed as (
+
+    select
+        payment_id,
+        order_id,
+        payment_method,
+        -- source stores integer cents; convert to currency units
+        cast(amount as decimal(18, 2)) / 100 as amount,
+        loaded_at
+    from source
+
+)
+
+select * from renamed
+```
+
+## Task
+Diagnose the failure and recommend a remediation. Base your answer on the information above. Where you need something that is not given, state it as an assumption rather than as a fact.
+
+Use exactly these four headings:
+### Root cause
+What went wrong and why, in a few sentences.
+### Fix
+The specific change to make. Name the exact models, sources, columns, files or settings involved, and include the SQL or YAML change where one is needed. If the change belongs outside the dbt project, say what should change and where.
+### Verification
+How to confirm the fix worked: the dbt command(s) or SQL query to run, and the expected result.
+### Assumptions
+Anything you assumed that the information above does not state.
+
+Keep the answer under 500 words, not counting code.

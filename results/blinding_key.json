@@ -1,0 +1,4056 @@
+{
+ "seed": 42,
+ "note": "Researcher only. Never send to raters.",
+ "items": {
+  "FV01-01A": {
+   "run_id": "FV01-partial-claude-r1",
+   "scenario_id": "FV01",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 1,
+   "expert_set": true
+  },
+  "FV01-01B": {
+   "run_id": "FV01-partial-gpt-r1",
+   "scenario_id": "FV01",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 1,
+   "expert_set": true
+  },
+  "FV01-01C": {
+   "run_id": "FV01-partial-llama-r1",
+   "scenario_id": "FV01",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 1,
+   "expert_set": true
+  },
+  "FV01-02A": {
+   "run_id": "FV01-full-gpt-r1",
+   "scenario_id": "FV01",
+   "level": "full",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 2,
+   "expert_set": false
+  },
+  "FV01-02B": {
+   "run_id": "FV01-full-claude-r1",
+   "scenario_id": "FV01",
+   "level": "full",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "B",
+   "group": 2,
+   "expert_set": false
+  },
+  "FV01-02C": {
+   "run_id": "FV01-full-llama-r1",
+   "scenario_id": "FV01",
+   "level": "full",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 2,
+   "expert_set": false
+  },
+  "FV01-03A": {
+   "run_id": "FV01-full-claude-r2",
+   "scenario_id": "FV01",
+   "level": "full",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "A",
+   "group": 3,
+   "expert_set": false
+  },
+  "FV01-03B": {
+   "run_id": "FV01-full-llama-r2",
+   "scenario_id": "FV01",
+   "level": "full",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "B",
+   "group": 3,
+   "expert_set": false
+  },
+  "FV01-03C": {
+   "run_id": "FV01-full-gpt-r2",
+   "scenario_id": "FV01",
+   "level": "full",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 3,
+   "expert_set": false
+  },
+  "FV01-04A": {
+   "run_id": "FV01-partial-claude-r2",
+   "scenario_id": "FV01",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "A",
+   "group": 4,
+   "expert_set": false
+  },
+  "FV01-04B": {
+   "run_id": "FV01-partial-llama-r2",
+   "scenario_id": "FV01",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "B",
+   "group": 4,
+   "expert_set": false
+  },
+  "FV01-04C": {
+   "run_id": "FV01-partial-gpt-r2",
+   "scenario_id": "FV01",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 4,
+   "expert_set": false
+  },
+  "FV01-05A": {
+   "run_id": "FV01-full-claude-r3",
+   "scenario_id": "FV01",
+   "level": "full",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "A",
+   "group": 5,
+   "expert_set": true
+  },
+  "FV01-05B": {
+   "run_id": "FV01-full-llama-r3",
+   "scenario_id": "FV01",
+   "level": "full",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "B",
+   "group": 5,
+   "expert_set": true
+  },
+  "FV01-05C": {
+   "run_id": "FV01-full-gpt-r3",
+   "scenario_id": "FV01",
+   "level": "full",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 5,
+   "expert_set": true
+  },
+  "FV01-06A": {
+   "run_id": "FV01-minimal-claude-r3",
+   "scenario_id": "FV01",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "A",
+   "group": 6,
+   "expert_set": false
+  },
+  "FV01-06B": {
+   "run_id": "FV01-minimal-gpt-r3",
+   "scenario_id": "FV01",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 6,
+   "expert_set": false
+  },
+  "FV01-06C": {
+   "run_id": "FV01-minimal-llama-r3",
+   "scenario_id": "FV01",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "C",
+   "group": 6,
+   "expert_set": false
+  },
+  "FV01-07A": {
+   "run_id": "FV01-partial-gpt-r3",
+   "scenario_id": "FV01",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 7,
+   "expert_set": false
+  },
+  "FV01-07B": {
+   "run_id": "FV01-partial-claude-r3",
+   "scenario_id": "FV01",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 7,
+   "expert_set": false
+  },
+  "FV01-07C": {
+   "run_id": "FV01-partial-llama-r3",
+   "scenario_id": "FV01",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "C",
+   "group": 7,
+   "expert_set": false
+  },
+  "FV01-08A": {
+   "run_id": "FV01-minimal-llama-r1",
+   "scenario_id": "FV01",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "A",
+   "group": 8,
+   "expert_set": true
+  },
+  "FV01-08B": {
+   "run_id": "FV01-minimal-claude-r1",
+   "scenario_id": "FV01",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "B",
+   "group": 8,
+   "expert_set": true
+  },
+  "FV01-08C": {
+   "run_id": "FV01-minimal-gpt-r1",
+   "scenario_id": "FV01",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 8,
+   "expert_set": true
+  },
+  "FV01-09A": {
+   "run_id": "FV01-minimal-gpt-r2",
+   "scenario_id": "FV01",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 9,
+   "expert_set": false
+  },
+  "FV01-09B": {
+   "run_id": "FV01-minimal-claude-r2",
+   "scenario_id": "FV01",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "B",
+   "group": 9,
+   "expert_set": false
+  },
+  "FV01-09C": {
+   "run_id": "FV01-minimal-llama-r2",
+   "scenario_id": "FV01",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "C",
+   "group": 9,
+   "expert_set": false
+  },
+  "FV02-01A": {
+   "run_id": "FV02-partial-llama-r2",
+   "scenario_id": "FV02",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "A",
+   "group": 1,
+   "expert_set": false
+  },
+  "FV02-01B": {
+   "run_id": "FV02-partial-gpt-r2",
+   "scenario_id": "FV02",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 1,
+   "expert_set": false
+  },
+  "FV02-01C": {
+   "run_id": "FV02-partial-claude-r2",
+   "scenario_id": "FV02",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "C",
+   "group": 1,
+   "expert_set": false
+  },
+  "FV02-02A": {
+   "run_id": "FV02-partial-gpt-r1",
+   "scenario_id": "FV02",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 2,
+   "expert_set": true
+  },
+  "FV02-02B": {
+   "run_id": "FV02-partial-llama-r1",
+   "scenario_id": "FV02",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "B",
+   "group": 2,
+   "expert_set": true
+  },
+  "FV02-02C": {
+   "run_id": "FV02-partial-claude-r1",
+   "scenario_id": "FV02",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "C",
+   "group": 2,
+   "expert_set": true
+  },
+  "FV02-03A": {
+   "run_id": "FV02-minimal-gpt-r1",
+   "scenario_id": "FV02",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 3,
+   "expert_set": false
+  },
+  "FV02-03B": {
+   "run_id": "FV02-minimal-claude-r1",
+   "scenario_id": "FV02",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "B",
+   "group": 3,
+   "expert_set": false
+  },
+  "FV02-03C": {
+   "run_id": "FV02-minimal-llama-r1",
+   "scenario_id": "FV02",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 3,
+   "expert_set": false
+  },
+  "FV02-04A": {
+   "run_id": "FV02-full-llama-r3",
+   "scenario_id": "FV02",
+   "level": "full",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "A",
+   "group": 4,
+   "expert_set": false
+  },
+  "FV02-04B": {
+   "run_id": "FV02-full-claude-r3",
+   "scenario_id": "FV02",
+   "level": "full",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 4,
+   "expert_set": false
+  },
+  "FV02-04C": {
+   "run_id": "FV02-full-gpt-r3",
+   "scenario_id": "FV02",
+   "level": "full",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 4,
+   "expert_set": false
+  },
+  "FV02-05A": {
+   "run_id": "FV02-full-claude-r2",
+   "scenario_id": "FV02",
+   "level": "full",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "A",
+   "group": 5,
+   "expert_set": false
+  },
+  "FV02-05B": {
+   "run_id": "FV02-full-gpt-r2",
+   "scenario_id": "FV02",
+   "level": "full",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 5,
+   "expert_set": false
+  },
+  "FV02-05C": {
+   "run_id": "FV02-full-llama-r2",
+   "scenario_id": "FV02",
+   "level": "full",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "C",
+   "group": 5,
+   "expert_set": false
+  },
+  "FV02-06A": {
+   "run_id": "FV02-minimal-llama-r2",
+   "scenario_id": "FV02",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "A",
+   "group": 6,
+   "expert_set": false
+  },
+  "FV02-06B": {
+   "run_id": "FV02-minimal-gpt-r2",
+   "scenario_id": "FV02",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 6,
+   "expert_set": false
+  },
+  "FV02-06C": {
+   "run_id": "FV02-minimal-claude-r2",
+   "scenario_id": "FV02",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "C",
+   "group": 6,
+   "expert_set": false
+  },
+  "FV02-07A": {
+   "run_id": "FV02-minimal-gpt-r3",
+   "scenario_id": "FV02",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 7,
+   "expert_set": true
+  },
+  "FV02-07B": {
+   "run_id": "FV02-minimal-claude-r3",
+   "scenario_id": "FV02",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 7,
+   "expert_set": true
+  },
+  "FV02-07C": {
+   "run_id": "FV02-minimal-llama-r3",
+   "scenario_id": "FV02",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "C",
+   "group": 7,
+   "expert_set": true
+  },
+  "FV02-08A": {
+   "run_id": "FV02-partial-gpt-r3",
+   "scenario_id": "FV02",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 8,
+   "expert_set": false
+  },
+  "FV02-08B": {
+   "run_id": "FV02-partial-claude-r3",
+   "scenario_id": "FV02",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 8,
+   "expert_set": false
+  },
+  "FV02-08C": {
+   "run_id": "FV02-partial-llama-r3",
+   "scenario_id": "FV02",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "C",
+   "group": 8,
+   "expert_set": false
+  },
+  "FV02-09A": {
+   "run_id": "FV02-full-claude-r1",
+   "scenario_id": "FV02",
+   "level": "full",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 9,
+   "expert_set": true
+  },
+  "FV02-09B": {
+   "run_id": "FV02-full-gpt-r1",
+   "scenario_id": "FV02",
+   "level": "full",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 9,
+   "expert_set": true
+  },
+  "FV02-09C": {
+   "run_id": "FV02-full-llama-r1",
+   "scenario_id": "FV02",
+   "level": "full",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 9,
+   "expert_set": true
+  },
+  "FV03-01A": {
+   "run_id": "FV03-full-gpt-r2",
+   "scenario_id": "FV03",
+   "level": "full",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 1,
+   "expert_set": false
+  },
+  "FV03-01B": {
+   "run_id": "FV03-full-claude-r2",
+   "scenario_id": "FV03",
+   "level": "full",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "B",
+   "group": 1,
+   "expert_set": false
+  },
+  "FV03-01C": {
+   "run_id": "FV03-full-llama-r2",
+   "scenario_id": "FV03",
+   "level": "full",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "C",
+   "group": 1,
+   "expert_set": false
+  },
+  "FV03-02A": {
+   "run_id": "FV03-minimal-llama-r3",
+   "scenario_id": "FV03",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "A",
+   "group": 2,
+   "expert_set": true
+  },
+  "FV03-02B": {
+   "run_id": "FV03-minimal-claude-r3",
+   "scenario_id": "FV03",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 2,
+   "expert_set": true
+  },
+  "FV03-02C": {
+   "run_id": "FV03-minimal-gpt-r3",
+   "scenario_id": "FV03",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 2,
+   "expert_set": true
+  },
+  "FV03-03A": {
+   "run_id": "FV03-partial-llama-r3",
+   "scenario_id": "FV03",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "A",
+   "group": 3,
+   "expert_set": true
+  },
+  "FV03-03B": {
+   "run_id": "FV03-partial-gpt-r3",
+   "scenario_id": "FV03",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 3,
+   "expert_set": true
+  },
+  "FV03-03C": {
+   "run_id": "FV03-partial-claude-r3",
+   "scenario_id": "FV03",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "C",
+   "group": 3,
+   "expert_set": true
+  },
+  "FV03-04A": {
+   "run_id": "FV03-full-gpt-r3",
+   "scenario_id": "FV03",
+   "level": "full",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 4,
+   "expert_set": true
+  },
+  "FV03-04B": {
+   "run_id": "FV03-full-claude-r3",
+   "scenario_id": "FV03",
+   "level": "full",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 4,
+   "expert_set": true
+  },
+  "FV03-04C": {
+   "run_id": "FV03-full-llama-r3",
+   "scenario_id": "FV03",
+   "level": "full",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "C",
+   "group": 4,
+   "expert_set": true
+  },
+  "FV03-05A": {
+   "run_id": "FV03-full-claude-r1",
+   "scenario_id": "FV03",
+   "level": "full",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 5,
+   "expert_set": false
+  },
+  "FV03-05B": {
+   "run_id": "FV03-full-gpt-r1",
+   "scenario_id": "FV03",
+   "level": "full",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 5,
+   "expert_set": false
+  },
+  "FV03-05C": {
+   "run_id": "FV03-full-llama-r1",
+   "scenario_id": "FV03",
+   "level": "full",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 5,
+   "expert_set": false
+  },
+  "FV03-06A": {
+   "run_id": "FV03-minimal-claude-r2",
+   "scenario_id": "FV03",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "A",
+   "group": 6,
+   "expert_set": false
+  },
+  "FV03-06B": {
+   "run_id": "FV03-minimal-gpt-r2",
+   "scenario_id": "FV03",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 6,
+   "expert_set": false
+  },
+  "FV03-06C": {
+   "run_id": "FV03-minimal-llama-r2",
+   "scenario_id": "FV03",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "C",
+   "group": 6,
+   "expert_set": false
+  },
+  "FV03-07A": {
+   "run_id": "FV03-minimal-claude-r1",
+   "scenario_id": "FV03",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 7,
+   "expert_set": false
+  },
+  "FV03-07B": {
+   "run_id": "FV03-minimal-gpt-r1",
+   "scenario_id": "FV03",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 7,
+   "expert_set": false
+  },
+  "FV03-07C": {
+   "run_id": "FV03-minimal-llama-r1",
+   "scenario_id": "FV03",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 7,
+   "expert_set": false
+  },
+  "FV03-08A": {
+   "run_id": "FV03-partial-llama-r2",
+   "scenario_id": "FV03",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "A",
+   "group": 8,
+   "expert_set": false
+  },
+  "FV03-08B": {
+   "run_id": "FV03-partial-claude-r2",
+   "scenario_id": "FV03",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "B",
+   "group": 8,
+   "expert_set": false
+  },
+  "FV03-08C": {
+   "run_id": "FV03-partial-gpt-r2",
+   "scenario_id": "FV03",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 8,
+   "expert_set": false
+  },
+  "FV03-09A": {
+   "run_id": "FV03-partial-gpt-r1",
+   "scenario_id": "FV03",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 9,
+   "expert_set": false
+  },
+  "FV03-09B": {
+   "run_id": "FV03-partial-llama-r1",
+   "scenario_id": "FV03",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "B",
+   "group": 9,
+   "expert_set": false
+  },
+  "FV03-09C": {
+   "run_id": "FV03-partial-claude-r1",
+   "scenario_id": "FV03",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "C",
+   "group": 9,
+   "expert_set": false
+  },
+  "NR01-01A": {
+   "run_id": "NR01-full-llama-r3",
+   "scenario_id": "NR01",
+   "level": "full",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "A",
+   "group": 1,
+   "expert_set": false
+  },
+  "NR01-01B": {
+   "run_id": "NR01-full-gpt-r3",
+   "scenario_id": "NR01",
+   "level": "full",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 1,
+   "expert_set": false
+  },
+  "NR01-01C": {
+   "run_id": "NR01-full-claude-r3",
+   "scenario_id": "NR01",
+   "level": "full",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "C",
+   "group": 1,
+   "expert_set": false
+  },
+  "NR01-02A": {
+   "run_id": "NR01-minimal-llama-r3",
+   "scenario_id": "NR01",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "A",
+   "group": 2,
+   "expert_set": false
+  },
+  "NR01-02B": {
+   "run_id": "NR01-minimal-claude-r3",
+   "scenario_id": "NR01",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 2,
+   "expert_set": false
+  },
+  "NR01-02C": {
+   "run_id": "NR01-minimal-gpt-r3",
+   "scenario_id": "NR01",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 2,
+   "expert_set": false
+  },
+  "NR01-03A": {
+   "run_id": "NR01-partial-llama-r2",
+   "scenario_id": "NR01",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "A",
+   "group": 3,
+   "expert_set": false
+  },
+  "NR01-03B": {
+   "run_id": "NR01-partial-claude-r2",
+   "scenario_id": "NR01",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "B",
+   "group": 3,
+   "expert_set": false
+  },
+  "NR01-03C": {
+   "run_id": "NR01-partial-gpt-r2",
+   "scenario_id": "NR01",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 3,
+   "expert_set": false
+  },
+  "NR01-04A": {
+   "run_id": "NR01-full-gpt-r2",
+   "scenario_id": "NR01",
+   "level": "full",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 4,
+   "expert_set": false
+  },
+  "NR01-04B": {
+   "run_id": "NR01-full-llama-r2",
+   "scenario_id": "NR01",
+   "level": "full",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "B",
+   "group": 4,
+   "expert_set": false
+  },
+  "NR01-04C": {
+   "run_id": "NR01-full-claude-r2",
+   "scenario_id": "NR01",
+   "level": "full",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "C",
+   "group": 4,
+   "expert_set": false
+  },
+  "NR01-05A": {
+   "run_id": "NR01-minimal-llama-r2",
+   "scenario_id": "NR01",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "A",
+   "group": 5,
+   "expert_set": true
+  },
+  "NR01-05B": {
+   "run_id": "NR01-minimal-claude-r2",
+   "scenario_id": "NR01",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "B",
+   "group": 5,
+   "expert_set": true
+  },
+  "NR01-05C": {
+   "run_id": "NR01-minimal-gpt-r2",
+   "scenario_id": "NR01",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 5,
+   "expert_set": true
+  },
+  "NR01-06A": {
+   "run_id": "NR01-minimal-claude-r1",
+   "scenario_id": "NR01",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 6,
+   "expert_set": false
+  },
+  "NR01-06B": {
+   "run_id": "NR01-minimal-llama-r1",
+   "scenario_id": "NR01",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "B",
+   "group": 6,
+   "expert_set": false
+  },
+  "NR01-06C": {
+   "run_id": "NR01-minimal-gpt-r1",
+   "scenario_id": "NR01",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 6,
+   "expert_set": false
+  },
+  "NR01-07A": {
+   "run_id": "NR01-full-gpt-r1",
+   "scenario_id": "NR01",
+   "level": "full",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 7,
+   "expert_set": true
+  },
+  "NR01-07B": {
+   "run_id": "NR01-full-claude-r1",
+   "scenario_id": "NR01",
+   "level": "full",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "B",
+   "group": 7,
+   "expert_set": true
+  },
+  "NR01-07C": {
+   "run_id": "NR01-full-llama-r1",
+   "scenario_id": "NR01",
+   "level": "full",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 7,
+   "expert_set": true
+  },
+  "NR01-08A": {
+   "run_id": "NR01-partial-gpt-r3",
+   "scenario_id": "NR01",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 8,
+   "expert_set": false
+  },
+  "NR01-08B": {
+   "run_id": "NR01-partial-claude-r3",
+   "scenario_id": "NR01",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 8,
+   "expert_set": false
+  },
+  "NR01-08C": {
+   "run_id": "NR01-partial-llama-r3",
+   "scenario_id": "NR01",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "C",
+   "group": 8,
+   "expert_set": false
+  },
+  "NR01-09A": {
+   "run_id": "NR01-partial-gpt-r1",
+   "scenario_id": "NR01",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 9,
+   "expert_set": true
+  },
+  "NR01-09B": {
+   "run_id": "NR01-partial-claude-r1",
+   "scenario_id": "NR01",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "B",
+   "group": 9,
+   "expert_set": true
+  },
+  "NR01-09C": {
+   "run_id": "NR01-partial-llama-r1",
+   "scenario_id": "NR01",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 9,
+   "expert_set": true
+  },
+  "NR02-01A": {
+   "run_id": "NR02-partial-gpt-r1",
+   "scenario_id": "NR02",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 1,
+   "expert_set": false
+  },
+  "NR02-01B": {
+   "run_id": "NR02-partial-claude-r1",
+   "scenario_id": "NR02",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "B",
+   "group": 1,
+   "expert_set": false
+  },
+  "NR02-01C": {
+   "run_id": "NR02-partial-llama-r1",
+   "scenario_id": "NR02",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 1,
+   "expert_set": false
+  },
+  "NR02-02A": {
+   "run_id": "NR02-partial-claude-r2",
+   "scenario_id": "NR02",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "A",
+   "group": 2,
+   "expert_set": true
+  },
+  "NR02-02B": {
+   "run_id": "NR02-partial-gpt-r2",
+   "scenario_id": "NR02",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 2,
+   "expert_set": true
+  },
+  "NR02-02C": {
+   "run_id": "NR02-partial-llama-r2",
+   "scenario_id": "NR02",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "C",
+   "group": 2,
+   "expert_set": true
+  },
+  "NR02-03A": {
+   "run_id": "NR02-minimal-gpt-r3",
+   "scenario_id": "NR02",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 3,
+   "expert_set": false
+  },
+  "NR02-03B": {
+   "run_id": "NR02-minimal-llama-r3",
+   "scenario_id": "NR02",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "B",
+   "group": 3,
+   "expert_set": false
+  },
+  "NR02-03C": {
+   "run_id": "NR02-minimal-claude-r3",
+   "scenario_id": "NR02",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "C",
+   "group": 3,
+   "expert_set": false
+  },
+  "NR02-04A": {
+   "run_id": "NR02-minimal-gpt-r2",
+   "scenario_id": "NR02",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 4,
+   "expert_set": false
+  },
+  "NR02-04B": {
+   "run_id": "NR02-minimal-claude-r2",
+   "scenario_id": "NR02",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "B",
+   "group": 4,
+   "expert_set": false
+  },
+  "NR02-04C": {
+   "run_id": "NR02-minimal-llama-r2",
+   "scenario_id": "NR02",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "C",
+   "group": 4,
+   "expert_set": false
+  },
+  "NR02-05A": {
+   "run_id": "NR02-partial-gpt-r3",
+   "scenario_id": "NR02",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 5,
+   "expert_set": false
+  },
+  "NR02-05B": {
+   "run_id": "NR02-partial-claude-r3",
+   "scenario_id": "NR02",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 5,
+   "expert_set": false
+  },
+  "NR02-05C": {
+   "run_id": "NR02-partial-llama-r3",
+   "scenario_id": "NR02",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "C",
+   "group": 5,
+   "expert_set": false
+  },
+  "NR02-06A": {
+   "run_id": "NR02-full-claude-r1",
+   "scenario_id": "NR02",
+   "level": "full",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 6,
+   "expert_set": false
+  },
+  "NR02-06B": {
+   "run_id": "NR02-full-gpt-r1",
+   "scenario_id": "NR02",
+   "level": "full",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 6,
+   "expert_set": false
+  },
+  "NR02-06C": {
+   "run_id": "NR02-full-llama-r1",
+   "scenario_id": "NR02",
+   "level": "full",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 6,
+   "expert_set": false
+  },
+  "NR02-07A": {
+   "run_id": "NR02-minimal-claude-r1",
+   "scenario_id": "NR02",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 7,
+   "expert_set": true
+  },
+  "NR02-07B": {
+   "run_id": "NR02-minimal-gpt-r1",
+   "scenario_id": "NR02",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 7,
+   "expert_set": true
+  },
+  "NR02-07C": {
+   "run_id": "NR02-minimal-llama-r1",
+   "scenario_id": "NR02",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 7,
+   "expert_set": true
+  },
+  "NR02-08A": {
+   "run_id": "NR02-full-gpt-r2",
+   "scenario_id": "NR02",
+   "level": "full",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 8,
+   "expert_set": true
+  },
+  "NR02-08B": {
+   "run_id": "NR02-full-claude-r2",
+   "scenario_id": "NR02",
+   "level": "full",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "B",
+   "group": 8,
+   "expert_set": true
+  },
+  "NR02-08C": {
+   "run_id": "NR02-full-llama-r2",
+   "scenario_id": "NR02",
+   "level": "full",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "C",
+   "group": 8,
+   "expert_set": true
+  },
+  "NR02-09A": {
+   "run_id": "NR02-full-gpt-r3",
+   "scenario_id": "NR02",
+   "level": "full",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 9,
+   "expert_set": false
+  },
+  "NR02-09B": {
+   "run_id": "NR02-full-claude-r3",
+   "scenario_id": "NR02",
+   "level": "full",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 9,
+   "expert_set": false
+  },
+  "NR02-09C": {
+   "run_id": "NR02-full-llama-r3",
+   "scenario_id": "NR02",
+   "level": "full",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "C",
+   "group": 9,
+   "expert_set": false
+  },
+  "NR03-01A": {
+   "run_id": "NR03-partial-gpt-r1",
+   "scenario_id": "NR03",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 1,
+   "expert_set": true
+  },
+  "NR03-01B": {
+   "run_id": "NR03-partial-claude-r1",
+   "scenario_id": "NR03",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "B",
+   "group": 1,
+   "expert_set": true
+  },
+  "NR03-01C": {
+   "run_id": "NR03-partial-llama-r1",
+   "scenario_id": "NR03",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 1,
+   "expert_set": true
+  },
+  "NR03-02A": {
+   "run_id": "NR03-full-claude-r1",
+   "scenario_id": "NR03",
+   "level": "full",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 2,
+   "expert_set": true
+  },
+  "NR03-02B": {
+   "run_id": "NR03-full-gpt-r1",
+   "scenario_id": "NR03",
+   "level": "full",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 2,
+   "expert_set": true
+  },
+  "NR03-02C": {
+   "run_id": "NR03-full-llama-r1",
+   "scenario_id": "NR03",
+   "level": "full",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 2,
+   "expert_set": true
+  },
+  "NR03-03A": {
+   "run_id": "NR03-partial-llama-r2",
+   "scenario_id": "NR03",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "A",
+   "group": 3,
+   "expert_set": false
+  },
+  "NR03-03B": {
+   "run_id": "NR03-partial-claude-r2",
+   "scenario_id": "NR03",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "B",
+   "group": 3,
+   "expert_set": false
+  },
+  "NR03-03C": {
+   "run_id": "NR03-partial-gpt-r2",
+   "scenario_id": "NR03",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 3,
+   "expert_set": false
+  },
+  "NR03-04A": {
+   "run_id": "NR03-minimal-claude-r2",
+   "scenario_id": "NR03",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "A",
+   "group": 4,
+   "expert_set": false
+  },
+  "NR03-04B": {
+   "run_id": "NR03-minimal-llama-r2",
+   "scenario_id": "NR03",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "B",
+   "group": 4,
+   "expert_set": false
+  },
+  "NR03-04C": {
+   "run_id": "NR03-minimal-gpt-r2",
+   "scenario_id": "NR03",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 4,
+   "expert_set": false
+  },
+  "NR03-05A": {
+   "run_id": "NR03-full-gpt-r3",
+   "scenario_id": "NR03",
+   "level": "full",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 5,
+   "expert_set": false
+  },
+  "NR03-05B": {
+   "run_id": "NR03-full-claude-r3",
+   "scenario_id": "NR03",
+   "level": "full",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 5,
+   "expert_set": false
+  },
+  "NR03-05C": {
+   "run_id": "NR03-full-llama-r3",
+   "scenario_id": "NR03",
+   "level": "full",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "C",
+   "group": 5,
+   "expert_set": false
+  },
+  "NR03-06A": {
+   "run_id": "NR03-partial-llama-r3",
+   "scenario_id": "NR03",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "A",
+   "group": 6,
+   "expert_set": false
+  },
+  "NR03-06B": {
+   "run_id": "NR03-partial-gpt-r3",
+   "scenario_id": "NR03",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 6,
+   "expert_set": false
+  },
+  "NR03-06C": {
+   "run_id": "NR03-partial-claude-r3",
+   "scenario_id": "NR03",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "C",
+   "group": 6,
+   "expert_set": false
+  },
+  "NR03-07A": {
+   "run_id": "NR03-minimal-llama-r1",
+   "scenario_id": "NR03",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "A",
+   "group": 7,
+   "expert_set": false
+  },
+  "NR03-07B": {
+   "run_id": "NR03-minimal-claude-r1",
+   "scenario_id": "NR03",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "B",
+   "group": 7,
+   "expert_set": false
+  },
+  "NR03-07C": {
+   "run_id": "NR03-minimal-gpt-r1",
+   "scenario_id": "NR03",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 7,
+   "expert_set": false
+  },
+  "NR03-08A": {
+   "run_id": "NR03-full-llama-r2",
+   "scenario_id": "NR03",
+   "level": "full",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "A",
+   "group": 8,
+   "expert_set": false
+  },
+  "NR03-08B": {
+   "run_id": "NR03-full-gpt-r2",
+   "scenario_id": "NR03",
+   "level": "full",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 8,
+   "expert_set": false
+  },
+  "NR03-08C": {
+   "run_id": "NR03-full-claude-r2",
+   "scenario_id": "NR03",
+   "level": "full",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "C",
+   "group": 8,
+   "expert_set": false
+  },
+  "NR03-09A": {
+   "run_id": "NR03-minimal-claude-r3",
+   "scenario_id": "NR03",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "A",
+   "group": 9,
+   "expert_set": true
+  },
+  "NR03-09B": {
+   "run_id": "NR03-minimal-llama-r3",
+   "scenario_id": "NR03",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "B",
+   "group": 9,
+   "expert_set": true
+  },
+  "NR03-09C": {
+   "run_id": "NR03-minimal-gpt-r3",
+   "scenario_id": "NR03",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 9,
+   "expert_set": true
+  },
+  "RC01-01A": {
+   "run_id": "RC01-minimal-claude-r1",
+   "scenario_id": "RC01",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 1,
+   "expert_set": false
+  },
+  "RC01-01B": {
+   "run_id": "RC01-minimal-gpt-r1",
+   "scenario_id": "RC01",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 1,
+   "expert_set": false
+  },
+  "RC01-01C": {
+   "run_id": "RC01-minimal-llama-r1",
+   "scenario_id": "RC01",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 1,
+   "expert_set": false
+  },
+  "RC01-02A": {
+   "run_id": "RC01-partial-gpt-r1",
+   "scenario_id": "RC01",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 2,
+   "expert_set": false
+  },
+  "RC01-02B": {
+   "run_id": "RC01-partial-llama-r1",
+   "scenario_id": "RC01",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "B",
+   "group": 2,
+   "expert_set": false
+  },
+  "RC01-02C": {
+   "run_id": "RC01-partial-claude-r1",
+   "scenario_id": "RC01",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "C",
+   "group": 2,
+   "expert_set": false
+  },
+  "RC01-03A": {
+   "run_id": "RC01-minimal-claude-r3",
+   "scenario_id": "RC01",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "A",
+   "group": 3,
+   "expert_set": true
+  },
+  "RC01-03B": {
+   "run_id": "RC01-minimal-llama-r3",
+   "scenario_id": "RC01",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "B",
+   "group": 3,
+   "expert_set": true
+  },
+  "RC01-03C": {
+   "run_id": "RC01-minimal-gpt-r3",
+   "scenario_id": "RC01",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 3,
+   "expert_set": true
+  },
+  "RC01-04A": {
+   "run_id": "RC01-partial-gpt-r3",
+   "scenario_id": "RC01",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 4,
+   "expert_set": true
+  },
+  "RC01-04B": {
+   "run_id": "RC01-partial-claude-r3",
+   "scenario_id": "RC01",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 4,
+   "expert_set": true
+  },
+  "RC01-04C": {
+   "run_id": "RC01-partial-llama-r3",
+   "scenario_id": "RC01",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "C",
+   "group": 4,
+   "expert_set": true
+  },
+  "RC01-05A": {
+   "run_id": "RC01-full-gpt-r3",
+   "scenario_id": "RC01",
+   "level": "full",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 5,
+   "expert_set": false
+  },
+  "RC01-05B": {
+   "run_id": "RC01-full-llama-r3",
+   "scenario_id": "RC01",
+   "level": "full",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "B",
+   "group": 5,
+   "expert_set": false
+  },
+  "RC01-05C": {
+   "run_id": "RC01-full-claude-r3",
+   "scenario_id": "RC01",
+   "level": "full",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "C",
+   "group": 5,
+   "expert_set": false
+  },
+  "RC01-06A": {
+   "run_id": "RC01-partial-gpt-r2",
+   "scenario_id": "RC01",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 6,
+   "expert_set": false
+  },
+  "RC01-06B": {
+   "run_id": "RC01-partial-llama-r2",
+   "scenario_id": "RC01",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "B",
+   "group": 6,
+   "expert_set": false
+  },
+  "RC01-06C": {
+   "run_id": "RC01-partial-claude-r2",
+   "scenario_id": "RC01",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "C",
+   "group": 6,
+   "expert_set": false
+  },
+  "RC01-07A": {
+   "run_id": "RC01-full-claude-r1",
+   "scenario_id": "RC01",
+   "level": "full",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 7,
+   "expert_set": true
+  },
+  "RC01-07B": {
+   "run_id": "RC01-full-llama-r1",
+   "scenario_id": "RC01",
+   "level": "full",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "B",
+   "group": 7,
+   "expert_set": true
+  },
+  "RC01-07C": {
+   "run_id": "RC01-full-gpt-r1",
+   "scenario_id": "RC01",
+   "level": "full",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 7,
+   "expert_set": true
+  },
+  "RC01-08A": {
+   "run_id": "RC01-minimal-claude-r2",
+   "scenario_id": "RC01",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "A",
+   "group": 8,
+   "expert_set": false
+  },
+  "RC01-08B": {
+   "run_id": "RC01-minimal-llama-r2",
+   "scenario_id": "RC01",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "B",
+   "group": 8,
+   "expert_set": false
+  },
+  "RC01-08C": {
+   "run_id": "RC01-minimal-gpt-r2",
+   "scenario_id": "RC01",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 8,
+   "expert_set": false
+  },
+  "RC01-09A": {
+   "run_id": "RC01-full-llama-r2",
+   "scenario_id": "RC01",
+   "level": "full",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "A",
+   "group": 9,
+   "expert_set": false
+  },
+  "RC01-09B": {
+   "run_id": "RC01-full-gpt-r2",
+   "scenario_id": "RC01",
+   "level": "full",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 9,
+   "expert_set": false
+  },
+  "RC01-09C": {
+   "run_id": "RC01-full-claude-r2",
+   "scenario_id": "RC01",
+   "level": "full",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "C",
+   "group": 9,
+   "expert_set": false
+  },
+  "RC02-01A": {
+   "run_id": "RC02-full-llama-r3",
+   "scenario_id": "RC02",
+   "level": "full",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "A",
+   "group": 1,
+   "expert_set": false
+  },
+  "RC02-01B": {
+   "run_id": "RC02-full-gpt-r3",
+   "scenario_id": "RC02",
+   "level": "full",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 1,
+   "expert_set": false
+  },
+  "RC02-01C": {
+   "run_id": "RC02-full-claude-r3",
+   "scenario_id": "RC02",
+   "level": "full",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "C",
+   "group": 1,
+   "expert_set": false
+  },
+  "RC02-02A": {
+   "run_id": "RC02-minimal-claude-r3",
+   "scenario_id": "RC02",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "A",
+   "group": 2,
+   "expert_set": false
+  },
+  "RC02-02B": {
+   "run_id": "RC02-minimal-gpt-r3",
+   "scenario_id": "RC02",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 2,
+   "expert_set": false
+  },
+  "RC02-02C": {
+   "run_id": "RC02-minimal-llama-r3",
+   "scenario_id": "RC02",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "C",
+   "group": 2,
+   "expert_set": false
+  },
+  "RC02-03A": {
+   "run_id": "RC02-partial-gpt-r2",
+   "scenario_id": "RC02",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 3,
+   "expert_set": true
+  },
+  "RC02-03B": {
+   "run_id": "RC02-partial-llama-r2",
+   "scenario_id": "RC02",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "B",
+   "group": 3,
+   "expert_set": true
+  },
+  "RC02-03C": {
+   "run_id": "RC02-partial-claude-r2",
+   "scenario_id": "RC02",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "C",
+   "group": 3,
+   "expert_set": true
+  },
+  "RC02-04A": {
+   "run_id": "RC02-minimal-claude-r2",
+   "scenario_id": "RC02",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "A",
+   "group": 4,
+   "expert_set": true
+  },
+  "RC02-04B": {
+   "run_id": "RC02-minimal-llama-r2",
+   "scenario_id": "RC02",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "B",
+   "group": 4,
+   "expert_set": true
+  },
+  "RC02-04C": {
+   "run_id": "RC02-minimal-gpt-r2",
+   "scenario_id": "RC02",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 4,
+   "expert_set": true
+  },
+  "RC02-05A": {
+   "run_id": "RC02-full-gpt-r1",
+   "scenario_id": "RC02",
+   "level": "full",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 5,
+   "expert_set": false
+  },
+  "RC02-05B": {
+   "run_id": "RC02-full-claude-r1",
+   "scenario_id": "RC02",
+   "level": "full",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "B",
+   "group": 5,
+   "expert_set": false
+  },
+  "RC02-05C": {
+   "run_id": "RC02-full-llama-r1",
+   "scenario_id": "RC02",
+   "level": "full",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 5,
+   "expert_set": false
+  },
+  "RC02-06A": {
+   "run_id": "RC02-partial-llama-r3",
+   "scenario_id": "RC02",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "A",
+   "group": 6,
+   "expert_set": false
+  },
+  "RC02-06B": {
+   "run_id": "RC02-partial-claude-r3",
+   "scenario_id": "RC02",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 6,
+   "expert_set": false
+  },
+  "RC02-06C": {
+   "run_id": "RC02-partial-gpt-r3",
+   "scenario_id": "RC02",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 6,
+   "expert_set": false
+  },
+  "RC02-07A": {
+   "run_id": "RC02-full-llama-r2",
+   "scenario_id": "RC02",
+   "level": "full",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "A",
+   "group": 7,
+   "expert_set": true
+  },
+  "RC02-07B": {
+   "run_id": "RC02-full-gpt-r2",
+   "scenario_id": "RC02",
+   "level": "full",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 7,
+   "expert_set": true
+  },
+  "RC02-07C": {
+   "run_id": "RC02-full-claude-r2",
+   "scenario_id": "RC02",
+   "level": "full",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "C",
+   "group": 7,
+   "expert_set": true
+  },
+  "RC02-08A": {
+   "run_id": "RC02-minimal-claude-r1",
+   "scenario_id": "RC02",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 8,
+   "expert_set": false
+  },
+  "RC02-08B": {
+   "run_id": "RC02-minimal-llama-r1",
+   "scenario_id": "RC02",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "B",
+   "group": 8,
+   "expert_set": false
+  },
+  "RC02-08C": {
+   "run_id": "RC02-minimal-gpt-r1",
+   "scenario_id": "RC02",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 8,
+   "expert_set": false
+  },
+  "RC02-09A": {
+   "run_id": "RC02-partial-gpt-r1",
+   "scenario_id": "RC02",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 9,
+   "expert_set": false
+  },
+  "RC02-09B": {
+   "run_id": "RC02-partial-claude-r1",
+   "scenario_id": "RC02",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "B",
+   "group": 9,
+   "expert_set": false
+  },
+  "RC02-09C": {
+   "run_id": "RC02-partial-llama-r1",
+   "scenario_id": "RC02",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 9,
+   "expert_set": false
+  },
+  "RC03-01A": {
+   "run_id": "RC03-partial-claude-r1",
+   "scenario_id": "RC03",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 1,
+   "expert_set": true
+  },
+  "RC03-01B": {
+   "run_id": "RC03-partial-llama-r1",
+   "scenario_id": "RC03",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "B",
+   "group": 1,
+   "expert_set": true
+  },
+  "RC03-01C": {
+   "run_id": "RC03-partial-gpt-r1",
+   "scenario_id": "RC03",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 1,
+   "expert_set": true
+  },
+  "RC03-02A": {
+   "run_id": "RC03-minimal-claude-r3",
+   "scenario_id": "RC03",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "A",
+   "group": 2,
+   "expert_set": false
+  },
+  "RC03-02B": {
+   "run_id": "RC03-minimal-llama-r3",
+   "scenario_id": "RC03",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "B",
+   "group": 2,
+   "expert_set": false
+  },
+  "RC03-02C": {
+   "run_id": "RC03-minimal-gpt-r3",
+   "scenario_id": "RC03",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 2,
+   "expert_set": false
+  },
+  "RC03-03A": {
+   "run_id": "RC03-minimal-gpt-r2",
+   "scenario_id": "RC03",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 3,
+   "expert_set": false
+  },
+  "RC03-03B": {
+   "run_id": "RC03-minimal-claude-r2",
+   "scenario_id": "RC03",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "B",
+   "group": 3,
+   "expert_set": false
+  },
+  "RC03-03C": {
+   "run_id": "RC03-minimal-llama-r2",
+   "scenario_id": "RC03",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "C",
+   "group": 3,
+   "expert_set": false
+  },
+  "RC03-04A": {
+   "run_id": "RC03-partial-llama-r2",
+   "scenario_id": "RC03",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "A",
+   "group": 4,
+   "expert_set": false
+  },
+  "RC03-04B": {
+   "run_id": "RC03-partial-claude-r2",
+   "scenario_id": "RC03",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "B",
+   "group": 4,
+   "expert_set": false
+  },
+  "RC03-04C": {
+   "run_id": "RC03-partial-gpt-r2",
+   "scenario_id": "RC03",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 4,
+   "expert_set": false
+  },
+  "RC03-05A": {
+   "run_id": "RC03-full-llama-r3",
+   "scenario_id": "RC03",
+   "level": "full",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "A",
+   "group": 5,
+   "expert_set": false
+  },
+  "RC03-05B": {
+   "run_id": "RC03-full-claude-r3",
+   "scenario_id": "RC03",
+   "level": "full",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 5,
+   "expert_set": false
+  },
+  "RC03-05C": {
+   "run_id": "RC03-full-gpt-r3",
+   "scenario_id": "RC03",
+   "level": "full",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 5,
+   "expert_set": false
+  },
+  "RC03-06A": {
+   "run_id": "RC03-full-llama-r1",
+   "scenario_id": "RC03",
+   "level": "full",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "A",
+   "group": 6,
+   "expert_set": true
+  },
+  "RC03-06B": {
+   "run_id": "RC03-full-gpt-r1",
+   "scenario_id": "RC03",
+   "level": "full",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 6,
+   "expert_set": true
+  },
+  "RC03-06C": {
+   "run_id": "RC03-full-claude-r1",
+   "scenario_id": "RC03",
+   "level": "full",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "C",
+   "group": 6,
+   "expert_set": true
+  },
+  "RC03-07A": {
+   "run_id": "RC03-partial-llama-r3",
+   "scenario_id": "RC03",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "A",
+   "group": 7,
+   "expert_set": false
+  },
+  "RC03-07B": {
+   "run_id": "RC03-partial-claude-r3",
+   "scenario_id": "RC03",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 7,
+   "expert_set": false
+  },
+  "RC03-07C": {
+   "run_id": "RC03-partial-gpt-r3",
+   "scenario_id": "RC03",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 7,
+   "expert_set": false
+  },
+  "RC03-08A": {
+   "run_id": "RC03-minimal-claude-r1",
+   "scenario_id": "RC03",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 8,
+   "expert_set": true
+  },
+  "RC03-08B": {
+   "run_id": "RC03-minimal-gpt-r1",
+   "scenario_id": "RC03",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 8,
+   "expert_set": true
+  },
+  "RC03-08C": {
+   "run_id": "RC03-minimal-llama-r1",
+   "scenario_id": "RC03",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 8,
+   "expert_set": true
+  },
+  "RC03-09A": {
+   "run_id": "RC03-full-claude-r2",
+   "scenario_id": "RC03",
+   "level": "full",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "A",
+   "group": 9,
+   "expert_set": false
+  },
+  "RC03-09B": {
+   "run_id": "RC03-full-llama-r2",
+   "scenario_id": "RC03",
+   "level": "full",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "B",
+   "group": 9,
+   "expert_set": false
+  },
+  "RC03-09C": {
+   "run_id": "RC03-full-gpt-r2",
+   "scenario_id": "RC03",
+   "level": "full",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 9,
+   "expert_set": false
+  },
+  "RI01-01A": {
+   "run_id": "RI01-minimal-llama-r3",
+   "scenario_id": "RI01",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "A",
+   "group": 1,
+   "expert_set": true
+  },
+  "RI01-01B": {
+   "run_id": "RI01-minimal-claude-r3",
+   "scenario_id": "RI01",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 1,
+   "expert_set": true
+  },
+  "RI01-01C": {
+   "run_id": "RI01-minimal-gpt-r3",
+   "scenario_id": "RI01",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 1,
+   "expert_set": true
+  },
+  "RI01-02A": {
+   "run_id": "RI01-partial-gpt-r3",
+   "scenario_id": "RI01",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 2,
+   "expert_set": false
+  },
+  "RI01-02B": {
+   "run_id": "RI01-partial-llama-r3",
+   "scenario_id": "RI01",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "B",
+   "group": 2,
+   "expert_set": false
+  },
+  "RI01-02C": {
+   "run_id": "RI01-partial-claude-r3",
+   "scenario_id": "RI01",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "C",
+   "group": 2,
+   "expert_set": false
+  },
+  "RI01-03A": {
+   "run_id": "RI01-partial-gpt-r2",
+   "scenario_id": "RI01",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 3,
+   "expert_set": true
+  },
+  "RI01-03B": {
+   "run_id": "RI01-partial-llama-r2",
+   "scenario_id": "RI01",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "B",
+   "group": 3,
+   "expert_set": true
+  },
+  "RI01-03C": {
+   "run_id": "RI01-partial-claude-r2",
+   "scenario_id": "RI01",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "C",
+   "group": 3,
+   "expert_set": true
+  },
+  "RI01-04A": {
+   "run_id": "RI01-minimal-gpt-r1",
+   "scenario_id": "RI01",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 4,
+   "expert_set": false
+  },
+  "RI01-04B": {
+   "run_id": "RI01-minimal-claude-r1",
+   "scenario_id": "RI01",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "B",
+   "group": 4,
+   "expert_set": false
+  },
+  "RI01-04C": {
+   "run_id": "RI01-minimal-llama-r1",
+   "scenario_id": "RI01",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 4,
+   "expert_set": false
+  },
+  "RI01-05A": {
+   "run_id": "RI01-full-claude-r3",
+   "scenario_id": "RI01",
+   "level": "full",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "A",
+   "group": 5,
+   "expert_set": true
+  },
+  "RI01-05B": {
+   "run_id": "RI01-full-llama-r3",
+   "scenario_id": "RI01",
+   "level": "full",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "B",
+   "group": 5,
+   "expert_set": true
+  },
+  "RI01-05C": {
+   "run_id": "RI01-full-gpt-r3",
+   "scenario_id": "RI01",
+   "level": "full",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 5,
+   "expert_set": true
+  },
+  "RI01-06A": {
+   "run_id": "RI01-minimal-llama-r2",
+   "scenario_id": "RI01",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "A",
+   "group": 6,
+   "expert_set": false
+  },
+  "RI01-06B": {
+   "run_id": "RI01-minimal-gpt-r2",
+   "scenario_id": "RI01",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 6,
+   "expert_set": false
+  },
+  "RI01-06C": {
+   "run_id": "RI01-minimal-claude-r2",
+   "scenario_id": "RI01",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "C",
+   "group": 6,
+   "expert_set": false
+  },
+  "RI01-07A": {
+   "run_id": "RI01-partial-claude-r1",
+   "scenario_id": "RI01",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 7,
+   "expert_set": false
+  },
+  "RI01-07B": {
+   "run_id": "RI01-partial-llama-r1",
+   "scenario_id": "RI01",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "B",
+   "group": 7,
+   "expert_set": false
+  },
+  "RI01-07C": {
+   "run_id": "RI01-partial-gpt-r1",
+   "scenario_id": "RI01",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 7,
+   "expert_set": false
+  },
+  "RI01-08A": {
+   "run_id": "RI01-full-gpt-r2",
+   "scenario_id": "RI01",
+   "level": "full",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 8,
+   "expert_set": false
+  },
+  "RI01-08B": {
+   "run_id": "RI01-full-claude-r2",
+   "scenario_id": "RI01",
+   "level": "full",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "B",
+   "group": 8,
+   "expert_set": false
+  },
+  "RI01-08C": {
+   "run_id": "RI01-full-llama-r2",
+   "scenario_id": "RI01",
+   "level": "full",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "C",
+   "group": 8,
+   "expert_set": false
+  },
+  "RI01-09A": {
+   "run_id": "RI01-full-claude-r1",
+   "scenario_id": "RI01",
+   "level": "full",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 9,
+   "expert_set": false
+  },
+  "RI01-09B": {
+   "run_id": "RI01-full-llama-r1",
+   "scenario_id": "RI01",
+   "level": "full",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "B",
+   "group": 9,
+   "expert_set": false
+  },
+  "RI01-09C": {
+   "run_id": "RI01-full-gpt-r1",
+   "scenario_id": "RI01",
+   "level": "full",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 9,
+   "expert_set": false
+  },
+  "RI02-01A": {
+   "run_id": "RI02-partial-claude-r1",
+   "scenario_id": "RI02",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 1,
+   "expert_set": true
+  },
+  "RI02-01B": {
+   "run_id": "RI02-partial-gpt-r1",
+   "scenario_id": "RI02",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 1,
+   "expert_set": true
+  },
+  "RI02-01C": {
+   "run_id": "RI02-partial-llama-r1",
+   "scenario_id": "RI02",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 1,
+   "expert_set": true
+  },
+  "RI02-02A": {
+   "run_id": "RI02-full-llama-r2",
+   "scenario_id": "RI02",
+   "level": "full",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "A",
+   "group": 2,
+   "expert_set": false
+  },
+  "RI02-02B": {
+   "run_id": "RI02-full-gpt-r2",
+   "scenario_id": "RI02",
+   "level": "full",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 2,
+   "expert_set": false
+  },
+  "RI02-02C": {
+   "run_id": "RI02-full-claude-r2",
+   "scenario_id": "RI02",
+   "level": "full",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "C",
+   "group": 2,
+   "expert_set": false
+  },
+  "RI02-03A": {
+   "run_id": "RI02-partial-claude-r3",
+   "scenario_id": "RI02",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "A",
+   "group": 3,
+   "expert_set": false
+  },
+  "RI02-03B": {
+   "run_id": "RI02-partial-gpt-r3",
+   "scenario_id": "RI02",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 3,
+   "expert_set": false
+  },
+  "RI02-03C": {
+   "run_id": "RI02-partial-llama-r3",
+   "scenario_id": "RI02",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "C",
+   "group": 3,
+   "expert_set": false
+  },
+  "RI02-04A": {
+   "run_id": "RI02-minimal-claude-r2",
+   "scenario_id": "RI02",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "A",
+   "group": 4,
+   "expert_set": true
+  },
+  "RI02-04B": {
+   "run_id": "RI02-minimal-gpt-r2",
+   "scenario_id": "RI02",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 4,
+   "expert_set": true
+  },
+  "RI02-04C": {
+   "run_id": "RI02-minimal-llama-r2",
+   "scenario_id": "RI02",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "C",
+   "group": 4,
+   "expert_set": true
+  },
+  "RI02-05A": {
+   "run_id": "RI02-full-claude-r1",
+   "scenario_id": "RI02",
+   "level": "full",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 5,
+   "expert_set": false
+  },
+  "RI02-05B": {
+   "run_id": "RI02-full-gpt-r1",
+   "scenario_id": "RI02",
+   "level": "full",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 5,
+   "expert_set": false
+  },
+  "RI02-05C": {
+   "run_id": "RI02-full-llama-r1",
+   "scenario_id": "RI02",
+   "level": "full",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 5,
+   "expert_set": false
+  },
+  "RI02-06A": {
+   "run_id": "RI02-partial-gpt-r2",
+   "scenario_id": "RI02",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 6,
+   "expert_set": false
+  },
+  "RI02-06B": {
+   "run_id": "RI02-partial-llama-r2",
+   "scenario_id": "RI02",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "B",
+   "group": 6,
+   "expert_set": false
+  },
+  "RI02-06C": {
+   "run_id": "RI02-partial-claude-r2",
+   "scenario_id": "RI02",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "C",
+   "group": 6,
+   "expert_set": false
+  },
+  "RI02-07A": {
+   "run_id": "RI02-minimal-llama-r1",
+   "scenario_id": "RI02",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "A",
+   "group": 7,
+   "expert_set": false
+  },
+  "RI02-07B": {
+   "run_id": "RI02-minimal-gpt-r1",
+   "scenario_id": "RI02",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 7,
+   "expert_set": false
+  },
+  "RI02-07C": {
+   "run_id": "RI02-minimal-claude-r1",
+   "scenario_id": "RI02",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "C",
+   "group": 7,
+   "expert_set": false
+  },
+  "RI02-08A": {
+   "run_id": "RI02-minimal-gpt-r3",
+   "scenario_id": "RI02",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 8,
+   "expert_set": false
+  },
+  "RI02-08B": {
+   "run_id": "RI02-minimal-claude-r3",
+   "scenario_id": "RI02",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 8,
+   "expert_set": false
+  },
+  "RI02-08C": {
+   "run_id": "RI02-minimal-llama-r3",
+   "scenario_id": "RI02",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "C",
+   "group": 8,
+   "expert_set": false
+  },
+  "RI02-09A": {
+   "run_id": "RI02-full-llama-r3",
+   "scenario_id": "RI02",
+   "level": "full",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "A",
+   "group": 9,
+   "expert_set": true
+  },
+  "RI02-09B": {
+   "run_id": "RI02-full-claude-r3",
+   "scenario_id": "RI02",
+   "level": "full",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 9,
+   "expert_set": true
+  },
+  "RI02-09C": {
+   "run_id": "RI02-full-gpt-r3",
+   "scenario_id": "RI02",
+   "level": "full",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 9,
+   "expert_set": true
+  },
+  "RI03-01A": {
+   "run_id": "RI03-minimal-claude-r2",
+   "scenario_id": "RI03",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "A",
+   "group": 1,
+   "expert_set": false
+  },
+  "RI03-01B": {
+   "run_id": "RI03-minimal-llama-r2",
+   "scenario_id": "RI03",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "B",
+   "group": 1,
+   "expert_set": false
+  },
+  "RI03-01C": {
+   "run_id": "RI03-minimal-gpt-r2",
+   "scenario_id": "RI03",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 1,
+   "expert_set": false
+  },
+  "RI03-02A": {
+   "run_id": "RI03-full-gpt-r3",
+   "scenario_id": "RI03",
+   "level": "full",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 2,
+   "expert_set": false
+  },
+  "RI03-02B": {
+   "run_id": "RI03-full-claude-r3",
+   "scenario_id": "RI03",
+   "level": "full",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 2,
+   "expert_set": false
+  },
+  "RI03-02C": {
+   "run_id": "RI03-full-llama-r3",
+   "scenario_id": "RI03",
+   "level": "full",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "C",
+   "group": 2,
+   "expert_set": false
+  },
+  "RI03-03A": {
+   "run_id": "RI03-full-llama-r1",
+   "scenario_id": "RI03",
+   "level": "full",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "A",
+   "group": 3,
+   "expert_set": true
+  },
+  "RI03-03B": {
+   "run_id": "RI03-full-claude-r1",
+   "scenario_id": "RI03",
+   "level": "full",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "B",
+   "group": 3,
+   "expert_set": true
+  },
+  "RI03-03C": {
+   "run_id": "RI03-full-gpt-r1",
+   "scenario_id": "RI03",
+   "level": "full",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 3,
+   "expert_set": true
+  },
+  "RI03-04A": {
+   "run_id": "RI03-partial-claude-r1",
+   "scenario_id": "RI03",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 4,
+   "expert_set": true
+  },
+  "RI03-04B": {
+   "run_id": "RI03-partial-llama-r1",
+   "scenario_id": "RI03",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "B",
+   "group": 4,
+   "expert_set": true
+  },
+  "RI03-04C": {
+   "run_id": "RI03-partial-gpt-r1",
+   "scenario_id": "RI03",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 4,
+   "expert_set": true
+  },
+  "RI03-05A": {
+   "run_id": "RI03-partial-gpt-r3",
+   "scenario_id": "RI03",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 5,
+   "expert_set": false
+  },
+  "RI03-05B": {
+   "run_id": "RI03-partial-llama-r3",
+   "scenario_id": "RI03",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "B",
+   "group": 5,
+   "expert_set": false
+  },
+  "RI03-05C": {
+   "run_id": "RI03-partial-claude-r3",
+   "scenario_id": "RI03",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "C",
+   "group": 5,
+   "expert_set": false
+  },
+  "RI03-06A": {
+   "run_id": "RI03-minimal-llama-r1",
+   "scenario_id": "RI03",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "A",
+   "group": 6,
+   "expert_set": false
+  },
+  "RI03-06B": {
+   "run_id": "RI03-minimal-claude-r1",
+   "scenario_id": "RI03",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "B",
+   "group": 6,
+   "expert_set": false
+  },
+  "RI03-06C": {
+   "run_id": "RI03-minimal-gpt-r1",
+   "scenario_id": "RI03",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 6,
+   "expert_set": false
+  },
+  "RI03-07A": {
+   "run_id": "RI03-minimal-gpt-r3",
+   "scenario_id": "RI03",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 7,
+   "expert_set": true
+  },
+  "RI03-07B": {
+   "run_id": "RI03-minimal-claude-r3",
+   "scenario_id": "RI03",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 7,
+   "expert_set": true
+  },
+  "RI03-07C": {
+   "run_id": "RI03-minimal-llama-r3",
+   "scenario_id": "RI03",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "C",
+   "group": 7,
+   "expert_set": true
+  },
+  "RI03-08A": {
+   "run_id": "RI03-full-claude-r2",
+   "scenario_id": "RI03",
+   "level": "full",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "A",
+   "group": 8,
+   "expert_set": false
+  },
+  "RI03-08B": {
+   "run_id": "RI03-full-gpt-r2",
+   "scenario_id": "RI03",
+   "level": "full",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 8,
+   "expert_set": false
+  },
+  "RI03-08C": {
+   "run_id": "RI03-full-llama-r2",
+   "scenario_id": "RI03",
+   "level": "full",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "C",
+   "group": 8,
+   "expert_set": false
+  },
+  "RI03-09A": {
+   "run_id": "RI03-partial-gpt-r2",
+   "scenario_id": "RI03",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 9,
+   "expert_set": false
+  },
+  "RI03-09B": {
+   "run_id": "RI03-partial-claude-r2",
+   "scenario_id": "RI03",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "B",
+   "group": 9,
+   "expert_set": false
+  },
+  "RI03-09C": {
+   "run_id": "RI03-partial-llama-r2",
+   "scenario_id": "RI03",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "C",
+   "group": 9,
+   "expert_set": false
+  },
+  "SD01-01A": {
+   "run_id": "SD01-full-claude-r1",
+   "scenario_id": "SD01",
+   "level": "full",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 1,
+   "expert_set": false
+  },
+  "SD01-01B": {
+   "run_id": "SD01-full-gpt-r1",
+   "scenario_id": "SD01",
+   "level": "full",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 1,
+   "expert_set": false
+  },
+  "SD01-01C": {
+   "run_id": "SD01-full-llama-r1",
+   "scenario_id": "SD01",
+   "level": "full",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 1,
+   "expert_set": false
+  },
+  "SD01-02A": {
+   "run_id": "SD01-minimal-gpt-r3",
+   "scenario_id": "SD01",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 2,
+   "expert_set": false
+  },
+  "SD01-02B": {
+   "run_id": "SD01-minimal-claude-r3",
+   "scenario_id": "SD01",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 2,
+   "expert_set": false
+  },
+  "SD01-02C": {
+   "run_id": "SD01-minimal-llama-r3",
+   "scenario_id": "SD01",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "C",
+   "group": 2,
+   "expert_set": false
+  },
+  "SD01-03A": {
+   "run_id": "SD01-partial-llama-r1",
+   "scenario_id": "SD01",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "A",
+   "group": 3,
+   "expert_set": false
+  },
+  "SD01-03B": {
+   "run_id": "SD01-partial-claude-r1",
+   "scenario_id": "SD01",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "B",
+   "group": 3,
+   "expert_set": false
+  },
+  "SD01-03C": {
+   "run_id": "SD01-partial-gpt-r1",
+   "scenario_id": "SD01",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 3,
+   "expert_set": false
+  },
+  "SD01-04A": {
+   "run_id": "SD01-full-gpt-r2",
+   "scenario_id": "SD01",
+   "level": "full",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 4,
+   "expert_set": true
+  },
+  "SD01-04B": {
+   "run_id": "SD01-full-claude-r2",
+   "scenario_id": "SD01",
+   "level": "full",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "B",
+   "group": 4,
+   "expert_set": true
+  },
+  "SD01-04C": {
+   "run_id": "SD01-full-llama-r2",
+   "scenario_id": "SD01",
+   "level": "full",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "C",
+   "group": 4,
+   "expert_set": true
+  },
+  "SD01-05A": {
+   "run_id": "SD01-full-llama-r3",
+   "scenario_id": "SD01",
+   "level": "full",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "A",
+   "group": 5,
+   "expert_set": false
+  },
+  "SD01-05B": {
+   "run_id": "SD01-full-gpt-r3",
+   "scenario_id": "SD01",
+   "level": "full",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 5,
+   "expert_set": false
+  },
+  "SD01-05C": {
+   "run_id": "SD01-full-claude-r3",
+   "scenario_id": "SD01",
+   "level": "full",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "C",
+   "group": 5,
+   "expert_set": false
+  },
+  "SD01-06A": {
+   "run_id": "SD01-partial-llama-r3",
+   "scenario_id": "SD01",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "A",
+   "group": 6,
+   "expert_set": true
+  },
+  "SD01-06B": {
+   "run_id": "SD01-partial-claude-r3",
+   "scenario_id": "SD01",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "B",
+   "group": 6,
+   "expert_set": true
+  },
+  "SD01-06C": {
+   "run_id": "SD01-partial-gpt-r3",
+   "scenario_id": "SD01",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 6,
+   "expert_set": true
+  },
+  "SD01-07A": {
+   "run_id": "SD01-minimal-llama-r1",
+   "scenario_id": "SD01",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "A",
+   "group": 7,
+   "expert_set": true
+  },
+  "SD01-07B": {
+   "run_id": "SD01-minimal-gpt-r1",
+   "scenario_id": "SD01",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 7,
+   "expert_set": true
+  },
+  "SD01-07C": {
+   "run_id": "SD01-minimal-claude-r1",
+   "scenario_id": "SD01",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "C",
+   "group": 7,
+   "expert_set": true
+  },
+  "SD01-08A": {
+   "run_id": "SD01-minimal-llama-r2",
+   "scenario_id": "SD01",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "A",
+   "group": 8,
+   "expert_set": false
+  },
+  "SD01-08B": {
+   "run_id": "SD01-minimal-claude-r2",
+   "scenario_id": "SD01",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "B",
+   "group": 8,
+   "expert_set": false
+  },
+  "SD01-08C": {
+   "run_id": "SD01-minimal-gpt-r2",
+   "scenario_id": "SD01",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 8,
+   "expert_set": false
+  },
+  "SD01-09A": {
+   "run_id": "SD01-partial-llama-r2",
+   "scenario_id": "SD01",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "A",
+   "group": 9,
+   "expert_set": false
+  },
+  "SD01-09B": {
+   "run_id": "SD01-partial-claude-r2",
+   "scenario_id": "SD01",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "B",
+   "group": 9,
+   "expert_set": false
+  },
+  "SD01-09C": {
+   "run_id": "SD01-partial-gpt-r2",
+   "scenario_id": "SD01",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 9,
+   "expert_set": false
+  },
+  "SD02-01A": {
+   "run_id": "SD02-minimal-claude-r2",
+   "scenario_id": "SD02",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "A",
+   "group": 1,
+   "expert_set": false
+  },
+  "SD02-01B": {
+   "run_id": "SD02-minimal-gpt-r2",
+   "scenario_id": "SD02",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 1,
+   "expert_set": false
+  },
+  "SD02-01C": {
+   "run_id": "SD02-minimal-llama-r2",
+   "scenario_id": "SD02",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "C",
+   "group": 1,
+   "expert_set": false
+  },
+  "SD02-02A": {
+   "run_id": "SD02-partial-llama-r1",
+   "scenario_id": "SD02",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "A",
+   "group": 2,
+   "expert_set": false
+  },
+  "SD02-02B": {
+   "run_id": "SD02-partial-gpt-r1",
+   "scenario_id": "SD02",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 2,
+   "expert_set": false
+  },
+  "SD02-02C": {
+   "run_id": "SD02-partial-claude-r1",
+   "scenario_id": "SD02",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "C",
+   "group": 2,
+   "expert_set": false
+  },
+  "SD02-03A": {
+   "run_id": "SD02-minimal-llama-r3",
+   "scenario_id": "SD02",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "A",
+   "group": 3,
+   "expert_set": true
+  },
+  "SD02-03B": {
+   "run_id": "SD02-minimal-gpt-r3",
+   "scenario_id": "SD02",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 3,
+   "expert_set": true
+  },
+  "SD02-03C": {
+   "run_id": "SD02-minimal-claude-r3",
+   "scenario_id": "SD02",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "C",
+   "group": 3,
+   "expert_set": true
+  },
+  "SD02-04A": {
+   "run_id": "SD02-full-llama-r2",
+   "scenario_id": "SD02",
+   "level": "full",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "A",
+   "group": 4,
+   "expert_set": false
+  },
+  "SD02-04B": {
+   "run_id": "SD02-full-claude-r2",
+   "scenario_id": "SD02",
+   "level": "full",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "B",
+   "group": 4,
+   "expert_set": false
+  },
+  "SD02-04C": {
+   "run_id": "SD02-full-gpt-r2",
+   "scenario_id": "SD02",
+   "level": "full",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 4,
+   "expert_set": false
+  },
+  "SD02-05A": {
+   "run_id": "SD02-partial-llama-r3",
+   "scenario_id": "SD02",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "A",
+   "group": 5,
+   "expert_set": true
+  },
+  "SD02-05B": {
+   "run_id": "SD02-partial-gpt-r3",
+   "scenario_id": "SD02",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 5,
+   "expert_set": true
+  },
+  "SD02-05C": {
+   "run_id": "SD02-partial-claude-r3",
+   "scenario_id": "SD02",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "C",
+   "group": 5,
+   "expert_set": true
+  },
+  "SD02-06A": {
+   "run_id": "SD02-minimal-llama-r1",
+   "scenario_id": "SD02",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "A",
+   "group": 6,
+   "expert_set": false
+  },
+  "SD02-06B": {
+   "run_id": "SD02-minimal-gpt-r1",
+   "scenario_id": "SD02",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 6,
+   "expert_set": false
+  },
+  "SD02-06C": {
+   "run_id": "SD02-minimal-claude-r1",
+   "scenario_id": "SD02",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "C",
+   "group": 6,
+   "expert_set": false
+  },
+  "SD02-07A": {
+   "run_id": "SD02-partial-claude-r2",
+   "scenario_id": "SD02",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "A",
+   "group": 7,
+   "expert_set": false
+  },
+  "SD02-07B": {
+   "run_id": "SD02-partial-gpt-r2",
+   "scenario_id": "SD02",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 7,
+   "expert_set": false
+  },
+  "SD02-07C": {
+   "run_id": "SD02-partial-llama-r2",
+   "scenario_id": "SD02",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "C",
+   "group": 7,
+   "expert_set": false
+  },
+  "SD02-08A": {
+   "run_id": "SD02-full-claude-r1",
+   "scenario_id": "SD02",
+   "level": "full",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 8,
+   "expert_set": true
+  },
+  "SD02-08B": {
+   "run_id": "SD02-full-gpt-r1",
+   "scenario_id": "SD02",
+   "level": "full",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 8,
+   "expert_set": true
+  },
+  "SD02-08C": {
+   "run_id": "SD02-full-llama-r1",
+   "scenario_id": "SD02",
+   "level": "full",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "C",
+   "group": 8,
+   "expert_set": true
+  },
+  "SD02-09A": {
+   "run_id": "SD02-full-gpt-r3",
+   "scenario_id": "SD02",
+   "level": "full",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 9,
+   "expert_set": false
+  },
+  "SD02-09B": {
+   "run_id": "SD02-full-llama-r3",
+   "scenario_id": "SD02",
+   "level": "full",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "B",
+   "group": 9,
+   "expert_set": false
+  },
+  "SD02-09C": {
+   "run_id": "SD02-full-claude-r3",
+   "scenario_id": "SD02",
+   "level": "full",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "C",
+   "group": 9,
+   "expert_set": false
+  },
+  "SD03-01A": {
+   "run_id": "SD03-full-llama-r2",
+   "scenario_id": "SD03",
+   "level": "full",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "A",
+   "group": 1,
+   "expert_set": true
+  },
+  "SD03-01B": {
+   "run_id": "SD03-full-gpt-r2",
+   "scenario_id": "SD03",
+   "level": "full",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 1,
+   "expert_set": true
+  },
+  "SD03-01C": {
+   "run_id": "SD03-full-claude-r2",
+   "scenario_id": "SD03",
+   "level": "full",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "C",
+   "group": 1,
+   "expert_set": true
+  },
+  "SD03-02A": {
+   "run_id": "SD03-partial-llama-r3",
+   "scenario_id": "SD03",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "A",
+   "group": 2,
+   "expert_set": false
+  },
+  "SD03-02B": {
+   "run_id": "SD03-partial-gpt-r3",
+   "scenario_id": "SD03",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 2,
+   "expert_set": false
+  },
+  "SD03-02C": {
+   "run_id": "SD03-partial-claude-r3",
+   "scenario_id": "SD03",
+   "level": "partial",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "C",
+   "group": 2,
+   "expert_set": false
+  },
+  "SD03-03A": {
+   "run_id": "SD03-partial-claude-r2",
+   "scenario_id": "SD03",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "A",
+   "group": 3,
+   "expert_set": true
+  },
+  "SD03-03B": {
+   "run_id": "SD03-partial-gpt-r2",
+   "scenario_id": "SD03",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 3,
+   "expert_set": true
+  },
+  "SD03-03C": {
+   "run_id": "SD03-partial-llama-r2",
+   "scenario_id": "SD03",
+   "level": "partial",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "C",
+   "group": 3,
+   "expert_set": true
+  },
+  "SD03-04A": {
+   "run_id": "SD03-minimal-llama-r1",
+   "scenario_id": "SD03",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "A",
+   "group": 4,
+   "expert_set": false
+  },
+  "SD03-04B": {
+   "run_id": "SD03-minimal-gpt-r1",
+   "scenario_id": "SD03",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 4,
+   "expert_set": false
+  },
+  "SD03-04C": {
+   "run_id": "SD03-minimal-claude-r1",
+   "scenario_id": "SD03",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "C",
+   "group": 4,
+   "expert_set": false
+  },
+  "SD03-05A": {
+   "run_id": "SD03-full-llama-r3",
+   "scenario_id": "SD03",
+   "level": "full",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "A",
+   "group": 5,
+   "expert_set": false
+  },
+  "SD03-05B": {
+   "run_id": "SD03-full-gpt-r3",
+   "scenario_id": "SD03",
+   "level": "full",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "B",
+   "group": 5,
+   "expert_set": false
+  },
+  "SD03-05C": {
+   "run_id": "SD03-full-claude-r3",
+   "scenario_id": "SD03",
+   "level": "full",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "C",
+   "group": 5,
+   "expert_set": false
+  },
+  "SD03-06A": {
+   "run_id": "SD03-minimal-llama-r2",
+   "scenario_id": "SD03",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "llama",
+   "label": "A",
+   "group": 6,
+   "expert_set": true
+  },
+  "SD03-06B": {
+   "run_id": "SD03-minimal-claude-r2",
+   "scenario_id": "SD03",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "claude",
+   "label": "B",
+   "group": 6,
+   "expert_set": true
+  },
+  "SD03-06C": {
+   "run_id": "SD03-minimal-gpt-r2",
+   "scenario_id": "SD03",
+   "level": "minimal",
+   "rep": 2,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 6,
+   "expert_set": true
+  },
+  "SD03-07A": {
+   "run_id": "SD03-full-gpt-r1",
+   "scenario_id": "SD03",
+   "level": "full",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "A",
+   "group": 7,
+   "expert_set": false
+  },
+  "SD03-07B": {
+   "run_id": "SD03-full-llama-r1",
+   "scenario_id": "SD03",
+   "level": "full",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "B",
+   "group": 7,
+   "expert_set": false
+  },
+  "SD03-07C": {
+   "run_id": "SD03-full-claude-r1",
+   "scenario_id": "SD03",
+   "level": "full",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "C",
+   "group": 7,
+   "expert_set": false
+  },
+  "SD03-08A": {
+   "run_id": "SD03-minimal-claude-r3",
+   "scenario_id": "SD03",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "claude",
+   "label": "A",
+   "group": 8,
+   "expert_set": false
+  },
+  "SD03-08B": {
+   "run_id": "SD03-minimal-llama-r3",
+   "scenario_id": "SD03",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "llama",
+   "label": "B",
+   "group": 8,
+   "expert_set": false
+  },
+  "SD03-08C": {
+   "run_id": "SD03-minimal-gpt-r3",
+   "scenario_id": "SD03",
+   "level": "minimal",
+   "rep": 3,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 8,
+   "expert_set": false
+  },
+  "SD03-09A": {
+   "run_id": "SD03-partial-claude-r1",
+   "scenario_id": "SD03",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "claude",
+   "label": "A",
+   "group": 9,
+   "expert_set": false
+  },
+  "SD03-09B": {
+   "run_id": "SD03-partial-llama-r1",
+   "scenario_id": "SD03",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "B",
+   "group": 9,
+   "expert_set": false
+  },
+  "SD03-09C": {
+   "run_id": "SD03-partial-gpt-r1",
+   "scenario_id": "SD03",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 9,
+   "expert_set": false
+  }
+ }
+}

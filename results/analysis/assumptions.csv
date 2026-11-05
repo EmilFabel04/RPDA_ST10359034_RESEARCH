@@ -1,0 +1,4 @@
+unit,model_key,dv,n,shapiro_W,shapiro_p,levene_W,levene_p,data_label
+median3,gpt,specificity,45,0.9396,0.0207,0.5562,0.8771,Automated metric
+median3,claude,specificity,45,0.9224,0.0051,0.6903,0.7657,Automated metric
+median3,llama,specificity,45,0.9591,0.1125,0.2159,0.998,Automated metric

@@ -1,0 +1,24 @@
+name: ecommerce
+version: "1.0.0"
+profile: ecommerce
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+flags:
+  send_anonymous_usage_stats: false
+
+seeds:
+  ecommerce:
+    +schema: raw          # seeds play the role of the ingestion tool's landing tables
+
+models:
+  ecommerce:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table

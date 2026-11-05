@@ -1,0 +1,32 @@
+{
+  "scenario_id": "FV03",
+  "category": "freshness_violation",
+  "as_of": "2026-10-13 19:00:00",
+  "seed": 42,
+  "dbt_commands": [
+    "dbt seed --full-refresh",
+    "dbt build --exclude resource_type:seed",
+    "dbt source freshness"
+  ],
+  "focus_nodes": [
+    "source.ecommerce.raw.raw_customers"
+  ],
+  "failure_description": "Command: dbt build  (exit code 0)\nResult: 30 passed, 0 failed, 0 errors, 0 warnings, 0 skipped\n\nCommand: dbt source freshness  (exit code 1)\n- ERROR: source raw.raw_customers: max(loaded_at) = 2026-10-13 14:56 UTC, 4.1 h before the check (warn after 1 hour, error after 2 hours)\n- PASS: source raw.raw_orders: max(loaded_at) = 2026-10-13 18:05 UTC, 1.0 h before the check (warn after 6 hours, error after 12 hours)\n- PASS: source raw.raw_payments: max(loaded_at) = 2026-10-13 18:05 UTC, 1.0 h before the check (warn after 6 hours, error after 12 hours)",
+  "model_metadata": "### Source raw.raw_customers\nTable: \"ecommerce\".\"raw\".\"raw_customers\"\nDescription: One row per customer account, extracted from the CRM.\nFreshness: measured on `loaded_at`; warn after 1 hour, error after 2 hours\nColumns (name \u00b7 type in warehouse \u00b7 description):\n- customer_id \u00b7 INTEGER \u00b7 CRM primary key of the customer (integer).\n- first_name \u00b7 VARCHAR \u00b7 Customer first name.\n- last_name \u00b7 VARCHAR \u00b7 Customer last name.\n- email \u00b7 VARCHAR \u00b7 Customer email address as entered in the CRM.\n- country \u00b7 VARCHAR \u00b7 ISO 3166-1 alpha-2 country code of the customer's billing address.\n- created_at \u00b7 TIMESTAMP \u00b7 UTC timestamp when the account was created in the CRM.\n- loaded_at \u00b7 TIMESTAMP \u00b7 UTC timestamp when the ingestion job wrote the row.",
+  "lineage": "DAG edges (upstream \u2192 downstream; tests omitted):\n- source raw.raw_customers \u2192 model stg_customers\n- model dim_customers \u2192 exposure finance_revenue_dashboard\n- model dim_customers \u2192 exposure marketing_customer_dashboard\n- model stg_customers \u2192 model dim_customers\nDownstream nodes (affected if the failing node is wrong or skipped):\n- model stg_customers (view): Cleaned customers, one row per customer. Email lower-cased, country code upper-cased.\n- model dim_customers (table): One row per customer with order history and lifetime value. Used by marketing and finance dashboards.\n- exposure finance_revenue_dashboard (dashboard, owner: Finance analytics): Daily revenue by payment method and order status. Refreshed at 07:00 UTC and used in the daily finance stand-up.\n- exposure marketing_customer_dashboard (dashboard, owner: Marketing analytics): Customer counts, lifetime value and repeat-purchase rate by country.\nColumn-level lineage (as designed):\n- stg_customers.customer_id \u2190 raw_customers.customer_id\n- stg_customers.{first_name, last_name, created_at, loaded_at} \u2190 raw_customers (same names)\n- stg_customers.email \u2190 raw_customers.email (lower-cased)\n- stg_customers.country_code \u2190 raw_customers.country (upper-cased)\n- dim_customers.{customer_id, first_name, last_name, email, country_code, created_at} \u2190 stg_customers (same names)\n- dim_customers.{first_order_date, most_recent_order_date, number_of_orders} \u2190 stg_orders.order_date / order_id, per customer_id\n- dim_customers.lifetime_value \u2190 stg_payments.amount joined via stg_orders.order_id, non-cancelled orders, per customer_id",
+  "historical_context": "Recent changes (newest first):\n- 2026-10-12 \u00b7 commit f1c34a7 \u00b7 sources.yml: align raw_customers freshness with orders/payments since all loaders run hourly, DATA-140 (models/staging/sources.yml)\n- 2026-10-07 \u00b7 deploy \u00b7 CI image upgraded dbt-duckdb 1.10 \u2192 1.11; full build passed afterwards\n- 2026-10-02 \u00b7 commit 33c675a \u00b7 add accepted_values test on stg_payments.payment_method (models/staging/schema.yml)\nPrevious incidents:\n- INC-0318 (2026-07-08): CRM sync paused for 2 days during a vendor upgrade; raw_customers freshness errored at 48 h. Resolution: sync resumed.\nRecent run history:\n- raw_customers freshness age at run time, last 7 daily runs: 3 h, 19 h, 7 h, 30 h, 11 h, 5 h; about 4 h today (2026-10-13).\n- Customer sign-ups per day: 0\u20132.",
+  "historical_context_synthetic": true,
+  "gold_standard_remediation": {
+    "root_cause": "Yesterday's DATA-140 commit changed raw_customers freshness in models/staging/sources.yml from warn 24 h / error 48 h to warn 1 h / error 2 h. Freshness is measured on max(loaded_at), and raw_customers only gets a row when a customer signs up, at most a couple a day. So max(loaded_at) is usually hours old even when the loader is healthy (now about 4 h). The CRM loader is working: the source is quiet, not stale.",
+    "fix": "Revert the raw_customers freshness override in models/staging/sources.yml to `warn_after: {count: 24, period: hour}` and `error_after: {count: 48, period: hour}`. If hourly monitoring of the CRM loader is needed, check the loader's own run log or heartbeat instead of row timestamps.",
+    "verification": "`dbt source freshness --select source:raw.raw_customers` passes, and its age falls within the historical range of 3\u201330 h.",
+    "notes": "",
+    "text": "Root cause: Yesterday's DATA-140 commit changed raw_customers freshness in models/staging/sources.yml from warn 24 h / error 48 h to warn 1 h / error 2 h. Freshness is measured on max(loaded_at), and raw_customers only gets a row when a customer signs up, at most a couple a day. So max(loaded_at) is usually hours old even when the loader is healthy (now about 4 h). The CRM loader is working: the source is quiet, not stale.\n\nFix: Revert the raw_customers freshness override in models/staging/sources.yml to `warn_after: {count: 24, period: hour}` and `error_after: {count: 48, period: hour}`. If hourly monitoring of the CRM loader is needed, check the loader's own run log or heartbeat instead of row timestamps.\n\nVerification: `dbt source freshness --select source:raw.raw_customers` passes, and its age falls within the historical range of 3\u201330 h."
+  },
+  "approx_tokens": {
+    "failure_description": 138,
+    "model_metadata": 183,
+    "lineage": 399,
+    "historical_context": 187
+  }
+}

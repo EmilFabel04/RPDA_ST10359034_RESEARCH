@@ -1,0 +1,10 @@
+model_key,dv,level,n,mean,sd,median,q1,q3,data_label
+gpt,specificity,minimal,15,0.7633,0.0573,0.7673,0.7466,0.8042,Automated metric
+gpt,specificity,partial,15,0.7755,0.0457,0.7867,0.7468,0.8047,Automated metric
+gpt,specificity,full,15,0.8377,0.0187,0.8417,0.8288,0.8482,Automated metric
+claude,specificity,minimal,15,0.7695,0.0691,0.787,0.7557,0.8054,Automated metric
+claude,specificity,partial,15,0.7952,0.0486,0.8022,0.771,0.8366,Automated metric
+claude,specificity,full,15,0.8407,0.0459,0.8509,0.8282,0.8692,Automated metric
+llama,specificity,minimal,15,0.6931,0.0507,0.7008,0.6607,0.7304,Automated metric
+llama,specificity,partial,15,0.7255,0.0471,0.718,0.701,0.7591,Automated metric
+llama,specificity,full,15,0.7433,0.0441,0.7423,0.7182,0.7679,Automated metric

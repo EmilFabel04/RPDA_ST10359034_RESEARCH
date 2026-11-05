@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__TITLE__</title>
+<style>
+:root {
+  --bg: #f6f6f3; --panel: #ffffff; --ink: #1d1d1b; --muted: #6b6b66; --line: #deded8;
+  --accent: #2f5d8a; --accent-ink: #ffffff; --done: #3d7a4f; --part: #b7791f; --warn-bg: #fff4d6;
+  --code-bg: #f0f0eb; --mock: #a32020;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161615; --panel: #20201e; --ink: #ecece6; --muted: #a3a39b; --line: #3a3a36;
+    --accent: #7fb0e0; --accent-ink: #10202f; --done: #6fbf86; --part: #e0a84a; --warn-bg: #3a3220;
+    --code-bg: #2a2a27; --mock: #ff8a8a;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #161615; --panel: #20201e; --ink: #ecece6; --muted: #a3a39b; --line: #3a3a36;
+  --accent: #7fb0e0; --accent-ink: #10202f; --done: #6fbf86; --part: #e0a84a; --warn-bg: #3a3220;
+  --code-bg: #2a2a27; --mock: #ff8a8a;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+header { position: sticky; top: 0; z-index: 5; background: var(--panel); border-bottom: 1px solid var(--line);
+  padding: 10px 16px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
+header h1 { font-size: 16px; margin: 0; font-weight: 600; }
+.progress { color: var(--muted); font-size: 14px; }
+.spacer { flex: 1; }
+button, .button { font: inherit; font-size: 14px; border: 1px solid var(--line); background: var(--panel);
+  color: var(--ink); border-radius: 6px; padding: 6px 12px; cursor: pointer; }
+button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+button:disabled { opacity: .45; cursor: default; }
+.banner { margin: 12px 16px 0; padding: 10px 14px; border-radius: 8px; background: var(--warn-bg); font-size: 14px; }
+.banner.mock { color: var(--mock); font-weight: 600; }
+main { display: grid; grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); gap: 16px; padding: 16px; }
+@media (max-width: 1000px) { main { grid-template-columns: minmax(0, 1fr); } }
+section.col { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px;
+  min-width: 0; }
+@media (min-width: 1001px) { section.col { max-height: calc(100vh - 140px); overflow-y: auto; } }
+.itemhead { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; margin-bottom: 8px; }
+.itemhead h2 { font-size: 18px; margin: 0; }
+.code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; color: var(--muted); }
+details { border-top: 1px solid var(--line); padding: 6px 0; }
+details > summary { cursor: pointer; font-weight: 600; padding: 4px 0; }
+.plain { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; }
+pre { background: var(--code-bg); padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-size: 13px;
+  line-height: 1.45; white-space: pre; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px;
+  background: var(--code-bg); padding: 1px 4px; border-radius: 4px; }
+pre code { background: none; padding: 0; }
+.suggestion { overflow-wrap: anywhere; }
+.suggestion h3, .suggestion h4, .suggestion h5 { margin: 14px 0 6px; font-size: 15px; }
+.repeat { margin: 0 0 10px; padding: 8px 12px; border-radius: 8px; background: var(--warn-bg); font-size: 14px; }
+form.score { border-top: 2px solid var(--line); margin-top: 18px; padding-top: 12px; }
+fieldset { border: 0; padding: 0; margin: 0 0 12px; }
+legend { font-weight: 600; padding: 0; margin-bottom: 4px; }
+.hint { color: var(--muted); font-size: 13px; margin: 0 0 6px; }
+.choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.choices label { border: 1px solid var(--line); border-radius: 6px; padding: 5px 14px; cursor: pointer;
+  user-select: none; }
+.choices input { margin-right: 6px; }
+.choices label:has(input:checked) { border-color: var(--accent); outline: 1px solid var(--accent); }
+textarea { width: 100%; min-height: 70px; font: inherit; font-size: 14px; padding: 8px; border-radius: 6px;
+  border: 1px solid var(--line); background: var(--panel); color: var(--ink); }
+.nav { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
+.msg { color: var(--part); font-size: 14px; }
+.grid { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 0; }
+.grid button { width: 38px; padding: 3px 0; font-size: 12px; }
+.grid button.complete { background: var(--done); color: #fff; border-color: var(--done); }
+.grid button.partial { border-color: var(--part); color: var(--part); }
+.grid button.current { outline: 2px solid var(--accent); }
+dialog { max-width: 760px; width: calc(100% - 32px); border: 1px solid var(--line); border-radius: 10px;
+  background: var(--panel); color: var(--ink); padding: 18px 22px; }
+dialog::backdrop { background: rgba(0, 0, 0, .35); }
+dialog h3 { margin-top: 18px; font-size: 15px; }
+.rater-pick { display: flex; gap: 8px; align-items: center; font-size: 14px; }
+select { font: inherit; font-size: 14px; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line);
+  background: var(--panel); color: var(--ink); }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title"></h1>
+  <span class="rater-pick" id="raterPick" hidden>Scoring as
+    <select id="raterSelect"></select></span>
+  <span class="progress" id="progress"></span>
+  <span class="spacer"></span>
+  <button type="button" id="rubricBtn">Rubric</button>
+  <button type="button" id="gridBtn">All items</button>
+  <label class="button" for="loadFile">Load CSV</label>
+  <input type="file" id="loadFile" accept=".csv,text/csv" hidden>
+  <button type="button" class="primary" id="exportBtn">Export CSV</button>
+</header>
+<div class="banner" id="banner"></div>
+<div id="gridWrap" hidden style="padding: 0 16px"><div class="grid" id="grid"></div></div>
+<main>
+  <section class="col" aria-label="Scenario">
+    <div class="itemhead"><h2 id="scenarioTitle"></h2></div>
+    <div id="scenario"></div>
+  </section>
+  <section class="col" aria-label="Suggestion and scores">
+    <div class="itemhead"><h2 id="itemTitle"></h2><span class="code" id="itemCode"></span></div>
+    <p class="repeat" id="repeatNote" hidden>Consistency check: you have scored this suggestion before. Score it
+      again from scratch; your earlier scores are not shown.</p>
+    <div class="suggestion" id="suggestion"></div>
+    <form class="score" id="form" autocomplete="off">
+      <div id="fields"></div>
+      <fieldset>
+        <legend>Notes <span class="hint">(optional: anything unusual, invented models or columns, doubts)</span></legend>
+        <textarea id="notes"></textarea>
+      </fieldset>
+      <div class="nav">
+        <button type="button" id="prevBtn">Previous</button>
+        <button type="button" class="primary" id="nextBtn">Save and next</button>
+        <button type="button" id="unscoredBtn">Next unscored</button>
+        <span class="msg" id="msg"></span>
+      </div>
+    </form>
+  </section>
+</main>
+<dialog id="rubric"><div id="rubricBody"></div><p><button type="button" id="rubricClose">Close</button></p></dialog>
+
+<script id="data" type="application/json">__DATA__</script>
+<script>
+"use strict";
+const DATA = JSON.parse(document.getElementById("data").textContent);
+const PAGE = DATA.page, ITEMS = DATA.items, RUBRIC = DATA.rubric;
+const COLUMNS = ["rater_id", "status", "item_id", "position", "is_repeat", "technical_accuracy",
+                 "root_cause_correctness", "actionability", "notes", "scored_at"];
+const DIMS = RUBRIC.dimensions;
+const CHOICES = {technical_accuracy: ["0", "0.5", "1"], root_cause_correctness: ["0", "1"], actionability: ["1", "2", "3"]};
+const $ = (id) => document.getElementById(id);
+
+// ------------------------------------------------------------ storage (this browser only)
+let rater = PAGE.rater_id || "";
+let scores = {};        // position -> {technical_accuracy, root_cause_correctness, actionability, notes, scored_at}
+let current = 0;
+let dirtySinceExport = false;
+const storeKey = () => `rpda8411:${PAGE.id}:${rater}`;
+function save() {
+  try { localStorage.setItem(storeKey(), JSON.stringify({scores, current, dirtySinceExport})); } catch (e) {}
+}
+function restore() {
+  scores = {}; current = 0; dirtySinceExport = false;
+  try {
+    const raw = localStorage.getItem(storeKey());
+    if (raw) { const s = JSON.parse(raw); scores = s.scores || {}; current = s.current || 0;
+               dirtySinceExport = !!s.dirtySinceExport; }
+  } catch (e) {}
+  if (current >= ITEMS.length) current = 0;
+}
+const isComplete = (s) => s && DIMS.every((d) => s[d.key] !== undefined && s[d.key] !== "");
+
+// ------------------------------------------------------------ text rendering (all input escaped)
+function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+function inline(s) {   // s is already escaped
+  return s.replace(/`([^`]+)`/g, "<code>$1</code>").replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+}
+function fenced(src, renderText) {   // split ``` code blocks from the text around them
+  const out = []; const parts = String(src).split(/^\s*```[^\n]*$/m);
+  parts.forEach((part, i) => {
+    if (i % 2 === 1) out.push("<pre><code>" + esc(part.replace(/^\n/, "").replace(/\n$/, "")) + "</code></pre>");
+    else if (part.trim()) out.push(renderText(part));
+  });
+  return out.join("");
+}
+function plain(src) {   // scenario text: keep line breaks and indentation
+  return fenced(src, (t) => `<div class="plain">${inline(esc(t.replace(/^\n+|\n+$/g, "")))}</div>`);
+}
+function markdown(src) {   // model suggestions: headings, lists, paragraphs, code
+  return fenced(src, (text) => {
+    let html = "", list = null, para = [];
+    const flush = () => { if (para.length) { html += "<p>" + inline(esc(para.join(" "))) + "</p>"; para = []; } };
+    const close = () => { if (list) { html += `</${list}>`; list = null; } };
+    for (const line of text.split("\n")) {
+      const h = line.match(/^\s*(#{1,6})\s+(.*)$/);
+      const ul = line.match(/^\s*[-*•]\s+(.*)$/);
+      const ol = line.match(/^\s*\d+[.)]\s+(.*)$/);
+      if (h) { flush(); close(); const n = Math.min(5, h[1].length + 2); html += `<h${n}>${inline(esc(h[2]))}</h${n}>`; }
+      else if (ul || ol) { flush(); const t = ul ? "ul" : "ol"; if (list !== t) { close(); html += `<${t}>`; list = t; }
+                           html += "<li>" + inline(esc((ul || ol)[1])) + "</li>"; }
+      else if (!line.trim()) { flush(); close(); }
+      else { close(); para.push(line.trim()); }
+    }
+    flush(); close(); return html;
+  });
+}
+
+// ------------------------------------------------------------ rendering
+function renderFields() {
+  $("fields").innerHTML = DIMS.map((d) => `
+    <fieldset>
+      <legend>${esc(d.name)} <span class="hint">(${esc(d.scale)})</span></legend>
+      <p class="hint">${esc(d.question)}</p>
+      <div class="choices">${CHOICES[d.key].map((v) =>
+        `<label><input type="radio" name="${d.key}" value="${v}">${v}</label>`).join("")}</div>
+    </fieldset>`).join("");
+}
+function renderProgress() {
+  const done = ITEMS.filter((it) => isComplete(scores[it.position])).length;
+  $("progress").textContent = `${done} of ${ITEMS.length} scored` + (dirtySinceExport ? " · not exported since last change" : "");
+}
+function renderGrid() {
+  $("grid").innerHTML = ITEMS.map((it, i) => {
+    const s = scores[it.position];
+    const cls = [isComplete(s) ? "complete" : (s ? "partial" : ""), i === current ? "current" : ""].join(" ");
+    return `<button type="button" class="${cls}" data-i="${i}" title="Item ${it.position}">${it.position}</button>`;
+  }).join("");
+}
+let shownScenario = null;   // the scenario panel is kept (open sections, scroll) while its answers are scored
+function render() {
+  const it = ITEMS[current], sc = DATA.scenarios[it.scenario_id];
+  $("scenarioTitle").textContent = `Scenario ${it.scenario_id}` +
+    (it.group_size > 1 ? ` · answer ${it.group_pos} of ${it.group_size}` : "");
+  const newScenario = shownScenario !== it.scenario_id;
+  if (newScenario) {
+    $("scenario").innerHTML = sc.sections.map(([title, text, open]) =>
+      `<details${open ? " open" : ""}><summary>${esc(title)}</summary>${plain(text)}</details>`).join("") +
+      `<details open><summary>Reference fix (researcher)</summary>${plain(sc.reference)}</details>`;
+    shownScenario = it.scenario_id;
+  }
+  $("itemTitle").textContent = `Item ${it.position} of ${ITEMS.length} · Model ${it.label}`;
+  $("itemCode").textContent = it.item_id;
+  $("repeatNote").hidden = !it.is_repeat;
+  $("suggestion").innerHTML = markdown(it.text);
+  const s = scores[it.position] || {};
+  for (const d of DIMS) for (const input of document.getElementsByName(d.key)) input.checked = s[d.key] === input.value;
+  $("notes").value = s.notes || "";
+  $("prevBtn").disabled = current === 0;
+  $("nextBtn").textContent = current === ITEMS.length - 1 ? "Save" : "Save and next";
+  $("msg").textContent = "";
+  renderProgress(); renderGrid();
+  document.querySelectorAll("section.col").forEach((el, i) => { if (i === 1 || newScenario) el.scrollTop = 0; });
+}
+function go(i) { current = Math.max(0, Math.min(ITEMS.length - 1, i)); save(); render(); window.scrollTo(0, 0); }
+
+// ------------------------------------------------------------ editing (saved on every change)
+function update() {
+  if (!rater) { $("msg").textContent = "Choose who is scoring (top of the page) first."; return; }
+  const it = ITEMS[current], s = Object.assign({}, scores[it.position] || {});
+  for (const d of DIMS) { const c = document.querySelector(`input[name="${d.key}"]:checked`); if (c) s[d.key] = c.value; }
+  s.notes = $("notes").value;
+  if (isComplete(s)) s.scored_at = new Date().toISOString().slice(0, 19) + "Z";
+  scores[it.position] = s; dirtySinceExport = true; save(); renderProgress(); renderGrid();
+}
+$("form").addEventListener("change", update);
+$("notes").addEventListener("input", update);
+$("prevBtn").onclick = () => go(current - 1);
+$("nextBtn").onclick = () => {
+  if (!isComplete(scores[ITEMS[current].position])) { $("msg").textContent = "Please score all three dimensions first."; return; }
+  if (current < ITEMS.length - 1) go(current + 1); else { $("msg").textContent = "Saved. Remember to export the CSV."; }
+};
+$("unscoredBtn").onclick = () => {
+  for (let k = 1; k <= ITEMS.length; k++) { const i = (current + k) % ITEMS.length;
+    if (!isComplete(scores[ITEMS[i].position])) return go(i); }
+  $("msg").textContent = "Every item is scored. Export the CSV and send it to the researcher.";
+};
+$("grid").onclick = (e) => { const b = e.target.closest("button[data-i]"); if (b) go(+b.dataset.i); };
+$("gridBtn").onclick = () => { $("gridWrap").hidden = !$("gridWrap").hidden; };
+
+// ------------------------------------------------------------ CSV export / import
+function csvCell(v) { v = String(v ?? ""); return /[",\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
+function exportCsv() {
+  if (!rater) { alert("Choose who is scoring first."); return; }
+  const rows = ITEMS.filter((it) => isComplete(scores[it.position])).map((it) => {
+    const s = scores[it.position];
+    return {rater_id: rater, status: PAGE.status, item_id: it.item_id, position: it.position,
+            is_repeat: it.is_repeat ? 1 : 0, technical_accuracy: s.technical_accuracy,
+            root_cause_correctness: s.root_cause_correctness, actionability: s.actionability,
+            notes: (s.notes || "").trim(), scored_at: s.scored_at || ""};
+  });
+  const text = [COLUMNS.join(","), ...rows.map((r) => COLUMNS.map((c) => csvCell(r[c])).join(","))].join("\n") + "\n";
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([text], {type: "text/csv"}));
+  a.download = `${PAGE.file_prefix}${rater}.csv`;
+  document.body.appendChild(a); a.click(); a.remove();
+  dirtySinceExport = false; save(); renderProgress();
+}
+function parseCsv(text) {
+  const rows = []; let row = [], cell = "", q = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (q) { if (ch === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += ch; }
+    else if (ch === '"') q = true;
+    else if (ch === ",") { row.push(cell); cell = ""; }
+    else if (ch === "\n" || ch === "\r") { if (ch === "\r" && text[i + 1] === "\n") i++; row.push(cell); rows.push(row); row = []; cell = ""; }
+    else cell += ch;
+  }
+  if (cell || row.length) { row.push(cell); rows.push(row); }
+  const head = rows.shift() || [];
+  return rows.filter((r) => r.length > 1).map((r) => Object.fromEntries(head.map((h, i) => [h, r[i] ?? ""])));
+}
+$("exportBtn").onclick = exportCsv;
+$("loadFile").onchange = async (e) => {
+  const file = e.target.files[0]; e.target.value = "";
+  if (!file) return;
+  const rows = parseCsv(await file.text());
+  const byPos = Object.fromEntries(ITEMS.map((it) => [String(it.position), it]));
+  const ok = rows.filter((r) => byPos[r.position] && byPos[r.position].item_id === r.item_id);
+  if (!ok.length) { alert("This CSV does not match this scoring page."); return; }
+  if (PAGE.rater_id && ok.some((r) => r.rater_id !== PAGE.rater_id)) { alert("This CSV belongs to a different rater."); return; }
+  if (!confirm(`Load ${ok.length} scores from ${file.name}? Scores for those items in this browser are replaced.`)) return;
+  if (!PAGE.rater_id && ok[0].rater_id) { rater = ok[0].rater_id; $("raterSelect").value = rater; restore(); }
+  for (const r of ok) scores[r.position] = {technical_accuracy: r.technical_accuracy,
+    root_cause_correctness: r.root_cause_correctness, actionability: r.actionability, notes: r.notes, scored_at: r.scored_at};
+  save(); render();
+};
+
+// ------------------------------------------------------------ rubric
+$("rubricBody").innerHTML = `<h2 style="margin-top:0">Rubric</h2>` +
+  RUBRIC.general.map((t) => `<p>${esc(t)}</p>`).join("") +
+  DIMS.map((d) => `<h3>${esc(d.name)} (${esc(d.scale)})</h3><p>${esc(d.question)}</p>`).join("") +
+  `<h3>Actionability anchors</h3><p>${esc(RUBRIC.anchor_failure)}</p>` +
+  RUBRIC.anchors.map((a) => `<p><strong>${esc(a.score)}</strong> — ${esc(a.example)}<br><span class="hint">${esc(a.why)}</span></p>`).join("") +
+  `<h3>Rules</h3><ul>${RUBRIC.rules.map((r) => `<li>${esc(r)}</li>`).join("")}</ul>`;
+$("rubricBtn").onclick = () => $("rubric").showModal();
+$("rubricClose").onclick = () => $("rubric").close();
+
+// ------------------------------------------------------------ start
+document.title = PAGE.title;
+$("title").textContent = PAGE.title;
+$("banner").innerHTML = PAGE.banner;
+if (PAGE.banner_class) $("banner").classList.add(PAGE.banner_class);
+if (!PAGE.rater_id) {
+  $("raterPick").hidden = false;
+  $("raterSelect").innerHTML = `<option value="">choose…</option>` +
+    PAGE.raters.map(([id, label]) => `<option value="${esc(id)}">${esc(label)}</option>`).join("");
+  $("raterSelect").onchange = (e) => { rater = e.target.value; restore(); render(); };
+}
+renderFields(); restore(); render();
+</script>
+</body>
+</html>

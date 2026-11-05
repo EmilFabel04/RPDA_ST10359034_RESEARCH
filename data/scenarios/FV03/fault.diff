@@ -1,0 +1,13 @@
+--- a/models/staging/sources.yml
++++ b/models/staging/sources.yml
+@@ -18,8 +18,8 @@
+         description: One row per customer account, extracted from the CRM.
+         config:
+           freshness:
+-            warn_after: {count: 24, period: hour}
+-            error_after: {count: 48, period: hour}
++            warn_after: {count: 1, period: hour}
++            error_after: {count: 2, period: hour}
+         columns:
+           - name: customer_id
+             description: CRM primary key of the customer (integer).

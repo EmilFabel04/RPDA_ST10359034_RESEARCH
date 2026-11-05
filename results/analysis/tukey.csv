@@ -1,0 +1,55 @@
+unit,model_key,dv,n,scope,from,to,n_per_level,mean_diff,ci_low,ci_high,p_adj,data_label
+median3,gpt,specificity,45,all categories,minimal,partial,15,0.0123,-0.0265,0.051,0.7234,Automated metric
+median3,gpt,specificity,45,all categories,partial,full,15,0.0622,0.0234,0.1009,0.001,Automated metric
+median3,gpt,specificity,45,all categories,minimal,full,15,0.0745,0.0357,0.1132,0.0001,Automated metric
+median3,gpt,specificity,45,freshness_violation,minimal,partial,3,0.0,-0.1057,0.1057,1.0,Automated metric
+median3,gpt,specificity,45,freshness_violation,partial,full,3,0.0794,-0.0263,0.1851,0.1308,Automated metric
+median3,gpt,specificity,45,freshness_violation,minimal,full,3,0.0795,-0.0262,0.1852,0.1306,Automated metric
+median3,gpt,specificity,45,null_rate_anomaly,minimal,partial,3,0.0221,-0.0952,0.1394,0.836,Automated metric
+median3,gpt,specificity,45,null_rate_anomaly,partial,full,3,0.0745,-0.0428,0.1918,0.2056,Automated metric
+median3,gpt,specificity,45,null_rate_anomaly,minimal,full,3,0.0967,-0.0206,0.214,0.0984,Automated metric
+median3,gpt,specificity,45,referential_integrity,minimal,partial,3,0.0595,-0.1152,0.2341,0.5786,Automated metric
+median3,gpt,specificity,45,referential_integrity,partial,full,3,0.0352,-0.1394,0.2098,0.8158,Automated metric
+median3,gpt,specificity,45,referential_integrity,minimal,full,3,0.0947,-0.08,0.2693,0.2929,Automated metric
+median3,gpt,specificity,45,row_count_anomaly,minimal,partial,3,0.0025,-0.0563,0.0613,0.9909,Automated metric
+median3,gpt,specificity,45,row_count_anomaly,partial,full,3,0.0525,-0.0063,0.1113,0.0752,Automated metric
+median3,gpt,specificity,45,row_count_anomaly,minimal,full,3,0.055,-0.0038,0.1138,0.064,Automated metric
+median3,gpt,specificity,45,schema_drift,minimal,partial,3,-0.0227,-0.0921,0.0466,0.6003,Automated metric
+median3,gpt,specificity,45,schema_drift,partial,full,3,0.0692,-0.0002,0.1386,0.0504,Automated metric
+median3,gpt,specificity,45,schema_drift,minimal,full,3,0.0465,-0.0229,0.1158,0.1799,Automated metric
+median3,claude,specificity,45,all categories,minimal,partial,15,0.0257,-0.0235,0.075,0.4203,Automated metric
+median3,claude,specificity,45,all categories,partial,full,15,0.0455,-0.0038,0.0947,0.0755,Automated metric
+median3,claude,specificity,45,all categories,minimal,full,15,0.0712,0.022,0.1205,0.003,Automated metric
+median3,claude,specificity,45,freshness_violation,minimal,partial,3,-0.0141,-0.16,0.1317,0.9528,Automated metric
+median3,claude,specificity,45,freshness_violation,partial,full,3,0.0637,-0.0821,0.2095,0.4261,Automated metric
+median3,claude,specificity,45,freshness_violation,minimal,full,3,0.0496,-0.0963,0.1954,0.5796,Automated metric
+median3,claude,specificity,45,null_rate_anomaly,minimal,partial,3,0.0119,-0.0837,0.1074,0.924,Automated metric
+median3,claude,specificity,45,null_rate_anomaly,partial,full,3,0.0523,-0.0433,0.1478,0.2874,Automated metric
+median3,claude,specificity,45,null_rate_anomaly,minimal,full,3,0.0641,-0.0314,0.1597,0.1788,Automated metric
+median3,claude,specificity,45,referential_integrity,minimal,partial,3,0.0863,-0.1481,0.3206,0.5324,Automated metric
+median3,claude,specificity,45,referential_integrity,partial,full,3,0.0463,-0.188,0.2806,0.8221,Automated metric
+median3,claude,specificity,45,referential_integrity,minimal,full,3,0.1326,-0.1018,0.3669,0.2681,Automated metric
+median3,claude,specificity,45,row_count_anomaly,minimal,partial,3,0.0218,-0.0476,0.0913,0.6231,Automated metric
+median3,claude,specificity,45,row_count_anomaly,partial,full,3,0.066,-0.0035,0.1354,0.0604,Automated metric
+median3,claude,specificity,45,row_count_anomaly,minimal,full,3,0.0878,0.0184,0.1572,0.0191,Automated metric
+median3,claude,specificity,45,schema_drift,minimal,partial,3,0.0228,-0.0643,0.1099,0.7149,Automated metric
+median3,claude,specificity,45,schema_drift,partial,full,3,-0.0008,-0.0879,0.0863,0.9995,Automated metric
+median3,claude,specificity,45,schema_drift,minimal,full,3,0.022,-0.0651,0.1091,0.7314,Automated metric
+median3,llama,specificity,45,all categories,minimal,partial,15,0.0324,-0.0096,0.0745,0.1586,Automated metric
+median3,llama,specificity,45,all categories,partial,full,15,0.0178,-0.0242,0.0599,0.5623,Automated metric
+median3,llama,specificity,45,all categories,minimal,full,15,0.0503,0.0082,0.0923,0.0158,Automated metric
+median3,llama,specificity,45,freshness_violation,minimal,partial,3,0.0405,-0.0515,0.1326,0.4209,Automated metric
+median3,llama,specificity,45,freshness_violation,partial,full,3,-0.0142,-0.1062,0.0778,0.886,Automated metric
+median3,llama,specificity,45,freshness_violation,minimal,full,3,0.0263,-0.0657,0.1184,0.6725,Automated metric
+median3,llama,specificity,45,null_rate_anomaly,minimal,partial,3,0.0361,-0.1324,0.2047,0.7951,Automated metric
+median3,llama,specificity,45,null_rate_anomaly,partial,full,3,0.0285,-0.14,0.1971,0.865,Automated metric
+median3,llama,specificity,45,null_rate_anomaly,minimal,full,3,0.0647,-0.1039,0.2332,0.5073,Automated metric
+median3,llama,specificity,45,referential_integrity,minimal,partial,3,0.0442,-0.0697,0.158,0.5003,Automated metric
+median3,llama,specificity,45,referential_integrity,partial,full,3,0.0338,-0.08,0.1477,0.6531,Automated metric
+median3,llama,specificity,45,referential_integrity,minimal,full,3,0.078,-0.0358,0.1918,0.1694,Automated metric
+median3,llama,specificity,45,row_count_anomaly,minimal,partial,3,0.0247,-0.0808,0.1302,0.7618,Automated metric
+median3,llama,specificity,45,row_count_anomaly,partial,full,3,0.0217,-0.0838,0.1272,0.8092,Automated metric
+median3,llama,specificity,45,row_count_anomaly,minimal,full,3,0.0464,-0.0591,0.1519,0.4214,Automated metric
+median3,llama,specificity,45,schema_drift,minimal,partial,3,0.0166,-0.0539,0.0872,0.7597,Automated metric
+median3,llama,specificity,45,schema_drift,partial,full,3,0.0193,-0.0513,0.0898,0.6955,Automated metric
+median3,llama,specificity,45,schema_drift,minimal,full,3,0.0359,-0.0347,0.1065,0.3311,Automated metric

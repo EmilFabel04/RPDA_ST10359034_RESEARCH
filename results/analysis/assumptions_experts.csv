@@ -1,0 +1,13 @@
+unit,model_key,dv,n,shapiro_W,shapiro_p,levene_W,levene_p,data_label
+experts,gpt,technical_accuracy,45,0.9554,0.0817,0.5943,0.8481,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,0.8956,0.0007,0.6286,0.8201,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,0.9681,0.2465,0.3944,0.9657,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,specificity,45,0.9411,0.0237,0.6485,0.803,Automated metric
+experts,claude,technical_accuracy,45,0.9513,0.0567,0.4502,0.942,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,0.933,0.012,0.4745,0.9293,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,0.9731,0.3736,0.3581,0.9772,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,specificity,45,0.9462,0.0366,0.9646,0.5087,Automated metric
+experts,llama,technical_accuracy,45,0.9316,0.0107,0.5926,0.8495,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,0.8116,0.0,0.8571,0.6078,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,0.9781,0.5444,0.298,0.9901,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,specificity,45,0.954,0.0721,0.1573,0.9997,Automated metric

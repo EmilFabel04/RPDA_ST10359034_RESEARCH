@@ -1,0 +1,55 @@
+{
+ "seed": 42,
+ "items": {
+  "PL01-01A": {
+   "run_id": "PL01-partial-llama-r1",
+   "scenario_id": "PL01",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "A",
+   "group": 1,
+   "expert_set": true
+  },
+  "PL01-01C": {
+   "run_id": "PL01-partial-gpt-r1",
+   "scenario_id": "PL01",
+   "level": "partial",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 1,
+   "expert_set": true
+  },
+  "PL01-02C": {
+   "run_id": "PL01-minimal-gpt-r1",
+   "scenario_id": "PL01",
+   "level": "minimal",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 2,
+   "expert_set": true
+  },
+  "PL01-03B": {
+   "run_id": "PL01-full-llama-r1",
+   "scenario_id": "PL01",
+   "level": "full",
+   "rep": 1,
+   "model_key": "llama",
+   "label": "B",
+   "group": 3,
+   "expert_set": true
+  },
+  "PL01-03C": {
+   "run_id": "PL01-full-gpt-r1",
+   "scenario_id": "PL01",
+   "level": "full",
+   "rep": 1,
+   "model_key": "gpt",
+   "label": "C",
+   "group": 3,
+   "expert_set": true
+  }
+ }
+}

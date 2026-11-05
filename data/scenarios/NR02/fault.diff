@@ -1,0 +1,11 @@
+--- a/models/marts/fct_orders.sql
++++ b/models/marts/fct_orders.sql
+@@ -35,7 +35,7 @@
+         coalesce(order_payments.bank_transfer_amount, 0) as bank_transfer_amount,
+         coalesce(order_payments.voucher_amount, 0) as voucher_amount,
+         coalesce(order_payments.gift_card_amount, 0) as gift_card_amount,
+-        coalesce(order_payments.total_amount, 0) as amount
++        order_payments.total_amount as amount
+     from orders
+     left join order_payments on orders.order_id = order_payments.order_id
+ 

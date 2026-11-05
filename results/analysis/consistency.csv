@@ -1,0 +1,6 @@
+unit,dv,models,categories,W,chi2,df,p,data_label
+median3,specificity,3,5,0.5556,6.6667,4,0.1546,Automated metric
+experts,technical_accuracy,3,5,0.1556,1.8667,4,0.7603,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,root_cause_correctness,3,5,0.5088,6.1053,4,0.1914,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,actionability,3,5,0.152,1.8246,4,0.768,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,specificity,3,5,0.3333,4.0,4,0.406,Automated metric

@@ -1,0 +1,217 @@
+unit,model_key,dv,n,scope,from,to,n_per_level,mean_diff,ci_low,ci_high,p_adj,data_label
+experts,gpt,technical_accuracy,45,all categories,minimal,partial,15,-0.0167,-0.2785,0.2452,0.9869,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,all categories,partial,full,15,0.4,0.1382,0.6618,0.0017,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,all categories,minimal,full,15,0.3833,0.1215,0.6452,0.0027,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,freshness_violation,minimal,partial,3,0.1667,-0.4238,0.7572,0.6793,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,freshness_violation,partial,full,3,0.4167,-0.1738,1.0072,0.1565,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,freshness_violation,minimal,full,3,0.5833,-0.0072,1.1738,0.0523,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,null_rate_anomaly,minimal,partial,3,0.0,-0.9336,0.9336,1.0,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,null_rate_anomaly,partial,full,3,0.3333,-0.6003,1.267,0.5508,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,null_rate_anomaly,minimal,full,3,0.3333,-0.6003,1.267,0.5508,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,referential_integrity,minimal,partial,3,0.0833,-0.7517,0.9184,0.9501,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,referential_integrity,partial,full,3,0.25,-0.5851,1.0851,0.6494,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,referential_integrity,minimal,full,3,0.3333,-0.5017,1.1684,0.4827,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,row_count_anomaly,minimal,partial,3,-0.25,-0.9102,0.4102,0.5153,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,row_count_anomaly,partial,full,3,0.4167,-0.2435,1.0769,0.209,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,row_count_anomaly,minimal,full,3,0.1667,-0.4935,0.8269,0.731,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,schema_drift,minimal,partial,3,-0.0833,-0.9184,0.7517,0.9501,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,schema_drift,partial,full,3,0.5833,-0.2517,1.4184,0.1609,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,technical_accuracy,45,schema_drift,minimal,full,3,0.5,-0.3351,1.3351,0.2366,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,all categories,minimal,partial,15,0.1333,-0.2038,0.4705,0.6054,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,all categories,partial,full,15,0.5333,0.1962,0.8705,0.0012,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,all categories,minimal,full,15,0.6667,0.3295,1.0038,0.0001,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,freshness_violation,minimal,partial,3,-0.1667,-0.5842,0.2509,0.4827,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,freshness_violation,partial,full,3,1.0,0.5825,1.4175,0.0008,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,freshness_violation,minimal,full,3,0.8333,0.4158,1.2509,0.0021,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,null_rate_anomaly,minimal,partial,3,0.1667,-0.2509,0.5842,0.4827,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,null_rate_anomaly,partial,full,3,0.8333,0.4158,1.2509,0.0021,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,null_rate_anomaly,minimal,full,3,1.0,0.5825,1.4175,0.0008,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,referential_integrity,minimal,partial,3,0.3333,-0.7714,1.438,0.6453,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,referential_integrity,partial,full,3,0.1667,-0.938,1.2714,0.8906,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,referential_integrity,minimal,full,3,0.5,-0.6047,1.6047,0.4037,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,row_count_anomaly,minimal,partial,3,0.6667,-0.1684,1.5017,0.1089,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,row_count_anomaly,partial,full,3,0.3333,-0.5017,1.1684,0.4827,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,row_count_anomaly,minimal,full,3,1.0,0.1649,1.8351,0.0242,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,schema_drift,minimal,partial,3,-0.3333,-1.586,0.9193,0.7074,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,schema_drift,partial,full,3,0.3333,-0.9193,1.586,0.7074,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,root_cause_correctness,45,schema_drift,minimal,full,3,0.0,-1.2526,1.2526,1.0,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,all categories,minimal,partial,15,0.3667,-0.1281,0.8615,0.1819,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,all categories,partial,full,15,0.5667,0.0719,1.0615,0.0215,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,all categories,minimal,full,15,0.9333,0.4385,1.4281,0.0001,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,freshness_violation,minimal,partial,3,0.5,-0.5228,1.5228,0.3554,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,freshness_violation,partial,full,3,0.5,-0.5228,1.5228,0.3554,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,freshness_violation,minimal,full,3,1.0,-0.0228,2.0228,0.0544,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,null_rate_anomaly,minimal,partial,3,0.3333,-0.987,1.6537,0.731,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,null_rate_anomaly,partial,full,3,1.1667,-0.1537,2.487,0.0781,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,null_rate_anomaly,minimal,full,3,1.5,0.1796,2.8204,0.0302,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,referential_integrity,minimal,partial,3,0.5,-1.3673,2.3673,0.7045,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,referential_integrity,partial,full,3,0.1667,-1.7006,2.034,0.9598,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,referential_integrity,minimal,full,3,0.6667,-1.2006,2.534,0.5508,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,row_count_anomaly,minimal,partial,3,0.5,-0.7526,1.7526,0.4827,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,row_count_anomaly,partial,full,3,0.3333,-0.9193,1.586,0.7074,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,row_count_anomaly,minimal,full,3,0.8333,-0.4193,2.086,0.1832,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,schema_drift,minimal,partial,3,0.0,-1.82,1.82,1.0,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,schema_drift,partial,full,3,0.6667,-1.1533,2.4867,0.5354,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,actionability,45,schema_drift,minimal,full,3,0.6667,-1.1533,2.4867,0.5354,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,gpt,specificity,45,all categories,minimal,partial,15,0.0187,-0.0238,0.0612,0.5392,Automated metric
+experts,gpt,specificity,45,all categories,partial,full,15,0.0589,0.0164,0.1015,0.0046,Automated metric
+experts,gpt,specificity,45,all categories,minimal,full,15,0.0776,0.0351,0.1202,0.0002,Automated metric
+experts,gpt,specificity,45,freshness_violation,minimal,partial,3,0.0216,-0.0637,0.1069,0.7303,Automated metric
+experts,gpt,specificity,45,freshness_violation,partial,full,3,0.0686,-0.0167,0.1539,0.1063,Automated metric
+experts,gpt,specificity,45,freshness_violation,minimal,full,3,0.0902,0.0049,0.1755,0.0404,Automated metric
+experts,gpt,specificity,45,null_rate_anomaly,minimal,partial,3,0.0203,-0.1355,0.1761,0.9168,Automated metric
+experts,gpt,specificity,45,null_rate_anomaly,partial,full,3,0.0789,-0.0769,0.2347,0.3336,Automated metric
+experts,gpt,specificity,45,null_rate_anomaly,minimal,full,3,0.0992,-0.0566,0.255,0.2044,Automated metric
+experts,gpt,specificity,45,referential_integrity,minimal,partial,3,0.0792,-0.0999,0.2583,0.4184,Automated metric
+experts,gpt,specificity,45,referential_integrity,partial,full,3,0.0264,-0.1528,0.2055,0.8955,Automated metric
+experts,gpt,specificity,45,referential_integrity,minimal,full,3,0.1056,-0.0736,0.2847,0.2452,Automated metric
+experts,gpt,specificity,45,row_count_anomaly,minimal,partial,3,0.0034,-0.0911,0.0979,0.9933,Automated metric
+experts,gpt,specificity,45,row_count_anomaly,partial,full,3,0.0437,-0.0508,0.1382,0.3897,Automated metric
+experts,gpt,specificity,45,row_count_anomaly,minimal,full,3,0.0471,-0.0474,0.1416,0.3431,Automated metric
+experts,gpt,specificity,45,schema_drift,minimal,partial,3,-0.031,-0.0937,0.0317,0.3487,Automated metric
+experts,gpt,specificity,45,schema_drift,partial,full,3,0.0771,0.0143,0.1398,0.0217,Automated metric
+experts,gpt,specificity,45,schema_drift,minimal,full,3,0.0461,-0.0167,0.1088,0.1398,Automated metric
+experts,claude,technical_accuracy,45,all categories,minimal,partial,15,0.1,-0.1819,0.3819,0.6671,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,all categories,partial,full,15,0.2333,-0.0486,0.5153,0.1221,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,all categories,minimal,full,15,0.3333,0.0514,0.6153,0.0171,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,freshness_violation,minimal,partial,3,-0.0833,-1.2268,1.0601,0.9729,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,freshness_violation,partial,full,3,0.3333,-0.8101,1.4768,0.6631,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,freshness_violation,minimal,full,3,0.25,-0.8935,1.3935,0.7881,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,null_rate_anomaly,minimal,partial,3,0.4167,-0.0502,0.8835,0.0754,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,null_rate_anomaly,partial,full,3,-0.0833,-0.5502,0.3835,0.8514,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,null_rate_anomaly,minimal,full,3,0.3333,-0.1335,0.8002,0.1514,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,referential_integrity,minimal,partial,3,0.3333,-0.3899,1.0565,0.3923,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,referential_integrity,partial,full,3,0.1667,-0.5565,0.8899,0.7684,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,referential_integrity,minimal,full,3,0.5,-0.2232,1.2232,0.1655,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,row_count_anomaly,minimal,partial,3,-0.0833,-0.9933,0.8267,0.9577,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,row_count_anomaly,partial,full,3,0.3333,-0.5767,1.2433,0.5354,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,row_count_anomaly,minimal,full,3,0.25,-0.66,1.16,0.6924,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,schema_drift,minimal,partial,3,-0.0833,-1.017,0.8503,0.9598,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,schema_drift,partial,full,3,0.4167,-0.517,1.3503,0.4126,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,technical_accuracy,45,schema_drift,minimal,full,3,0.3333,-0.6003,1.267,0.5508,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,all categories,minimal,partial,15,0.1,-0.2749,0.4749,0.7945,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,all categories,partial,full,15,0.4667,0.0918,0.8415,0.0116,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,all categories,minimal,full,15,0.5667,0.1918,0.9415,0.0019,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,freshness_violation,minimal,partial,3,-0.1667,-1.3476,1.0143,0.9034,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,freshness_violation,partial,full,3,0.3333,-0.8476,1.5143,0.6793,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,freshness_violation,minimal,full,3,0.1667,-1.0143,1.3476,0.9034,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,null_rate_anomaly,minimal,partial,3,0.1667,-0.767,1.1003,0.8514,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,null_rate_anomaly,partial,full,3,0.5,-0.4336,1.4336,0.3,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,null_rate_anomaly,minimal,full,3,0.6667,-0.267,1.6003,0.1514,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,referential_integrity,minimal,partial,3,0.3333,-0.8476,1.5143,0.6793,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,referential_integrity,partial,full,3,0.3333,-0.8476,1.5143,0.6793,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,referential_integrity,minimal,full,3,0.6667,-0.5143,1.8476,0.2694,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,row_count_anomaly,minimal,partial,3,-0.1667,-1.2714,0.938,0.8906,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,row_count_anomaly,partial,full,3,0.5,-0.6047,1.6047,0.4037,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,row_count_anomaly,minimal,full,3,0.3333,-0.7714,1.438,0.6453,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,schema_drift,minimal,partial,3,0.3333,-0.5017,1.1684,0.4827,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,schema_drift,partial,full,3,0.6667,-0.1684,1.5017,0.1089,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,root_cause_correctness,45,schema_drift,minimal,full,3,1.0,0.1649,1.8351,0.0242,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,all categories,minimal,partial,15,0.2,-0.406,0.806,0.704,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,all categories,partial,full,15,0.7,0.094,1.306,0.0203,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,all categories,minimal,full,15,0.9,0.294,1.506,0.0023,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,freshness_violation,minimal,partial,3,-0.5,-2.2715,1.2715,0.6793,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,freshness_violation,partial,full,3,0.6667,-1.1048,2.4381,0.5191,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,freshness_violation,minimal,full,3,0.1667,-1.6048,1.9381,0.9554,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,null_rate_anomaly,minimal,partial,3,1.0,-0.2526,2.2526,0.1089,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,null_rate_anomaly,partial,full,3,0.3333,-0.9193,1.586,0.7074,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,null_rate_anomaly,minimal,full,3,1.3333,0.0807,2.586,0.0393,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,referential_integrity,minimal,partial,3,0.6667,-1.2006,2.534,0.5508,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,referential_integrity,partial,full,3,0.6667,-1.2006,2.534,0.5508,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,referential_integrity,minimal,full,3,1.3333,-0.534,3.2006,0.1514,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,row_count_anomaly,minimal,partial,3,0.0,-1.8673,1.8673,1.0,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,row_count_anomaly,partial,full,3,0.6667,-1.2006,2.534,0.5508,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,row_count_anomaly,minimal,full,3,0.6667,-1.2006,2.534,0.5508,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,schema_drift,minimal,partial,3,-0.1667,-1.9381,1.6048,0.9554,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,schema_drift,partial,full,3,1.1667,-0.6048,2.9381,0.188,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,actionability,45,schema_drift,minimal,full,3,1.0,-0.7715,2.7715,0.2694,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,claude,specificity,45,all categories,minimal,partial,15,0.0273,-0.0185,0.073,0.3261,Automated metric
+experts,claude,specificity,45,all categories,partial,full,15,0.0323,-0.0134,0.0781,0.2106,Automated metric
+experts,claude,specificity,45,all categories,minimal,full,15,0.0596,0.0139,0.1053,0.0079,Automated metric
+experts,claude,specificity,45,freshness_violation,minimal,partial,3,-0.01,-0.136,0.1161,0.9682,Automated metric
+experts,claude,specificity,45,freshness_violation,partial,full,3,0.0691,-0.057,0.1951,0.2864,Automated metric
+experts,claude,specificity,45,freshness_violation,minimal,full,3,0.0591,-0.0669,0.1851,0.3814,Automated metric
+experts,claude,specificity,45,null_rate_anomaly,minimal,partial,3,0.0189,-0.0672,0.105,0.786,Automated metric
+experts,claude,specificity,45,null_rate_anomaly,partial,full,3,0.0312,-0.0549,0.1173,0.5426,Automated metric
+experts,claude,specificity,45,null_rate_anomaly,minimal,full,3,0.0501,-0.036,0.1362,0.2523,Automated metric
+experts,claude,specificity,45,referential_integrity,minimal,partial,3,0.0694,-0.1514,0.2902,0.6236,Automated metric
+experts,claude,specificity,45,referential_integrity,partial,full,3,0.0481,-0.1727,0.269,0.7892,Automated metric
+experts,claude,specificity,45,referential_integrity,minimal,full,3,0.1175,-0.1033,0.3384,0.3037,Automated metric
+experts,claude,specificity,45,row_count_anomaly,minimal,partial,3,0.0195,-0.0304,0.0695,0.4955,Automated metric
+experts,claude,specificity,45,row_count_anomaly,partial,full,3,0.0421,-0.0078,0.092,0.0915,Automated metric
+experts,claude,specificity,45,row_count_anomaly,minimal,full,3,0.0616,0.0117,0.1116,0.0213,Automated metric
+experts,claude,specificity,45,schema_drift,minimal,partial,3,0.0384,-0.0629,0.1397,0.5145,Automated metric
+experts,claude,specificity,45,schema_drift,partial,full,3,-0.0288,-0.1301,0.0725,0.6756,Automated metric
+experts,claude,specificity,45,schema_drift,minimal,full,3,0.0096,-0.0917,0.1109,0.9548,Automated metric
+experts,llama,technical_accuracy,45,all categories,minimal,partial,15,0.1167,-0.1528,0.3861,0.5488,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,all categories,partial,full,15,-0.0167,-0.2861,0.2528,0.9876,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,all categories,minimal,full,15,0.1,-0.1695,0.3695,0.6423,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,freshness_violation,minimal,partial,3,0.0,-0.7527,0.7527,1.0,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,freshness_violation,partial,full,3,0.3333,-0.4194,1.0861,0.4175,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,freshness_violation,minimal,full,3,0.3333,-0.4194,1.0861,0.4175,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,null_rate_anomaly,minimal,partial,3,-0.1667,-0.6335,0.3002,0.5508,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,null_rate_anomaly,partial,full,3,0.4167,-0.0502,0.8835,0.0754,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,null_rate_anomaly,minimal,full,3,0.25,-0.2168,0.7168,0.3,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,referential_integrity,minimal,partial,3,0.8333,0.4158,1.2509,0.0021,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,referential_integrity,partial,full,3,-0.8333,-1.2509,-0.4158,0.0021,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,referential_integrity,minimal,full,3,0.0,-0.4175,0.4175,1.0,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,row_count_anomaly,minimal,partial,3,-0.0833,-0.2921,0.1254,0.4827,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,row_count_anomaly,partial,full,3,0.0,-0.2088,0.2088,1.0,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,row_count_anomaly,minimal,full,3,-0.0833,-0.2921,0.1254,0.4827,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,schema_drift,minimal,partial,3,0.0,-0.7232,0.7232,1.0,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,schema_drift,partial,full,3,0.0,-0.7232,0.7232,1.0,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,technical_accuracy,45,schema_drift,minimal,full,3,0.0,-0.7232,0.7232,1.0,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,all categories,minimal,partial,15,0.1,-0.2259,0.4259,0.7379,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,all categories,partial,full,15,0.1333,-0.1925,0.4592,0.5846,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,all categories,minimal,full,15,0.2333,-0.0925,0.5592,0.2026,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,freshness_violation,minimal,partial,3,0.0,-0.8351,0.8351,1.0,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,freshness_violation,partial,full,3,0.6667,-0.1684,1.5017,0.1089,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,freshness_violation,minimal,full,3,0.6667,-0.1684,1.5017,0.1089,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,null_rate_anomaly,minimal,partial,3,0.3333,-0.5017,1.1684,0.4827,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,null_rate_anomaly,partial,full,3,-0.3333,-1.1684,0.5017,0.4827,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,null_rate_anomaly,minimal,full,3,0.0,-0.8351,0.8351,1.0,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,referential_integrity,minimal,partial,3,0.5,-0.2232,1.2232,0.1655,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,referential_integrity,partial,full,3,-0.5,-1.2232,0.2232,0.1655,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,referential_integrity,minimal,full,3,0.0,-0.7232,0.7232,1.0,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,row_count_anomaly,minimal,partial,3,0.0,-0.8351,0.8351,1.0,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,row_count_anomaly,partial,full,3,0.3333,-0.5017,1.1684,0.4827,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,row_count_anomaly,minimal,full,3,0.3333,-0.5017,1.1684,0.4827,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,schema_drift,minimal,partial,3,-0.3333,-1.438,0.7714,0.6453,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,schema_drift,partial,full,3,0.5,-0.6047,1.6047,0.4037,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,root_cause_correctness,45,schema_drift,minimal,full,3,0.1667,-0.938,1.2714,0.8906,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,all categories,minimal,partial,15,0.3,-0.2224,0.8224,0.3526,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,all categories,partial,full,15,-0.0667,-0.5891,0.4558,0.9485,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,all categories,minimal,full,15,0.2333,-0.2891,0.7558,0.5285,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,freshness_violation,minimal,partial,3,0.0,-1.5055,1.5055,1.0,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,freshness_violation,partial,full,3,0.6667,-0.8388,2.1721,0.4175,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,freshness_violation,minimal,full,3,0.6667,-0.8388,2.1721,0.4175,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,null_rate_anomaly,minimal,partial,3,-0.1667,-1.3476,1.0143,0.9034,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,null_rate_anomaly,partial,full,3,0.3333,-0.8476,1.5143,0.6793,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,null_rate_anomaly,minimal,full,3,0.1667,-1.0143,1.3476,0.9034,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,referential_integrity,minimal,partial,3,1.3333,0.0807,2.586,0.0393,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,referential_integrity,partial,full,3,-1.3333,-2.586,-0.0807,0.0393,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,referential_integrity,minimal,full,3,0.0,-1.2526,1.2526,1.0,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,row_count_anomaly,minimal,partial,3,0.1667,-0.8561,1.1894,0.874,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,row_count_anomaly,partial,full,3,0.3333,-0.6894,1.3561,0.6035,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,row_count_anomaly,minimal,full,3,0.5,-0.5228,1.5228,0.3554,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,schema_drift,minimal,partial,3,0.1667,-1.5549,1.8882,0.9529,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,schema_drift,partial,full,3,-0.3333,-2.0549,1.3882,0.8283,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,actionability,45,schema_drift,minimal,full,3,-0.1667,-1.8882,1.5549,0.9529,"Expert scores (one repetition per cell; mean of 2 experts on 45 shared answers, 1 expert on 90)"
+experts,llama,specificity,45,all categories,minimal,partial,15,0.0223,-0.0234,0.0679,0.4687,Automated metric
+experts,llama,specificity,45,all categories,partial,full,15,0.0144,-0.0312,0.0601,0.7248,Automated metric
+experts,llama,specificity,45,all categories,minimal,full,15,0.0367,-0.009,0.0823,0.1369,Automated metric
+experts,llama,specificity,45,freshness_violation,minimal,partial,3,0.0111,-0.0744,0.0966,0.9179,Automated metric
+experts,llama,specificity,45,freshness_violation,partial,full,3,-0.0065,-0.092,0.079,0.9706,Automated metric
+experts,llama,specificity,45,freshness_violation,minimal,full,3,0.0046,-0.0809,0.0901,0.9853,Automated metric
+experts,llama,specificity,45,null_rate_anomaly,minimal,partial,3,0.0251,-0.1202,0.1704,0.8596,Automated metric
+experts,llama,specificity,45,null_rate_anomaly,partial,full,3,0.0281,-0.1172,0.1734,0.8283,Automated metric
+experts,llama,specificity,45,null_rate_anomaly,minimal,full,3,0.0533,-0.092,0.1986,0.535,Automated metric
+experts,llama,specificity,45,referential_integrity,minimal,partial,3,0.0638,-0.0653,0.1929,0.3488,Automated metric
+experts,llama,specificity,45,referential_integrity,partial,full,3,0.0316,-0.0975,0.1607,0.7442,Automated metric
+experts,llama,specificity,45,referential_integrity,minimal,full,3,0.0954,-0.0337,0.2245,0.1374,Automated metric
+experts,llama,specificity,45,row_count_anomaly,minimal,partial,3,0.0136,-0.1031,0.1303,0.933,Automated metric
+experts,llama,specificity,45,row_count_anomaly,partial,full,3,0.0263,-0.0904,0.143,0.7764,Automated metric
+experts,llama,specificity,45,row_count_anomaly,minimal,full,3,0.0399,-0.0768,0.1566,0.5761,Automated metric
+experts,llama,specificity,45,schema_drift,minimal,partial,3,-0.0023,-0.1084,0.1039,0.9976,Automated metric
+experts,llama,specificity,45,schema_drift,partial,full,3,-0.0075,-0.1136,0.0987,0.9748,Automated metric
+experts,llama,specificity,45,schema_drift,minimal,full,3,-0.0097,-0.1159,0.0964,0.9576,Automated metric

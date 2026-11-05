@@ -1,0 +1,63 @@
+item_id,entity,suggested_verdict,reason
+FV01-04B,freshness_config,H,dbt has no `freshness_config` key; source freshness is set with `freshness:` (warn_after / error_after)
+FV01-04B,max_backfill_hours,H,No dbt setting `max_backfill_hours`; stated as an existing value to increase
+FV02-03A,order_status,C,"Inside an insert statement introduced with 'for example'; raw_orders has `status`, not `order_status`"
+FV02-03A,order_total,C,Same 'for example' insert; raw_orders has no `order_total`
+FV02-03A,updated_at,C,Same 'for example' insert; raw_orders has no `updated_at`
+FV02-03C,ref('raw_orders'),H,"`raw_orders` is a source, not a model: `ref('raw_orders')` fails (should be `source('raw', 'raw_orders')`); stated as the required change"
+FV02-04B,recency,N,'Optionally add a `recency` ... test (e.g. `dbt_utils.recency`)': proposes adding a test
+FV02-04B,updated_at,C,"'uses a monotonic column (e.g. `updated_at`, ...)': an example"
+FV02-06B,models/sources.yml,C,'If the source definition is in a file such as `models/sources.yml`': hedged
+FV02-09B,ingested_at,C,'only if the new correct column is assumed to be `ingested_at`': hedged
+FV03-02A,max_lag_hours,H,"No `max_lag_hours` setting, and profiles.yml does not hold freshness thresholds; stated as existing"
+FV03-04B,_synced_at,N,'consider writing a heartbeat or `_synced_at` column': proposes a new column
+FV03-04C,freshness_config,H,dbt has no `freshness_config` key in sources.yml; stated as the setting to update
+FV03-05B,completed_at,N,"Proposes a new audit table `raw.crm_ingestion_runs(job_name, completed_at, ...)`"
+FV03-05B,job_name,N,Same proposed audit table
+FV03-06B,updated_at,C,Inside an insert introduced with 'for example'; raw_customers has no `updated_at`
+FV03-07C,freshness_threshold_hours,H,No dbt setting `freshness_threshold_hours` in dbt_project.yml; stated as existing ('the ... setting')
+FV03-09B,fingerprint,H,"No `fingerprint` field, and no file `models/raw/raw_customers.sql`; stated as existing"
+NR01-03C,amount_cents,C,'If the raw feed changed and the cents value now lives in another column ... for example'
+NR01-05C,amount_cents,C,"'For example, if the correct raw column is `amount_cents`'"
+NR01-06A,refunded,F,"'refunded' is a status value, not a model/column/setting (and it sits inside an 'if' branch)"
+NR02-01C,nullable,H,dbt has no `nullable` test; stated as the replacement for not_null
+NR02-04B,fct_orders.created_at,H,"Triage query selects `o.created_at` from fct_orders, which has no created_at (it has order_date); not hedged"
+NR02-07C,models/fct_orders.sql,H,"fct_orders.sql is in models/marts/, not models/; stated as 'the models/fct_orders.sql file'"
+NR03-02B,email_hash,N,Proposes adding a new `email_hash` column through the pipeline
+NR03-02B,raw_customers.email_hash,N,"'Example staging change, if `raw_customers.email_hash` exists': part of the same proposal"
+RC01-08C,order_created_at,C,Inside SQL introduced with 'Example:'; raw_orders has no `order_created_at`
+RC01-08C,order_status,C,"Same 'Example:' SQL; raw_orders has `status`, not `order_status`"
+RC02-02B,order_created_at,C,Inside SQL introduced with 'Example pattern:'
+RC02-02B,order_status,C,'Example pattern:' and 'If stg_orders currently has a restrictive clause such as this'
+RC02-02C,validate_order_id,N,Proposes creating a `validate_order_id` macro and shows its definition
+RC03-02B,fct_orders.column1,F,"Placeholder `column1, column2, ...`, not an entity reference"
+RC03-02B,fct_orders.column2,F,"Placeholder `column1, column2, ...`"
+RC03-02B,stg_orders.column1,F,"Placeholder `column1, column2, ...`"
+RC03-02B,stg_orders.column2,F,"Placeholder `column1, column2, ...`"
+RC03-08A,order_by,F,"A typo the answer itself corrects ('DuckDB syntax: `order by`, not `order_by`')"
+RI01-04A,models/sources.yml,C,'likely something like `models/sources.yml` or `models/staging/sources.yml`': hedged
+RI01-06A,expected_results,H,dbt tests have no `expected_results` config parameter; stated as the parameter to change
+RI01-08C,retry,N,'we can add a `retry` option' to the ingestion job: a proposal for an unspecified tool
+RI02-04A,fct_orders.ordered_at,C,The answer says '(`ordered_at` is an assumed column name.)'
+RI02-04A,ordered_at,C,Same: explicitly an assumed column name
+RI03-01B,tolerance,H,dbt's relationships test has no `tolerance` argument (thresholds use error_if / warn_if); presented as a supported parameter
+RI03-01C,is_test,C,Inside 'If the 6 payments are invalid/test ... For example:'; raw_payments has no `is_test`
+RI03-06C,order_status,C,Inside SQL introduced with 'Example fix'
+RI03-06C,updated_at,C,Same 'Example fix' SQL; raw_orders has no `updated_at`
+RI03-07A,order_status,C,"Inside 'For example, if stg_orders currently excludes ...'"
+RI03-08A,approved_by,N,"Proposes a new seed `erased_orders(order_id, ticket, approved_by)`"
+SD01-02A,raw_amount_column,F,"`raw_amount_column` is an obvious placeholder in an 'Alternatively, if ...' example"
+SD01-04A,models/sources.yml,C,'likely in the relevant `models/sources.yml` or equivalent': hedged
+SD01-07B,payment_amount,C,Listed as one of two 'for example' alternatives
+SD02-01C,date_format,H,DuckDB has no `DATE_FORMAT` function (it has strftime); stated as the function to add
+SD02-05A,to_char,H,DuckDB has no `to_char` function (Postgres has); 'the `to_char` function is used to convert'
+SD03-01B,raw_customers.crm_external_ref,N,Proposes a new raw column for the CRM external reference key
+SD03-01C,legacy_customer_id,N,'assuming the export gains a `legacy_customer_id` column': a proposed new column
+SD03-05B,crm_external_customer_id,N,'add a new column such as `crm_external_customer_id`'
+SD03-05B,webshop_customer_id,N,Part of a proposed new crosswalk table `raw.customer_id_map`
+SD03-07A,raw_customers.external_customer_id,N,"'Update the raw CRM ingestion ... to include both keys, for example ...'"
+SD03-07A,webshop_customer_id,N,'add/use a mapping column instead': proposed
+SD03-07C,legacy_customer_id,N,'export the legacy numeric ID as an additional column (e.g. `legacy_customer_id`)'
+SD03-08C,customer_id_int,N,'or add a separate normalized numeric key such as `customer_id_int`'
+SD03-09B,models/stg_customers.sql,C,"'(e.g., `models/stg_customers.sql`)': hedged; the real file is models/staging/stg_customers.sql"
+SD03-09B,ref('raw.raw_customers'),H,`ref('raw.raw_customers')` fails: raw_customers is a source. Borderline: the SQL is introduced with 'could look like this'; choose C if you read it as an example

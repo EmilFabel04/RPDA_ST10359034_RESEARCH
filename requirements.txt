@@ -1,0 +1,28 @@
+# Direct dependencies (lower bounds). Exact versions actually installed are
+# frozen in requirements-lock.txt for reproducibility — install from that file
+# to recreate the environment exactly:  pip install -r requirements-lock.txt
+
+# dbt + local warehouse
+dbt-core>=1.9
+dbt-duckdb>=1.9
+duckdb>=1.1
+
+# LLM SDKs (plain SDK calls, no LangChain)
+openai>=1.60
+anthropic>=0.60
+ollama>=0.4
+python-dotenv>=1.0
+
+# Analysis + metrics
+pandas>=2.2
+scipy>=1.13
+statsmodels>=0.14
+scikit-learn>=1.5          # cohen_kappa_score (Step 8)
+sentence-transformers>=3.0 # specificity metric (Step 7)
+sqlglot>=25.0             # parsing answers' SQL for the hallucination check (Step 7)
+pyyaml>=6.0               # parsing answers' YAML for the hallucination check (Step 7)
+matplotlib>=3.8
+tqdm>=4.66
+
+# Testing
+pytest>=8.0
