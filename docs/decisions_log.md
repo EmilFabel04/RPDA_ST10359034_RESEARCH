@@ -847,3 +847,31 @@ These entries refer to the working draft Claude produced in `report/src/` during
 the study. The submitted report is a separate document written by the
 researcher, and those corrections were not applied to it. Decisions about the
 method and results in those entries still apply to the submitted report.
+
+## D43 — Repeated-measures analysis and evaluator offsets (recorded 2026-11-05, Confirmed)
+
+**Decision (researcher):** the main analysis treats scenario as the subject. The
+same 15 scenarios appear at all three context levels, so the 45 values per model
+are repeated measures, which the two-way ANOVA and Tukey HSD of D29 treat as
+independent.
+
+- **Main test:** repeated-measures (split-plot) ANOVA per model and dependent
+  variable: context level and level × category within scenarios (error df 20),
+  failure category between scenarios (error df 10), Greenhouse–Geisser correction
+  for the within-scenario effects, partial η².
+- **Follow-up:** paired t-tests between context levels across the 15 scenarios,
+  Holm-adjusted within each model and dimension, instead of Tukey HSD.
+- **Kept from D29:** Friedman as the rank-based check; Holm across the four
+  dependent variables of the expert-scored sample.
+- **Evaluator sensitivity:** the 90 single-scored answers are not split evenly
+  between the evaluators within each model and level (D30), so each evaluator's
+  mean offset on the 45 shared answers is subtracted from all of their scores and
+  the within-scenario test of context level is repeated.
+
+**Where:** calculated by the researcher in `RPDA_stats_analysis.xlsx` (repository
+root). The two-way ANOVA, Tukey, Kruskal–Wallis and Kendall's W outputs in
+`results/analysis/` come from the AI assistant's earlier analysis
+(`scripts/analyse.py`) and are not reported; only its figures are used, for
+illustration.
+**Report as:** 3.7, the deviations table (3.11), Tables 7, 8, 11 and 12, and the
+sensitivity results in 4.2.2.
